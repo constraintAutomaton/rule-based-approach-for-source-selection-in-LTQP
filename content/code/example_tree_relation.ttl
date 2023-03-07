@@ -4,6 +4,6 @@
 ex:node tree:relation _:b1 .
 _b1 a  tree:EqualToRelation ;
     tree:node ex:nextNode ;
-    tree:value "33"^^<http://www.w3.org/2001/XMLSchema#integer> ;
-    tree:path ex:product_id ;
+    tree:value "2023-01-07T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    tree:path ex:publication_date ;
     tree:remainingItems "21"^^<http://www.w3.org/2001/XMLSchema#integer> .

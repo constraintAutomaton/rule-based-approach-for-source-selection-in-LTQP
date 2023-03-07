@@ -27,14 +27,18 @@ and client-side route planning [](cite:cites Delva2020, Delva2020a).
 
 In this paper we consider the [TREE specification](cite:cites spec:tree), a web specification that structure the publication of
 RDF documents in a way that the link between the fragment of a dataset, where we call the fragments `tree:Node`,
-can be describe using set of triples called `tree:relation`.
-Those relations can countain a boolean equation that constraint the value of a property of the data inside the next subject fragment.
+can be described using set of triples called `tree:relation`.
+Those relations can contain a boolean equation that constraint the value of a property of the data inside the next subject fragment.
 We apply a technique called, Guided Link Traversal Query Processing (GLTQP) [](cite:cites verborgh2020, taelman2023)
 a derivative of Link Traversal Query Processing (LTQP).
-LTQP  consist in recursively looking up new data sources by derefencing the named node result and/or intermediary result
+LTQP  consist of recursively looking up new data sources by dereferencing the named node result and/or intermediary result
 capture by the query engine [](cite:cites Hartig2013AnOO).
-The guided variance introduce the usage of acquired knowledge from the triple captured to prune,
-the irrelevant data source, hence dimunishing the search domain. 
+The guided variance introduces the usage of acquired knowledge from the triple captured to prune,
+the irrelevant data source, hence diminishing the search domain. 
 We propose to use this technique to leverage the information that the `tree:relation` provided to the query engine
 by evaluating the solvability of the combination of the boolean equation of the `tree:relation` and the SPARQL filter expression
-of a query.
+of a query. 
+This can be particularly useful when querying sensor data,
+where the fragmentation is made over the time of publication of the data.
+Users might want to get a time slice of the dataset hence they will use a SPARQL Filter operation
+which will enable the use of GLTQP.   

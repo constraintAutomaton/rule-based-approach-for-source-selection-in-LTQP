@@ -1,8 +1,8 @@
 PREFIX ex: <https://exemple.be#> .
 SELECT ?s ?id ?t
 WHERE {
-  ?s ex:product_id ?id;
-     ex:unit_temp ?t.
+  ?s ex:publication_date ?t;
+     ex:unit_temp ?temp.
 
-  FILTER(?id=33 && (?t>44 || ?t<=55))
+  FILTER(?t <= 2023-01-10T00:00:00Z)
 }

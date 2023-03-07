@@ -1,5 +1,40 @@
 ## Guided Link traversal for the TREE specification
-{:#solver_description}
+{:#guided_link_traversal}
+
+Our approach to GTQP consists of restricting the link that the query engine can follow using first the structural properties of the TREE specification
+and second using the solvability of a boolean equation combining the semantic link between two `tree:Node`s.
+It has to be noted that our approach is based on the assumption that the user wants to query the member of the TREE document.
+More formally, this consists of creating a [reachability criteria](cite:cites hartig2012) that will be able to discriminate each triple encounter
+into a TREE document to decide if it's useful to dereference a named node to seek a new data source. 
+The structural aspect of this reachability criterion is the based on the a priori knowledge
+that the members are located into the `tree:Node`s and that the way to access other `tree:Node`s is via the `tree:relation`s, 
+more precisely the named node that has the predicate `tree:node`.
+As for solvability of the boolean equation,
+from the `tree:relation` we can create a boolean equation, where the operator is described by the 
+type of relation, the left side of the equation from the literal with the predicate `tree:value`.
+As for the variable, it will depend on the filter expression provided by the user.
+From the relation we can know which property is targeted by looking at the named node with the predicate `tree:path`.
+With this property we can look at the SPARQL query and capture the SPARQL variable that is linked with the same property.
+The second boolean equation is simply the SPARQL filter expression.
+If the two expressions combined are solvable, then we know that the targeted `tree:Node` has the potential of containing
+members that can satisfy the query, hence it is worth looking at this data source. 
+[](#TREE-relation-turtle-example)  present example of a `tree:relation` to illustrate the capture of the knowledge to use our method.
+
+
+
+
+<figure id="TREE-relation-turtle-example" class="listing">
+````/code/example_tree_relation.ttl````
+<figcaption markdown="block">
+The example is showing a set of triple representing a TREE relation. 
+The relation indicates that the next node exists at the address https://exemple.be#nextNode,
+all the members contain into the next node have the property `ex:publication_date` with a value $$ \text{2023-01-07T00:00:00Z} $$ and there is $$ 21 $$ members into next nodes.
+The relation can be converted into the following boolean equation $$ x= unitTime(\text{2023-01-07T00:00:00Z}) $$ where $$ x $$ could be a variable contingent to the SPARQL query.
+</figcaption>
+</figure>
+
+
+<!--
 
 To optimize the discovery of members represented in TREE documents during query execution, we apply the concepts of guided link traversal.
 Our source of knowledge is the `tree:relation`,
@@ -126,3 +161,4 @@ the query engine can also implement a timeout, to stop the search after a certai
 the most trivial one is to stop the search when we traveled the whole `tree:view`.
 With our method we can stop the query processing when there is no next `tree:Node` 
 candidate, from every $$ NO_i $$ inside the link queue where, we can define it as for every $$ NO_i $$  $$ dom (r_{ij} \land R) = \emptyset \forall j $$. 
+-->
