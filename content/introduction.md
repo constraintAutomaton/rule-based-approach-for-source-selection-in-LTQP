@@ -1,24 +1,24 @@
 ## Introduction
 {:#introduction}
 
-Today, there is large amonth of RDF document hosted on the web,
-for some perpective in 2015 there was 88 billion Linked Data triples distributed
-inside 9,960 knowledge graphs [](cite:cites Ermilov2013, Verborgh2016TriplePF).
+Today, there is a large amount of RDF document hosted on the web,
+for some perspective in 2015 there was 88 billion Linked Data triples distributed
+inside 9960 knowledge graphs [](cite:cites Ermilov2013, Verborgh2016TriplePF).
 A naive way to host linked data online is by hosting it into one file,
-has it come with a lot of avantages derived from the locality of the data,
-which make simple the update and query of part of the data set. 
-But, fragmentation of comes also with a lot of avantages that can in some situation
-outweight the disavantage produced by the distance between part of the data.
+as it comes with a lot of advantages derived from the locality of the data,
+which make simply the update and query of part of the data set. 
+But fragmentation of also comes with a lot of advantages that can in some situation
+outweighed the disadvantage produced by the distance between part of the data.
 Before diving into the advantages, we defined fragmentation has a methodology that divide data into substructures,
 where this data is conceptually part of a single dataset.
-[Triple Pattern Fragments](cite:cites Verborgh2016TriplePF) has shown how fragementation of the data
+[Triple Pattern Fragments](cite:cites Verborgh2016TriplePF) has shown how fragmentation of the data
 on the server side can improve the query execution time. 
-But,
-fragmentation has also other advantages such as that the client does not have to download the whole dataset to access
+But
+fragmentation also has other advantages such as that the client does not have to download the whole dataset to access
 the information needed and
 that the server does not have to create and maintain an interface 
 to send the precise data needed by the client[](cite:cites ColpaertMaterializedTREE, lancker2021LDS).
-Another advantages, related to the previous one is that by fragmenting
+Another advantage, related to the previous one is that by fragmenting
 the data in an adequate way such as the query engine can understand the fragmentation,
 the client will not need to implement a complex algorithm
 to process the information but will simply need to query the relevant fragment without having to do a lot of processing.
