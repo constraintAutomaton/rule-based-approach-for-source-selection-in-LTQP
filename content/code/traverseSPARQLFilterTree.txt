@@ -1,0 +1,26 @@
+struct BooleanExpression {
+    variable,
+    operator,
+    value
+}
+
+struct SolverExpression {
+    booleanExpression,
+    operatorDescendance
+}
+
+fn traverseSPARQLFilterTree(tree, operatorDescendanceList, solverExpressionList) {
+    if(isExpression(tree.node)) {
+        solverExpressionList.push({
+            booleanExpression: tree.node,
+            operatorDescendance: operatorDescendanceList
+        })
+        return solverExpressionList
+    } else {
+        // it is an operator
+        operatorDescendanceList.push(tree.node)
+        for (node in tree.next_node) {
+            traverseSPARQLFilterTree(node, operatorDescendanceList, solverExpressionList )
+        }
+    }
+}

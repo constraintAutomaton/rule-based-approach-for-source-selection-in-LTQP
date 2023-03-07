@@ -1,0 +1,8 @@
+PREFIX ex: <https://exemple.be#> .
+SELECT ?s ?id ?t
+WHERE {
+  ?s ex:product_id ?id;
+     ex:unit_temp ?t.
+
+  FILTER(?id=33 && (?t>44 || ?t<=55))
+}

@@ -1,0 +1,37 @@
+struct SolutionDomain {
+    lowerBound,
+    upperBound,
+    operatorDescendance
+}
+
+fn calculateSolutionDomainFromBooleanExpression(solverExpression: SolverExpression) {
+    expression = solverExpression.booleanExpression
+
+    switch (expression.operator) {
+        case "=":
+            return SolutionDomain{
+                lowerBound: expression.value,
+                upperBound: expression.value,
+                solverExpression: solverExpression.solverExpression }
+        case ">":
+            return SolutionDomain{
+                lowerBound: expression.value + DELTA,
+                upperBound: PLUS_INFINITY,
+                solverExpression: solverExpression.solverExpression }
+        case "=>":
+            return SolutionDomain{
+                lowerBound: expression.value,
+                upperBound: PLUS_INFINITY,
+                solverExpression: solverExpression.solverExpression }
+        case "<":
+            return SolutionDomain{
+                lowerBound: MINUS_INFINITY,
+                upperBound: expression.value - DELTA,
+                solverExpression: solverExpression.solverExpression}
+        case "=<":
+            return SolutionDomain{
+                lowerBound: MINUS_INFINITY,
+                upperBound: expression.value,
+                solverExpression: solverExpression.solverExpression}
+    }
+}
