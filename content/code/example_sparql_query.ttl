@@ -1,8 +1,8 @@
-PREFIX ex: <https://exemple.be#> .
-SELECT ?s ?id ?t
+PREFIX ex: <https://exemple.be/> .
+SELECT ?s ?temp
 WHERE {
-  ?s ex:publication_date ?t;
+  ?s ex:storage_date ?t;
      ex:unit_temp ?temp.
 
-  FILTER(?t <= 2023-01-10T00:00:00Z)
+  FILTER(?t <= 2023-01-01T00:00:00Z)
 }

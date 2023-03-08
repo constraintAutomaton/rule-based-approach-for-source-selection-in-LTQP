@@ -17,18 +17,13 @@ by taking into account the relationships between fragments,
 and mapping it to the retrieval needs in the current query.
 <!-- Object       -->
 Concretely, we apply this method over datasets published using the [TREE specification](https://treecg.github.io/specification/),
-<del class="comment" data-author="RT">
-which structures fragmented documents published over the web by letting the data publisher describe the
-links between the fragments with a constraint over a property of the member inside the fragment. 
-That constraint must be followed by every member inside the fragment and can be interpreted as a boolean equation.
-</del>
-
+a web specification used to structure the fragmentation of RDF documents by constraining a property of the member inside the fragment.
 <!-- Findings     -->
-TODO
+We created a new reachability criteria that reduced the search domain considered by the query engine by
+making use of the a priori knowledge of the structure of TREE documents to dereference only named node which
+will lead to other fragments and by evaluating the constraint of the fragment with the SPARQL filter statement provided by the user.
 <!-- Conclusion   -->
-TODO
+...
 <!-- Perspectives -->
-TODO
-
-{:.comment data-author="RT"}
-Make sure to also talk about findings, conclusions, and perspectives.
+This reachability criteria open the posibility for faster client side query of fragmented Linked Datasets,
+such as in the case of sensor data.
