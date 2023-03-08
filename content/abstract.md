@@ -1,21 +1,34 @@
 ## Abstract
 <!-- Context      -->
-Semantically fragmented linked data is a useful method for storing graph-type information,
-such as bus routes and city plans, as well as data events streams like sensors outputs.
-Link traversal querying processing is a good way to search the entire collection,
-because the fragment refers one another 
-and in a lot of cases there is not a summary document to lookup fragments based on the client query.
+Linked Datasets can be published on the Web in a large variety of ways.
+When publishing datasets in which resources have a certain relationship to each other,
+such as bus routes, city plans, and data events streams like sensors outputs,
+it can be useful for clients to publish them in a fragmented manner,
+as they can selectively fetch only specific fragments to answer their needs.
 <!-- Need         -->
-However, querying using link traversal query processing can be inefficient due to the number of resources that must be fetched to answer a query.
+To enable clients to find data in such fragmented collections,
+there is a need for a query execution paradigm that can answer these needs using declarative SPARQL queries.
 <!-- Task         -->
-We can reduce the number of fragments that needs to be visited,
-by enabling our query engine with the capacity of capturing the semantic link between the fragment 
-and evaluating the solvability of the combination of those semantic links
-with a SPARQL filter expression provided by the user. This variance of Link traversal is called Guided Link Traversal Query Processing.
+In this paper, we investigate Link Traversal Querying Processing (LTQP) as a way to search through such fragments,
+as it is able to follow links between fragments.
+Traditionally, querying using LTQP can be inefficient due to the number of resources that must be fetched to answer a query.
+In our case, we can reduce the number of fragments that needs to be visited,
+by taking into account the relationships between fragments,
+and mapping it to the retrieval needs in the current query.
 <!-- Object       -->
-We proposed to use that method over documents that follow the [TREE specification](https://treecg.github.io/specification/),
-a web specification that structure fragmented document published over the web by letting the data publisher describe the
+Concretely, we apply this method over datasets published using the [TREE specification](https://treecg.github.io/specification/),
+<del class="comment" data-author="RT">
+which structures fragmented documents published over the web by letting the data publisher describe the
 links between the fragments with a constraint over a property of the member inside the fragment. 
 That constraint must be followed by every member inside the fragment and can be interpreted as a boolean equation.
+</del>
 
+<!-- Findings     -->
+TODO
+<!-- Conclusion   -->
+TODO
+<!-- Perspectives -->
+TODO
 
+{:.comment data-author="RT"}
+Make sure to also talk about findings, conclusions, and perspectives.
