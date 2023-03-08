@@ -1,19 +1,62 @@
 ## Guided Link traversal for the TREE specification
 {:#guided_link_traversal}
 
-Our approach to GTQP consists of restricting the link that the query engine can follow using first the structural properties of the TREE specification
+{:.comment data-author="RT"}
+The paragraph below is very long, and not very structured.
+I suggest splitting it up into multiple smaller paragraphs, each having their own focus.
+Because the text is very hard to follow at the moment.
+
+{:.comment data-author="RT"}
+First, start by repeating briefly what the goal is. (speeding up query exec by reducing the search space)
+
+Our approach to GLTQP consists of restricting the links that the query engine can follow using first the structural properties of the TREE specification
 and second using the solvability of a boolean equation combining the semantic link between two `tree:Node`s.
+
+{:.comment data-author="RT"}
+the semantic link -> hypermedia descriptions (see my last review)
+
 It has to be noted that our approach is based on the assumption that the user wants to query the member of the TREE document.
+
+{:.comment data-author="RT"}
+Which member is that?
+
 More formally, this consists of creating a [reachability criteria](cite:cites hartig2012) that will be able to discriminate each triple encounter
-into a TREE document to decide if it's useful to dereference a named node to seek a new data source. 
-The structural aspect of this reachability criterion is the based on the a priori knowledge
+into a TREE document to decide if it is useful to dereference a named node to seek a new data source. 
+
+{:.comment data-author="RT"}
+"useful" is not precise enough.
+named node -> URL
+"seek" is not precise enough.
+data source -> fragment
+
+The structural aspect of this reachability criterion is based on the a priori knowledge
+
+{:.comment data-author="RT"}
+What is a structural aspect?
+
 that the members are located into the `tree:Node`s and that the way to access other `tree:Node`s is via the `tree:relation`s, 
 more precisely the named node that has the predicate `tree:node`.
+
+{:.comment data-author="RT"}
+The sentence is good, but wait to mention this until after the code snippet.
+
 As for solvability of the boolean equation,
 from the `tree:relation` we can create a boolean equation, where the operator is described by the 
 type of relation, the left side of the equation is derived from the literal with the predicate `tree:value`.
+
+{:.comment data-author="RT"}
+The above will need some more details, because I don't understand it.
+
 As for the variable, it will depend on the filter expression provided by the user.
+
+{:.comment data-author="RT"}
+What is the variable?
+
 From the relation we can know which property is targeted by looking at the named node with the predicate `tree:path`.
+
+{:.comment data-author="RT"}
+We definitely need to explain this with a running example, because you lost me :/
+
 With this property we can look at the SPARQL query and capture the SPARQL variable that is linked with the same property.
 The second boolean equation is simply the SPARQL filter expression.
 If the two expressions combined are solvable, then we know that the targeted `tree:Node` has the potential of containing
@@ -24,13 +67,24 @@ members that can satisfy the query, hence it is worth looking at this data sourc
 <figure id="TREE-relation-turtle-example" class="listing">
 ````/code/example_tree_relation.ttl````
 <figcaption markdown="block">
-The example is showing a set of triple representing a TREE relation. 
-The relation indicates that the next node exists at the address https://exemple.be#nextNode,
+The example is showing a set of triples representing a TREE relation. 
+The relation indicates that the next node exists at the address https://exemple.be/#nextNode,
+
+{:.comment data-author="RT"}
+I would suggest not using #, as it will cause confusion.
+Let's make it refer to an actual different document.
+
 all the members contain into the next node have the property `ex:publication_date` with
-a value $$ \text{2023-01-07T00:00:00Z} $$ and there is $$ 21 $$ members into next nodes.
+a value $$ \text{2023-01-07T00:00:00Z} $$ and there are $$ 21 $$ members in https://exemple.be/#nextNode.
 The relation can be converted into the following boolean equation $$ x= unitTime(\text{2023-01-07T00:00:00Z}) $$ where $$ x $$ could be a variable contingent to the SPARQL query.
 </figcaption>
 </figure>
+
+{:.comment data-author="RT"}
+https://exemple.be# -> https://exemple.be/#
+exemple -> example
+What is a "variable contingent"?
+
 
 
 <!--
