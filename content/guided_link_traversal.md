@@ -11,7 +11,7 @@ that the members are located into the `tree:Node`s and that the way to access ot
 more precisely the named node that has the predicate `tree:node`.
 As for solvability of the boolean equation,
 from the `tree:relation` we can create a boolean equation, where the operator is described by the 
-type of relation, the left side of the equation from the literal with the predicate `tree:value`.
+type of relation, the left side of the equation is derived from the literal with the predicate `tree:value`.
 As for the variable, it will depend on the filter expression provided by the user.
 From the relation we can know which property is targeted by looking at the named node with the predicate `tree:path`.
 With this property we can look at the SPARQL query and capture the SPARQL variable that is linked with the same property.
@@ -21,14 +21,13 @@ members that can satisfy the query, hence it is worth looking at this data sourc
 [](#TREE-relation-turtle-example)  present example of a `tree:relation` to illustrate the capture of the knowledge to use our method.
 
 
-
-
 <figure id="TREE-relation-turtle-example" class="listing">
 ````/code/example_tree_relation.ttl````
 <figcaption markdown="block">
 The example is showing a set of triple representing a TREE relation. 
 The relation indicates that the next node exists at the address https://exemple.be#nextNode,
-all the members contain into the next node have the property `ex:publication_date` with a value $$ \text{2023-01-07T00:00:00Z} $$ and there is $$ 21 $$ members into next nodes.
+all the members contain into the next node have the property `ex:publication_date` with
+a value $$ \text{2023-01-07T00:00:00Z} $$ and there is $$ 21 $$ members into next nodes.
 The relation can be converted into the following boolean equation $$ x= unitTime(\text{2023-01-07T00:00:00Z}) $$ where $$ x $$ could be a variable contingent to the SPARQL query.
 </figcaption>
 </figure>
