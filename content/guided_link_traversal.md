@@ -42,6 +42,7 @@ which contains a `tree:Node` that is linked to the current node via the predicat
 An example of the descriptions of such a TREE dataset is shown 
 in [](#TREE-relation-turtle-example) using the [Turtle](https://www.w3.org/TR/turtle/) serialization.
 
+<~--
 <figure id="TREE-relation-turtle-example" class="listing">
 ````/code/example_tree_relation.ttl````
 <figcaption markdown="block">
@@ -56,7 +57,7 @@ What you write below should be in the text, not in the caption.
 The relation can be converted into the following boolean equation $$ x= unitTime(\text{2023-01-07T00:00:00Z}) $$ where $$ x $$ is any variable inside the client SPARQL query that as the predicate `ex:publication_date`.
 </figcaption>
 </figure>
-
+-->
 The second part of our reachability criterion pertains to the compatibility between the constraint
 of the `tree:Node` and the SPARQL Filter expression. 
 

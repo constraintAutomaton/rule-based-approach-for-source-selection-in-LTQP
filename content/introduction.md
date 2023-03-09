@@ -23,7 +23,8 @@ In the scope of this paper, we consider the following use case;
 a user want to determine the temperature of all units that have been stored before or at the first of January 2023,
 which can be expressed in SPARQL as shown in [](#example-sparql).
 
-<figure id="example-sparql" class="listing">
+<div class="sidebysidecontainer">
+<figure id="example-sparql" class="listing" style="padding-right: 5px; padding-left: 5px">
 ````/code/example_sparql_query.ttl````
 <figcaption markdown="block">
 SPARQL query to get the temperature and the associated unit IRI.
@@ -32,6 +33,17 @@ SPARQL query to get the temperature and the associated unit IRI.
 
 {:.comment data-author="RT"}
 Can we make use of real ontologies in this example query?
+
+<figure id="TREE-relation-turtle-example" class="listing" style="padding-right: 5px; padding-left: 5px">
+````/code/example_tree_relation.ttl````
+<figcaption markdown="block">
+The example is showing a set of triples representing a TREE relation. 
+The relation can be converted into the following boolean equation 
+$$ x= unitTime(\text{2023-01-07T00:00:00Z}) $$ 
+where $$ x $$ is any variable inside the client SPARQL query that as the predicate `ex:publication_date`.
+</figcaption>
+</figure>
+</div>
 
 {:.comment data-author="RT"}
 What is "unit" here exactly? Is it a cooler or something?
