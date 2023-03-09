@@ -16,7 +16,7 @@ In our case, we can reduce the number of fragments that need to be visited,
 by taking into account the relationships between fragments.
 <!-- Object       -->
 Concretely, we apply this method over datasets published using the [TREE specification](https://treecg.github.io/specification/),
-a web specification used to structure the fragmentation of RDF documents by constraining a property of the data inside the fragment.
+a Web specification used to structure the fragmentation of RDF documents by constraining a property of the data inside the fragment.
 <!-- Findings     -->
 Our findings show that we are able to use the hypermedia descriptions of the TREE specification
 to prune links to fragments if they will not contribute to the SPARQL query.
