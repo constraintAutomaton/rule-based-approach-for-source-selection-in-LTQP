@@ -1,25 +1,28 @@
 ## Introduction
 {:#introduction}
 
-Today, a large number of RDF documents are hosted on the web [](cite:cites Ermilov2013, Verborgh2016TriplePF).
+Today, a large number of RDF documents is hosted on the Web [](cite:cites Ermilov2013, Verborgh2016TriplePF).
 One way to publish Linked Data is by hosting it into one RDF file,
 which is simple for the data publisher.
 The data publisher can also publish its data in a fragmented manner,
-which can be beneficial for query execution time as have been demonstrated by
-[Triple Pattern Fragments](cite:cites Verborgh2016TriplePF).
-The fragmentation also helps the users by giving them the possibility to query only the segment of data necessary for them [](cite:cites ColpaertMaterializedTREE, lancker2021LDS). 
-It's also help client application to enable functionalities by having the data already process 
-and store into fragments, 
-in a way that most of the work consist in querying the data,
-such as in the case of [client side auto completion](https://tree.linkeddatafragments.org/demo/autocompletion/)
+which can be beneficial for query execution time,
+as demonstrated by [Triple Pattern Fragments](cite:cites Verborgh2016TriplePF).
+The fragmentation also helps the users by giving them the possibility to fetch only the relevant data subsets [](cite:cites ColpaertMaterializedTREE, lancker2021LDS). 
+It also helps client-side applications to enable functionalities by having the data pre-processed and stored into fragments,
+so that the client has to perform less effort during [auto-completion](https://tree.linkeddatafragments.org/demo/autocompletion/)
 and client-side route planning [](cite:cites Delva2020, Delva2020a). 
-The disadvantage of fragmenting the document is that there are multiple sources of truth that the user
-has to query to find the information needed , which means more processing power is needed on the client side. 
+The disadvantage of fragmenting such datasets is that there are multiple sources of truth that the user
+has to query to find the information needed, which means more processing power is needed on the client side. 
 
+{:.comment data-author="RT"}
+Sources of truth is the wrong argument here, because the source of truth still exists in one source, it's just fragmented now.
+Instead, we can say that data is just spread over multiple sources.
+Also, this will not lead to a need for more processing power, but instead, it requires more HTTP lookups. (it may even lead to less client-side processing!)
 
-For this paper, we consider the following example,
-a user want to get the temperature of all the unit of a product that has been stored before or at the first of January 2023.
-The user decides to execute the query presented at [](#example-sparql).
+In the scope of this paper, we consider the following use case;
+a user want to determine the temperature of all units that have been stored before or at the first of January 2023,
+which can be expressed in SPARQL as shown in [](#example-sparql).
+
 <div class="sidebysidecontainer">
 <figure id="example-sparql" class="listing" style="padding-right: 5px; padding-left: 5px">
 ````/code/example_sparql_query.ttl````
@@ -27,6 +30,9 @@ The user decides to execute the query presented at [](#example-sparql).
 SPARQL query to get the temperature and the associated unit IRI.
 </figcaption>
 </figure>
+
+{:.comment data-author="RT"}
+Can we make use of real ontologies in this example query?
 
 <figure id="TREE-relation-turtle-example" class="listing" style="padding-right: 5px; padding-left: 5px">
 ````/code/example_tree_relation.ttl````
@@ -39,20 +45,31 @@ where $$ x $$ is any variable inside the client SPARQL query that as the predica
 </figure>
 </div>
 
-As there are a large number of units, the data provider decides 
-to fragment the data set using the [TREE specification](cite:cites spec:tree),
-a Web specification that structured the publication of fragmented RDF documents.
-More precisely, the specification offers the possibility to the data publisher to describe a boolean constraint on a property of the data inside each fragment.
-The fragments are also linked to each other with a description of the constraint.
-Given those constraints and the SPARQL filter expression,
-it is possible to select the fragments that can possibly contribute to the answer to the query.
+{:.comment data-author="RT"}
+What is "unit" here exactly? Is it a cooler or something?
+We need to be more precise here.
 
-The query engine can then apply a query paradigm called,
-Guided Link Traversal Query Processing (GLTQP) [](cite:cites verborgh2020, taelman2023)
-a derivative of Link Traversal Query Processing (LTQP).
-This querying paradigm consists of recursively looking up new documents
-by following links inside them [](cite:cites Hartig2013AnOO).
-GLTQP differ from LTQP by using knowledge capture from triples during the query execution to increase the selectivity
-of data sources, or/and by using a priori knowledge pertaining to the structure
-of RDF documents to reduce the search domain.
+As there many units, the data provider decides
+to fragment the dataset using the [TREE specification](cite:cites spec:tree).
+TREE enables data publisher to place a boolean constraint on a property of the data inside each fragment.
 
+{:.comment data-author="RT"}
+"property of the data"
+Do you mean a property on members inside the dataset?
+
+Furthermore, these fragments linked to each other with a hypermedia description of the constraint.
+
+Given these hypermedia-based constraints,
+it is therefore possible for a client-side query engine
+to interpret them and use them during SPARQL query execution.
+Furthermore, the engine could map them to SPARQL FILTER expressions,
+and only fetch those fragments that could contribute to query results.
+
+One approach to achieve this, is to apply a query paradigm called
+[Guided Link Traversal Query Processing (GLTQP)](cite:cites verborgh2020, taelman2023)
+a specific form of [Link Traversal Query Processing (LTQP)](cite:cites Hartig2013AnOO).
+The idea of LTQP consists of recursively looking up new documents
+by following links inside them.
+GLTQP goes a step further,
+by making use of a priori knowledge pertaining to the structure of Linked Data documents to reduce the search domain,
+which may be discovered during link traversal
