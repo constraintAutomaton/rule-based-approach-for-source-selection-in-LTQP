@@ -222,6 +222,12 @@ main, #appendix {
       }
     }
   }
+  .sidebysidecontainer {
+    display: grid; /* sets the layout to grid */
+    grid-template-columns: repeat(2, 1fr); /* two columns that are equally wide */
+    gap: 2rem; /* space between columns */
+    align-items: end; /* align grid cell contents to bottom of the cell */
+  }
 
   // References
   .references {
