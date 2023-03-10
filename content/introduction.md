@@ -7,18 +7,8 @@ which is simple for the data publisher.
 The data publisher can also publish its data in a fragmented manner,
 which can be beneficial for query execution time,
 as demonstrated by [Triple Pattern Fragments](cite:cites Verborgh2016TriplePF).
-The fragmentation also helps the users by giving them the possibility to fetch only the relevant data subsets [](cite:cites ColpaertMaterializedTREE). 
-
-{:.comment data-author="RE"} 
-Furthermore, fragmentation helps the user ...
-
-It also helps client-side applications to enable functionalities by having the data pre-processed and stored into fragments,
-so that the client has to perform less effort during [auto-completion](https://tree.linkeddatafragments.org/demo/autocompletion/)
-and client-side route planning [](cite:cites Delva2020), for example.
-
-{:.comment data-author="RE"} 
+Furthermore, the fragmentation helps the users by giving them the possibility to fetch only the relevant data subsets [](cite:cites ColpaertMaterializedTREE). 
 Additionally, by storing pre-processed data into fragments, client-side applications can reduce computational load during resource intensive tasks like [auto-completion](https://tree.linkeddatafragments.org/demo/autocompletion/) and client-side route planning [](cite:cites Delva2020).
-
 The disadvantage of fragmenting such datasets is that there are multiple data sources that the user
 has to query to find the information needed, which means more HTTP lookups,
 hence a potential higher client side query execution time. 
@@ -63,9 +53,5 @@ a specific form of [Link Traversal Query Processing (LTQP)](cite:cites Hartig201
 The idea of LTQP consists of recursively looking up new documents
 by following links inside them.
 GLTQP goes a step further,
-by making use of a priori knowledge pertaining to the structure of Linked Data documents to reduce the search domain,
-which may be discovered during link traversal.
-
-{:.comment data-author="RE"} 
-Its a bit unclear what may be discovered in this sentence: "which may be discovered during link traversal."
-
+by making use of a priori knowledge pertaining to the structure of Linked Data documents and 
+knowledge captured during the query execution to reduce the search domain.
