@@ -33,7 +33,7 @@ SPARQL query to get the temperature and the associated unit IRI.
 The example is showing a set of triples representing a TREE relation. 
 The relation can be converted into the following boolean equation 
 $$ x= unitTime(\text{2023-01-07T00:00:00Z}) $$ 
-where $$ x $$ is any variable inside the client SPARQL query that as the predicate `ex:publication_date`.
+where $$ x $$ is any variable inside the client SPARQL query that as the predicate `dct:created`.
 </figcaption>
 </figure>
 </div>
