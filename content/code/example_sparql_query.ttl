@@ -1,6 +1,6 @@
-PREFIX ex: https://exemple.be/ .
-PREFIX dct: http://purl.org/dc/terms/ .
-@prefix xsd: http://www.w3.org/2001/XMLSchema# .
+PREFIX ex: <https://exemple.be/> .
+PREFIX dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 SELECT ?s ?temp
 WHERE {
