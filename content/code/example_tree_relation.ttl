@@ -1,10 +1,10 @@
 @prefix tree: <https://w3id.org/tree#> .
-@prefix ex: <https://exemple.be#> .
+@prefix dct: http://purl.org/dc/terms/ .
 @prefix w3: <http://www.w3.org/2001/XMLSchema#> ,
 
 ex:node tree:relation _:b1 .
 _b1 a  tree:EqualToRelation ;
     tree:node ex:nextNode ;
     tree:value "2023-01-07T00:00:00Z"^^w3:dateTime ;
-    tree:path ex:publication_date ;
+    tree:path dct:created ;
     tree:remainingItems "21"^^w3:integer .

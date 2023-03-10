@@ -2,7 +2,7 @@
 {:#conclusion}
 
 In this paper, we presented a GLTQP approach to 
-prune links to fragmented RDF documents following the TREE specification based on SPARQL FILTER expressions. 
+prune links to fragmented RDF documents following the TREE specification based on SPARQL filter expressions. 
 We showed that we can exploit the structural properties of the TREE specification 
 and the hypermedia constraints on links between fragments to reduce the search domain
 that a LTQP query engine has to explore.
