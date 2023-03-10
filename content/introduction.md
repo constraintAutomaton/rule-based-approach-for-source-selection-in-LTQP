@@ -1,22 +1,30 @@
 ## Introduction
 {:#introduction}
 
-Today, a large number of RDF documents is hosted on the Web [](cite:cites Verborgh2016TriplePF).
+Today, a large number of RDF documents are hosted on the Web [](cite:cites Verborgh2016TriplePF).
 One way to publish Linked Data is by hosting it into one RDF file,
 which is simple for the data publisher.
 The data publisher can also publish its data in a fragmented manner,
 which can be beneficial for query execution time,
 as demonstrated by [Triple Pattern Fragments](cite:cites Verborgh2016TriplePF).
 The fragmentation also helps the users by giving them the possibility to fetch only the relevant data subsets [](cite:cites ColpaertMaterializedTREE). 
+
+{:.comment data-author="RE"} 
+Furthermore, fragmentation helps the user ...
+
 It also helps client-side applications to enable functionalities by having the data pre-processed and stored into fragments,
 so that the client has to perform less effort during [auto-completion](https://tree.linkeddatafragments.org/demo/autocompletion/)
 and client-side route planning [](cite:cites Delva2020), for example.
+
+{:.comment data-author="RE"} 
+Additionally, by storing pre-processed data into fragments, client-side applications can reduce computational load during resource intensive tasks like [auto-completion](https://tree.linkeddatafragments.org/demo/autocompletion/) and client-side route planning [](cite:cites Delva2020).
+
 The disadvantage of fragmenting such datasets is that there are multiple data sources that the user
 has to query to find the information needed, which means more HTTP lookups,
 hence a potential higher client side query execution time. 
 
 In the scope of this paper, we consider the following use case;
-a user want to determine the temperature of all sensor logs that have been created before or at the first of January 2023,
+a user wants to determine the temperature of all sensor logs that have been created before or at the first of January 2023,
 which can be expressed in SPARQL as shown in [](#example-sparql).
 
 <div class="sidebysidecontainer">
@@ -57,3 +65,7 @@ by following links inside them.
 GLTQP goes a step further,
 by making use of a priori knowledge pertaining to the structure of Linked Data documents to reduce the search domain,
 which may be discovered during link traversal.
+
+{:.comment data-author="RE"} 
+Its a bit unclear what may be discovered in this sentence: "which may be discovered during link traversal."
+
