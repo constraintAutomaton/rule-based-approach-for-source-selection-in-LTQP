@@ -43,8 +43,8 @@ Furthermore, these fragments linked to each other with a hypermedia description 
 
 Given these hypermedia-based constraints,
 it is therefore possible for a client-side query engine
-to interpret them and use them during SPARQL query execution.
-Furthermore, the engine could map them to SPARQL FILTER expressions,
+to interpret those constraints and use them during SPARQL query execution.
+Furthermore, the engine could map the constraints to SPARQL FILTER expressions,
 and only fetch those fragments that could contribute to query results.
 
 One approach to achieve this, is to apply a query paradigm called
