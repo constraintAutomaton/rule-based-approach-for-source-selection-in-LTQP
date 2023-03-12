@@ -1,4 +1,4 @@
-# Guided Link Traversal Query Processing over RDF documents fragmented with TREE
+# [Guided Link Traversal Query Processing over RDF documents fragmented with TREE](https://constraintautomaton.github.io/comunica-filter-poster/)
 
 Poster article written to the [ESWC 2023](https://2023.eswc-conferences.org/), **Not published yet** .
 
