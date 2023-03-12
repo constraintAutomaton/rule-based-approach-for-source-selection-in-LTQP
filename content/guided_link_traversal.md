@@ -43,7 +43,7 @@ The second part of our reachability criteria pertains to the compatibility betwe
 of the `tree:Node` and the SPARQL Filter expression. 
 The constraint of the `tree:Relation`, can be conceptualized as a boolean equation.
 This equation as a variable, a comparator and a literal,
-we can exemplify it by the following simple expression; $$ ?t >= unixtime(\text{2023-01-07T00:00:00Z}) $$.
+we can exemplify it by the following simple expression; $$ t \leq unixTime(\text{2023-01-07T00:00:00Z}) $$.
 The left hand of the expression, the variable, is contingent to a SPARQL query expression.
 It is the variable pertaining to the property that the `tree:Relation` is targeting.
 The property targeted by the relation is defined by the object of the triple
