@@ -43,13 +43,13 @@ The second part of our reachability criteria pertains to the compatibility betwe
 of the `tree:Node` and the SPARQL Filter expression. 
 The constraint of the `tree:Relation`, can be conceptualized as a boolean equation.
 This equation as a variable, a comparator and a literal,
-we can exemplify it by the following simple expression; $$ x > 5 $$.
+we can exemplify it by the following simple expression; $$ ?t >= unixtime(\text{2023-01-07T00:00:00Z}) $$.
 The left hand of the expression, the variable, is contingent to a SPARQL query expression.
 It is the variable pertaining to the property that the `tree:Relation` is targeting.
 The property targeted by the relation is defined by the object of the triple
 having the predicate `tree:path`.
 In the example of [](#example-sparql) it was $$ ?t $$, because the example of [](#TREE-relation-turtle-example)
-has the `tree:path` property `dct:created`. 
+has the `tree:path` property `sosa:resultTime`. 
 The boolean operator such as; equal, greater than, is described by the [RDF type of the TREE relation](https://treecg.github.io/specification/#Relation), in Turtle serialization it is the object of the triple with the predicate "`a`".
 Finally, the literal is simply represented by the object of the triple in the relation,
 containing the predicate `tree:value`.
