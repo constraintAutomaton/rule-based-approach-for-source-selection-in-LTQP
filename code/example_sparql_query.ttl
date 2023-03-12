@@ -1,0 +1,10 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+SELECT ?s ?temp
+WHERE {
+  ?s sosa:resultTime ?t;
+     sosa:hasSimpleResult ?temp.
+
+  FILTER(?t <= "2023-01-01T00:00:00Z"^^xsd:dateTime)
+}

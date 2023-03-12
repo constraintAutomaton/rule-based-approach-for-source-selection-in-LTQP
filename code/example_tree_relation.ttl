@@ -1,0 +1,11 @@
+@prefix tree: <https://w3id.org/tree#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <https://example.be/> .
+
+ex:node tree:relation _:b1 .
+_b1 a  tree:EqualToRelation ;
+    tree:node ex:nextNode ;
+    tree:value "2023-01-07T00:00:00Z"^^xsd:dateTime ;
+    tree:path sosa:resultTime ;
+    tree:remainingItems "21"^^xsd:integer .
