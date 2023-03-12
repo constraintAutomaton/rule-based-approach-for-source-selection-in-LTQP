@@ -1,5 +1,9 @@
 # Guided Link Traversal Query Processing over RDF documents fragmented with TREE
 
+Poster article written to the [ESWC 2023](https://2023.eswc-conferences.org/), **Not published yet** .
+
+Accessible online at https://constraintautomaton.github.io/comunica-filter-poster/
+
 ## Abstract
 Linked Datasets can be published on the Web in a large variety of ways.
 When publishing datasets in which resources have a certain relationship to each other,
