@@ -24,15 +24,14 @@ This method opens the possibility for faster client-side query execution over fr
 such as in the case of sensor data.
 As such, this facilitates the creation of more user-friendly applications over decentralized and fragmented Knowledge Graphs.
 
-
-
-## Development mode
+## Editing the article
+### Development mode
 ```
 bundle install
 bundle exec guard
 ```
 
-## Build
+### Build
 ```
 bundle install
 bundle exec nanoc compile
