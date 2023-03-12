@@ -1,4 +1,4 @@
-# [Poster Article] Guided Link Traversal Query Processing over RDF documents fragmented with TREE
+# Guided Link Traversal Query Processing over RDF documents fragmented with TREE
 
 ## Abstract
 Linked Datasets can be published on the Web in a large variety of ways.
