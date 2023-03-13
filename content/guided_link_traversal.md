@@ -10,7 +10,7 @@ and the [hypermedia descriptions](cite:cites thomasFieldingPhdThesis) of fragmen
 More formally, this consists of creating a [reachability criteria](cite:cites hartig2012) 
 that can discriminate triples encountered
 inside a TREE document with the objective to decide if dereferencing the URLs in
-those triples will contribute to result for the query.
+those triples will contribute to the results for the query.
 A conceptual example is presented at [](#running_example) based on the query of [](#example-sparql),
 where we see in green that the query engine only considers the triples pertaining to
 the relation between the fragment and follow the relation that is compatible with the SPARQL filter expression.
@@ -54,5 +54,4 @@ containing the predicate `tree:value`.
 
 Given,
 the boolean representation of the `tree:Relation` and the SPARQL filter expression that is already a boolean expression,
-a solver can evaluate if the combination of those two expressions is resolvable, like in [our open source implementation](https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation) where we evaluate the solution domain of the equation to find the solvability, hence
-discriminating the certain non-contribution relations.
+a solver can evaluate if the combination of those two expressions is resolvable, like in [our open source implementation](https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation) where we evaluate the solution domain of the equation to find the solvability, hence, pruning certainly noncontributing relations.
