@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta charset="utf-8" />
-  <title property="foaf:name schema:name">Guided Link Traversal Query Processing over RDF documents fragmented with TREE</title>
+  <title property="foaf:name schema:name">How TREE hypermedia can speed up Link Traversal-based Query Processing for SPARQL queries with filters</title>
   <link rel="stylesheet" media="screen" href="styles/screen.css" />
   <link rel="stylesheet" media="print"  href="styles/print.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" media="all"    href="styles/katex.css" />
-  <meta name="citation_title" content="Guided Link Traversal Query Processing over RDF documents fragmented with TREE">
+  <meta name="citation_title" content="How TREE hypermedia can speed up Link Traversal-based Query Processing for SPARQL queries with filters">
   <meta name="citation_author" content="Bryan-Elliott Tam" />
   <meta name="citation_author" content="Ruben Taelman" />
   <meta name="citation_author" content="Pieter Colpaert" />
@@ -16,8 +16,9 @@
 </head>
 
 <body prefix="dctypes: http://purl.org/dc/dcmitype/ pimspace: http://www.w3.org/ns/pim/space# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# lsc: http://linkedscience.org/lsc/ns#" typeof="schema:CreativeWork sioc:Post prov:Entity lsc:Research">
-  <header>
-  <h1 id="guided-link-traversal-query-processing-over-rdf-documents-fragmented-with-tree">Guided Link Traversal Query Processing over RDF documents fragmented with TREE</h1>
+  <!-- Guided Link Traversal Query Processing over RDF documents fragmented with TREE -->
+<header>
+  <h1 id="how-tree-hypermedia-can-speed-up-link-traversal-based-query-processing-for-sparql-queries-with-filters">How TREE hypermedia can speed up Link Traversal-based Query Processing for SPARQL queries with filters</h1>
 
   <ul id="authors">
     <li><a rev="lsc:participatesIn" property="foaf:maker schema:creator schema:author schema:publisher" href="https://github.com/constraintAutomaton" typeof="foaf:Person schema:Person" resource="">Bryan-Elliott Tam</a></li>
@@ -44,19 +45,24 @@
       <!-- Context      -->
       <p>Linked Data can be published on the Web in a variety of APIs such as in subject pages or in a SPARQL endpoint.
 Each API has its own set of trade-offs:
-in the former, the client needs to perform a rather slow link traversal algorithm to find an answer to any query, but the API is cheap to host; while in the latter the server is able to provide a rather fast and concise answer to a well-defined query, but the API is more expensive to maintain. 
+in the former, the client needs to perform a rather slow link traversal algorithm to find an answer to any query, but the 
+API is cheap to host; while in the latter the server is able to provide a rather fast and concise answer to a 
+well-defined query, but the API is more expensive to maintain. 
 <!-- Need         -->
-An in-between solution could work using guided link traversal and hypermedia, in which the server already exposes hints of an ordering of subjects in a search space.
+An in-between solution could work using guided link traversal and hypermedia, in which the server already exposes hints 
+of an ordering of subjects in a search space.
 <!-- Task         -->
-The <a href="https://w3id.org/tree/specification">TREE hypermedia specification</a> allows to define such relations between pages containing zero or more members (fragments) of the collection.
+The <a href="https://w3id.org/tree/specification">TREE hypermedia specification</a> allows to define such relations between pages (fragments) containing zero or more members of the collection.
 <!-- Object       -->
-In this paper, we investigate a guided Link Traversal-based Query Processing (LTQP) approach to search through such interlinked fragments, and reduce the number of fragments that need to be visited by taking into account the described relations.
+In this paper, we investigate a Guided Link Traversal-based Query Processing (GLTQP) approach to search through such 
+interlinked fragments, and reduce the number of fragments that need to be visited by taking into account the described relations.
 <!-- Findings     -->
-Our findings show that we are able to use the hypermedia descriptions of the TREE specification to prune links to fragments that will certainly not contribute to the SPARQL query based on a solver between SPARQL FILTER and TREE Relation descriptions.
+Our findings show that we are able to use the hypermedia descriptions of the TREE specification to prune links to 
+fragments that will certainly not contribute to the SPARQL query based on a reachability criteria that can be
+the basis for a solver resolving a boolean equation combinaing the SPARQL FILTER expression and TREE Relation descriptions.
 <!-- Conclusion   -->
-This solver has been made available as open-source to demonstrate how it can generate faster results on the client for SPARQL queries with FILTER clauses over TREE fragmented Linked Datasets.
-<!-- Perspectives -->
-<!--As such, this facilitates the creation of more user-friendly applications over decentralized and fragmented Knowledge Graphs.--></p>
+This solver has been made available as open-source to demonstrate how it can generate faster results on the client for 
+SPARQL queries with FILTER clauses over TREE fragmented Linked Datasets.</p>
 
     </div>
 </section>
@@ -166,10 +172,7 @@ the relation between the fragment and follow the relation that is compatible wit
         <figure id="running_example">
 <img src="img/running_example.drawio.svg" alt="[Running example of our GLTQP approach]" class="figure-narrow" style="height: 20vh" />
 <figcaption>
-            <p><span class="label">Fig. 1:</span> Running example of our GLTQP approach.
-We see that the query engine consider the relations between the fragment separately from the other triples
-and in green only consider the relation and fragment compatible with the SPARQL filter expression of
-<a href="#example-sparql">Listing 1</a>.</p>
+            <p><span class="label">Fig. 1:</span> Running example of our GLTQP approach based on <a href="#example-sparql">Listing 1</a>.</p>
           </figcaption>
 </figure>
 
@@ -201,8 +204,8 @@ containing the predicate <code>tree:value</code>.</p>
 
         <p>Given,
 the boolean representation of the <code>tree:Relation</code> and the SPARQL filter expression that is already a boolean expression,
-the query engine can evaluate if the combination of those two expressions is solvable, hence
-discriminate if the relation should be followed if there are possible solutions to this boolean expression.</p>
+a solver can evaluate if the combination of those two expressions is resolvable, like in <a href="https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation">our open source implementation</a> where we evaluate the solution domain of the equation to find the solvability, hence
+discriminating the certain non-contribution relations.</p>
       </div>
 </section>
 
@@ -219,8 +222,8 @@ that a LTQP query engine has to explore.</p>
         <p>This work opens the possibility for faster traversal-based query execution over fragmented RDF documents, 
 given that the data provider uses hypermedia descriptions to characterize the fragmentation
 in a structured manner. 
-It follows that our work is a motivation for more structured fragmented RDF documents
-and for the implementation of more a priori knowledge inside client-side SPARQL query engines.</p>
+It follows that our future work is to benchmark our GLTQP with different solver approaches, to
+empirically prove the efficiency of our method.</p>
 
       </div>
 </section>
@@ -235,7 +238,7 @@ and for the implementation of more a priori knowledge inside client-side SPARQL 
   <dt id="ref-2">[2]</dt>
   <dd resource="#ColpaertMaterializedTREE" typeof="schema:Article">Colpaert, P.: Building materializable querying interfaces with the TREE hypermedia specification.</dd>
   <dt id="ref-3">[3]</dt>
-  <dd resource="#Delva2020" typeof="schema:Article">Delva, H., Rojas, J.A., Vandenberghe, P.-J., Colpaert, P., Verborgh, R.: Geospatial Partitioning of Open Transit Data. In: Bielikova, M., Mikkonen, T., and Pautasso, C. (eds.) Web Engineering. Springer International Publishing</dd>
+  <dd resource="#Delva2020" typeof="schema:Article">Delva, H., Rojas, J.A., Vandenberghe, P.-J., Colpaert, P., Verborgh, R.: Geospatial Partitioning of Open Transit Data. In: Web Engineering. Springer</dd>
   <dt id="ref-4">[4]</dt>
   <dd resource="#spec:tree" typeof="schema:CreativeWork">Colpaert, P.: The TREE hypermedia specification.</dd>
   <dt id="ref-5">[5]</dt>
