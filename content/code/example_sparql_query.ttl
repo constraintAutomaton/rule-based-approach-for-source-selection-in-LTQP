@@ -1,5 +1,5 @@
-PREFIX sosa: <http://www.w3.org/ns/sosa/> .
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> .
+PREFIX sosa: <http://www.w3.org/ns/sosa/> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
 
 SELECT ?s ?temp
 WHERE {
