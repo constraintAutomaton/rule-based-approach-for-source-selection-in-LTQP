@@ -12,7 +12,7 @@
   <meta name="citation_author" content="Ruben Taelman" />
   <meta name="citation_author" content="Pieter Colpaert" />
   
-  <meta name="citation_publication_date" content="2023/03/12" />
+  <meta name="citation_publication_date" content="2023/03/13" />
 </head>
 
 <body prefix="dctypes: http://purl.org/dc/dcmitype/ pimspace: http://www.w3.org/ns/pim/space# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# lsc: http://linkedscience.org/lsc/ns#" typeof="schema:CreativeWork sioc:Post prov:Entity lsc:Research">
@@ -94,8 +94,8 @@ which can be expressed in SPARQL as shown in <a href="#example-sparql">Listing 
 
         <div class="sidebysidecontainer">
 <figure id="example-sparql" class="listing" style="padding-right: 5px; padding-left: 5px">
-<pre><code>PREFIX sosa: &lt;http://www.w3.org/ns/sosa/&gt; .
-</code><code>PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+<pre><code>PREFIX sosa: &lt;http://www.w3.org/ns/sosa/&gt; 
+</code><code>PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; 
 </code><code>
 </code><code>SELECT ?s ?temp
 </code><code>WHERE {
@@ -103,7 +103,8 @@ which can be expressed in SPARQL as shown in <a href="#example-sparql">Listing 
 </code><code>     sosa:hasSimpleResult ?temp.
 </code><code>
 </code><code>  FILTER(?t &lt;= &quot;2023-01-01T00:00:00Z&quot;^^xsd:dateTime)
-</code><code>}</code></pre>
+</code><code>}
+</code></pre>
 <figcaption>
               <p><span class="label">Listing 1:</span> SPARQL query to get the temperature and the associated unit IRI.</p>
             </figcaption>
