@@ -10,5 +10,6 @@ that a LTQP query engine has to explore.
 This work opens the possibility for faster traversal-based query execution over fragmented RDF documents, 
 given that the data provider uses hypermedia descriptions to characterize the fragmentation
 in a structured manner. 
-It follows that our work is a motivation for more structured fragmented RDF documents
-and for the implementation of more a priori knowledge inside client-side SPARQL query engines.
+It follows that our future work is to benchmark our GLTQP with different solver approaches, to
+empirically prove the efficiency of our method.
+

@@ -19,10 +19,7 @@ the relation between the fragment and follow the relation that is compatible wit
 <figure id="running_example">
 <img src="img/running_example.drawio.svg" alt="[Running example of our GLTQP approach]" class="figure-narrow" style="height: 20vh">
 <figcaption markdown="block">
-Running example of our GLTQP approach.
-We see that the query engine consider the relations between the fragment separately from the other triples
-and in green only consider the relation and fragment compatible with the SPARQL filter expression of
-[](#example-sparql).
+Running example of our GLTQP approach based on [](#example-sparql).
 </figcaption>
 </figure>
 
@@ -57,5 +54,5 @@ containing the predicate `tree:value`.
 
 Given,
 the boolean representation of the `tree:Relation` and the SPARQL filter expression that is already a boolean expression,
-the query engine can evaluate if the combination of those two expressions is solvable, hence
-discriminate if the relation should be followed if there are possible solutions to this boolean expression.
+a solver can evaluate if the combination of those two expressions is resolvable, like in [our open source implementation](https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation) where we evaluate the solution domain of the equation to find the solvability, hence
+discriminating the certain non-contribution relations.
