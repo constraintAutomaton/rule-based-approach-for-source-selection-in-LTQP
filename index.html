@@ -182,14 +182,14 @@ Concretely, fragments of TREE datasets
 are called <a href="https://treecg.github.io/specification/#Node"><code>tree:Node</code></a>s.
 Those fragments contain hypermedia descriptions of the next <code>tree:Node</code>s that are related to this node.
 Those descriptions are called <a href="https://treecg.github.io/specification/#Relation"><code>tree:Relation</code></a>,
-which contains a <code>tree:Node</code> that is linked to the current node via the predicate <code>tree:node</code>.
+they characterize the link between the current <code>tree:Node</code> and another via the predicate <code>tree:node</code>.
 An example of the descriptions of such a TREE dataset is shown 
 in <a href="#TREE-relation-turtle-example">Listing 2</a> using the <a href="https://www.w3.org/TR/turtle/">Turtle</a> serialization.</p>
 
         <p>The second part of our reachability criterium pertains to the compatibility between the constraint
 of the <code>tree:Node</code> and the SPARQL Filter expression. 
 The constraint of the <code>tree:Relation</code>, can be conceptualized as a boolean equation.
-This equation as a variable, a comparator and a literal,
+This equation has a variable, a comparator and a literal,
 we can exemplify it by the following simple expression; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>&#x2264;</mo><mi>u</mi><mi>n</mi><mi>i</mi><mi>x</mi><mi>T</mi><mi>i</mi><mi>m</mi><mi>e</mi><mo stretchy="false">(</mo><mtext>2023-01-07T00:00:00Z</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">t \leq unixTime(\text{2023-01-07T00:00:00Z})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2264;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">u</span><span class="mord mathnormal">ni</span><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">im</span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord text"><span class="mord">2023-01-07T00:00:00Z</span></span><span class="mclose">)</span></span></span></span>.
 The left hand of the expression, the variable, is contingent to a SPARQL query expression.
 It is the variable pertaining to the property that the <code>tree:Relation</code> is targeting.
