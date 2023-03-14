@@ -29,14 +29,14 @@ Concretely, fragments of TREE datasets
 are called [`tree:Node`](https://treecg.github.io/specification/#Node)s.
 Those fragments contain hypermedia descriptions of the next `tree:Node`s that are related to this node.
 Those descriptions are called [`tree:Relation`](https://treecg.github.io/specification/#Relation),
-which contains a `tree:Node` that is linked to the current node via the predicate `tree:node`.
+they characterize the link between the current `tree:Node` and another via the predicate `tree:node`.
 An example of the descriptions of such a TREE dataset is shown 
 in [](#TREE-relation-turtle-example) using the [Turtle](https://www.w3.org/TR/turtle/) serialization.
 
 The second part of our reachability criterium pertains to the compatibility between the constraint
 of the `tree:Node` and the SPARQL Filter expression. 
 The constraint of the `tree:Relation`, can be conceptualized as a boolean equation.
-This equation as a variable, a comparator and a literal,
+This equation has a variable, a comparator and a literal,
 we can exemplify it by the following simple expression; $$ t \leq unixTime(\text{2023-01-07T00:00:00Z}) $$.
 The left hand of the expression, the variable, is contingent to a SPARQL query expression.
 It is the variable pertaining to the property that the `tree:Relation` is targeting.
