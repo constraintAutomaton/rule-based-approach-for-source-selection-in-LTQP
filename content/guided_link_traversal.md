@@ -7,7 +7,7 @@ Our approach to GLTQP consists of restricting the links
 that the query engine can follow using a combination of prior knowledge about the structural properties of the TREE specification,
 and the [hypermedia descriptions](cite:cites thomasFieldingPhdThesis) of fragment constraints.
 
-More formally, this consists of creating a [reachability criteria](cite:cites hartig2012) 
+More formally, this consists of creating a [reachability criterium](cite:cites hartig2012) 
 that can discriminate triples encountered
 inside a TREE document with the objective to decide if dereferencing the URLs in
 those triples will contribute to the results for the query.
@@ -15,14 +15,12 @@ A conceptual example is presented at [](#running_example) based on the query of 
 where we see in green that the query engine only considers the triples pertaining to
 the relation between the fragment and follow the relation that is compatible with the SPARQL filter expression.
 
-
 <figure id="running_example">
 <img src="img/running_example.drawio.svg" alt="[Running example of our GLTQP approach]" class="figure-narrow" style="height: 20vh">
 <figcaption markdown="block">
 Running example of our GLTQP approach based on [](#example-sparql).
 </figcaption>
 </figure>
-
 
 To determine if a URL will lead to another fragment in the current TREE dataset,
 or another document elsewhere on the Web,
@@ -35,8 +33,7 @@ which contains a `tree:Node` that is linked to the current node via the predicat
 An example of the descriptions of such a TREE dataset is shown 
 in [](#TREE-relation-turtle-example) using the [Turtle](https://www.w3.org/TR/turtle/) serialization.
 
-
-The second part of our reachability criteria pertains to the compatibility between the constraint
+The second part of our reachability criterium pertains to the compatibility between the constraint
 of the `tree:Node` and the SPARQL Filter expression. 
 The constraint of the `tree:Relation`, can be conceptualized as a boolean equation.
 This equation as a variable, a comparator and a literal,
@@ -52,6 +49,5 @@ Finally, the literal is simply represented by the object of the triple in the re
 containing the predicate `tree:value`.
 
 
-Given,
-the boolean representation of the `tree:Relation` and the SPARQL filter expression that is already a boolean expression,
-a solver can evaluate if the combination of those two expressions is resolvable, like in [our open source implementation](https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation) where we evaluate the solution domain of the equation to find the solvability, hence, pruning certainly noncontributing relations.
+Given the boolean representation of the `tree:Relation` and the SPARQL filter expression that is already a boolean expression,
+a solver can evaluate if the combination of those two expressions is resolvable, like in [our open source implementation](https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation) where we evaluate the solution domain of the equation to find the solvability, hence, pruning certainly non-contributing relations.

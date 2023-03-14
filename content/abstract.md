@@ -18,7 +18,6 @@ Our findings show that we are able to use the hypermedia descriptions of the TRE
 fragments that will certainly not contribute to the SPARQL query based on a reachability criteria that can be
 the basis for a solver resolving a boolean equation combinaing the SPARQL FILTER expression and TREE Relation descriptions.
 <!-- Conclusion   -->
-This solver has been made available as open-source to demonstrate how it can generate faster results on the client for 
+This solver has been made available as open-source as part of the Comunica project to demonstrate how it can generate faster results on the client for 
 SPARQL queries with FILTER clauses over TREE fragmented Linked Datasets.
-
 
