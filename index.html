@@ -12,7 +12,7 @@
   <meta name="citation_author" content="Ruben Taelman" />
   <meta name="citation_author" content="Pieter Colpaert" />
   
-  <meta name="citation_publication_date" content="2023/03/13" />
+  <meta name="citation_publication_date" content="2023/03/14" />
 </head>
 
 <body prefix="dctypes: http://purl.org/dc/dcmitype/ pimspace: http://www.w3.org/ns/pim/space# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# lsc: http://linkedscience.org/lsc/ns#" typeof="schema:CreativeWork sioc:Post prov:Entity lsc:Research">
@@ -61,7 +61,7 @@ Our findings show that we are able to use the hypermedia descriptions of the TRE
 fragments that will certainly not contribute to the SPARQL query based on a reachability criteria that can be
 the basis for a solver resolving a boolean equation combinaing the SPARQL FILTER expression and TREE Relation descriptions.
 <!-- Conclusion   -->
-This solver has been made available as open-source to demonstrate how it can generate faster results on the client for 
+This solver has been made available as open-source as part of the Comunica project to demonstrate how it can generate faster results on the client for 
 SPARQL queries with FILTER clauses over TREE fragmented Linked Datasets.</p>
 
     </div>
@@ -73,24 +73,23 @@ SPARQL queries with FILTER clauses over TREE fragmented Linked Datasets.</p>
 <div datatype="rdf:HTML" property="schema:description">
         <h2 property="schema:name">Introduction</h2>
 
-        <p>Today, a large number of RDF documents are hosted on the Web <span class="references">[<a href="#ref-1">1</a>]</span>.
-One way to publish Linked Data is by hosting it into one RDF file,
-which is simple for the data publisher.
-The data publisher can also publish its data in a fragmented manner,
-which can be beneficial for query execution time,
-as demonstrated by Triple Pattern Fragments <span class="references">[<a href="#ref-1">1</a>]</span>.
-Furthermore, the fragmentation helps the users by giving them the possibility to fetch only the relevant data subsets <span class="references">[<a href="#ref-2">2</a>]</span>. 
-Additionally, by storing pre-processed data into fragments, client-side applications can reduce computational load during resource intensive tasks like <a href="https://tree.linkeddatafragments.org/demo/autocompletion/">auto-completion</a> and client-side route planning <span class="references">[<a href="#ref-3">3</a>]</span>.
+        <p>Hosting a number of RDF documents is a cost-efficient choice when it comes to Web API design.
+One alternative would be to host a SPARQL endpoint, that can generate an infinite amount of RDF documents depending on the precise SPARQL query.
+The data publisher however can also publish its data in fragments with a certain locality,
+which can lead to an interesting new trade-off between cost-efficiency and query execution when the client takes part in the query execution,
+as demonstrated by the work on Triple Pattern Fragments <span class="references">[<a href="#ref-1">1</a>]</span>.
+The fragmentation helps the users by giving them the possibility to fetch only the relevant data subsets.</p>
+
+        <p>By storing pre-processed data into fragments in various ways, client-side applications can reduce computational load during other tasks as well, like auto completion <span class="references">[<a href="#ref-2">2</a>]</span> and client-side route planning <span class="references">[<a href="#ref-3">3</a>]</span>.
 The disadvantage of fragmenting such datasets is that there are multiple data sources that the user
 has to query to find the information needed, which means more HTTP lookups,
-hence a potential higher client side query execution time.</p>
-
-        <p>In the scope of this paper, we consider the following use case;
+hence a potential higher client side query execution time. 
+In this paper, we consider the following use case;
 a user wants to determine the temperature of all sensor logs that have been created before or at the first of January 2023,
 which can be expressed in SPARQL as shown in <a href="#example-sparql">Listing 1</a>.</p>
 
-        <div class="sidebysidecontainer">
-<figure id="example-sparql" class="listing" style="padding-right: 5px; padding-left: 5px">
+        <div class="sidebysidecontainer" style="align-items: stretch !important; ">
+<figure id="example-sparql" class="listing" style="padding-right: 5px; padding-left: 5px; height='100%'">
 <pre><code>PREFIX sosa: &lt;http://www.w3.org/ns/sosa/&gt; 
 </code><code>PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; 
 </code><code>
@@ -128,8 +127,8 @@ where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.
 </figure>
 </div>
 
-        <p>As there are many sensor logs, the data provider decides
-to fragment the dataset using the TREE specification <span class="references">[<a href="#ref-4">4</a>]</span>.
+        <p>As there are too many sensor logs for one page, the data provider decides
+to fragment the dataset using the <a href="https://w3id.org/tree/specification">TREE specification</a>.
 TREE enables data publishers to place a boolean constraint on a property of the members inside each fragment.
 Furthermore, these fragments linked to each other with a hypermedia description of the constraint.</p>
 
@@ -140,8 +139,8 @@ Furthermore, the engine could map the constraints to SPARQL FILTER expressions,
 and only fetch those fragments that could contribute to query results.</p>
 
         <p>One approach to achieve this, is to apply a query paradigm called
-Guided Link Traversal Query Processing (GLTQP) <span class="references">[<a href="#ref-5">5</a>]</span>
-a specific form of Link Traversal Query Processing (LTQP) <span class="references">[<a href="#ref-6">6</a>]</span>.
+Guided Link Traversal Query Processing (GLTQP) <span class="references">[<a href="#ref-4">4</a>]</span>
+a specific form of Link Traversal Query Processing (LTQP) <span class="references">[<a href="#ref-5">5</a>]</span>.
 The idea of LTQP consists of recursively looking up new documents
 by following links inside them.
 GLTQP goes a step further,
@@ -159,9 +158,9 @@ knowledge captured during the query execution to reduce the search domain.</p>
 acquired before or during execution.
 Our approach to GLTQP consists of restricting the links 
 that the query engine can follow using a combination of prior knowledge about the structural properties of the TREE specification,
-and the hypermedia descriptions <span class="references">[<a href="#ref-7">7</a>]</span> of fragment constraints.</p>
+and the hypermedia descriptions <span class="references">[<a href="#ref-6">6</a>]</span> of fragment constraints.</p>
 
-        <p>More formally, this consists of creating a reachability criteria <span class="references">[<a href="#ref-8">8</a>]</span> 
+        <p>More formally, this consists of creating a reachability criterium <span class="references">[<a href="#ref-7">7</a>]</span> 
 that can discriminate triples encountered
 inside a TREE document with the objective to decide if dereferencing the URLs in
 those triples will contribute to the results for the query.
@@ -187,7 +186,7 @@ which contains a <code>tree:Node</code> that is linked to the current node via t
 An example of the descriptions of such a TREE dataset is shown 
 in <a href="#TREE-relation-turtle-example">Listing 2</a> using the <a href="https://www.w3.org/TR/turtle/">Turtle</a> serialization.</p>
 
-        <p>The second part of our reachability criteria pertains to the compatibility between the constraint
+        <p>The second part of our reachability criterium pertains to the compatibility between the constraint
 of the <code>tree:Node</code> and the SPARQL Filter expression. 
 The constraint of the <code>tree:Relation</code>, can be conceptualized as a boolean equation.
 This equation as a variable, a comparator and a literal,
@@ -202,9 +201,9 @@ The boolean operator such as; equal, greater than, is described by the <a href="
 Finally, the literal is simply represented by the object of the triple in the relation,
 containing the predicate <code>tree:value</code>.</p>
 
-        <p>Given,
-the boolean representation of the <code>tree:Relation</code> and the SPARQL filter expression that is already a boolean expression,
-a solver can evaluate if the combination of those two expressions is resolvable, like in <a href="https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation">our open source implementation</a> where we evaluate the solution domain of the equation to find the solvability, hence, pruning certainly noncontributing relations.</p>
+        <p>Given the boolean representation of the <code>tree:Relation</code> and the SPARQL filter expression that is already a boolean expression,
+a solver can evaluate if the combination of those two expressions is resolvable, like in <a href="https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation">our open source implementation</a> where we evaluate the solution domain of the equation to find the solvability, hence, pruning certainly non-contributing relations.</p>
+
       </div>
 </section>
 
@@ -212,8 +211,7 @@ a solver can evaluate if the combination of those two expressions is resolvable,
 <div datatype="rdf:HTML" property="schema:description">
         <h2 property="schema:name">Conclusion</h2>
 
-        <p>In this paper, we present a GLTQP approach to 
-prune links to fragmented RDF documents following the TREE specification based on SPARQL filter expressions. 
+        <p>Concluding from our preliminary implementation, a GLTQP approach to prune links to fragmented RDF documents following the TREE specification based on SPARQL filter expressions is possible.
 We show that we can exploit the structural properties of the TREE specification 
 and the hypermedia constraints on links between fragments to reduce the search domain
 that a LTQP query engine has to explore.</p>
@@ -221,7 +219,7 @@ that a LTQP query engine has to explore.</p>
         <p>This work opens the possibility for faster traversal-based query execution over fragmented RDF documents, 
 given that the data provider uses hypermedia descriptions to characterize the fragmentation
 in a structured manner. 
-It follows that our future work is to benchmark our GLTQP with different solver approaches, to
+In future work, we are going to benchmark this GLTQP approach and are going to
 empirically prove the efficiency of our method.</p>
 
       </div>
@@ -239,14 +237,12 @@ empirically prove the efficiency of our method.</p>
   <dt id="ref-3">[3]</dt>
   <dd resource="#Delva2020" typeof="schema:Article">Delva, H., Rojas, J.A., Vandenberghe, P.-J., Colpaert, P., Verborgh, R.: Geospatial Partitioning of Open Transit Data. In: Web Engineering. Springer</dd>
   <dt id="ref-4">[4]</dt>
-  <dd resource="#spec:tree" typeof="schema:CreativeWork">Colpaert, P.: The TREE hypermedia specification.</dd>
-  <dt id="ref-5">[5]</dt>
   <dd resource="#verborgh2020" typeof="schema:CreativeWork">Verborgh, R., Taelman, R.: Guided Link-Traversal-Based Query Processing</dd>
-  <dt id="ref-6">[6]</dt>
+  <dt id="ref-5">[5]</dt>
   <dd resource="#Hartig2013AnOO" typeof="schema:Article">Hartig, O.: An Overview on Execution Strategies for Linked Data Queries. Datenbank-Spektrum.</dd>
-  <dt id="ref-7">[7]</dt>
+  <dt id="ref-6">[6]</dt>
   <dd resource="#thomasFieldingPhdThesis" typeof="schema:Thesis">Fielding, R.T.: Architectural Styles and the Design of Network-based Software Architectures</dd>
-  <dt id="ref-8">[8]</dt>
+  <dt id="ref-7">[7]</dt>
   <dd resource="#hartig2012" typeof="schema:Article">Hartig, O., Freytag, J.-C.: Foundations of Traversal Based Query Execution over Linked Data. In: Conference on Hypertext and Social Media. ACM</dd>
 </dl>
 </section>
