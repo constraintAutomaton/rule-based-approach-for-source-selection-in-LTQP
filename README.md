@@ -1,7 +1,5 @@
 # [How TREE hypermedia can speed up Link Traversal-based Query Processing for SPARQL queries with filters](https://constraintautomaton.github.io/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/)
 
-Poster article written to the [ESWC 2023](https://2023.eswc-conferences.org/), **Submitted** .
-
 Accessible online at https://constraintautomaton.github.io/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/
 
 ## Abstract
