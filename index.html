@@ -12,7 +12,7 @@
   <meta name="citation_author" content="Ruben Taelman" />
   <meta name="citation_author" content="Pieter Colpaert" />
   
-  <meta name="citation_publication_date" content="2023/04/14" />
+  <meta name="citation_publication_date" content="2023/05/12" />
 </head>
 
 <body prefix="dctypes: http://purl.org/dc/dcmitype/ pimspace: http://www.w3.org/ns/pim/space# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# lsc: http://linkedscience.org/lsc/ns#" typeof="schema:CreativeWork sioc:Post prov:Entity lsc:Research">
@@ -113,11 +113,12 @@ which can be expressed in SPARQL as shown in <a href="#example-sparql">Listing 
 </code><code>@prefix ex: &lt;https://example.be/&gt; .
 </code><code>
 </code><code>ex:node tree:relation _:b1 .
-</code><code>_b1 a  tree:EqualToRelation ;
+</code><code>_:b1 a  tree:EqualToRelation ;
 </code><code>    tree:node ex:nextNode ;
 </code><code>    tree:value &quot;2023-01-07T00:00:00Z&quot;^^xsd:dateTime ;
 </code><code>    tree:path sosa:resultTime ;
-</code><code>    tree:remainingItems &quot;21&quot;^^xsd:integer .</code></pre>
+</code><code>    tree:remainingItems &quot;21&quot;^^xsd:integer .
+</code></pre>
 <figcaption>
               <p><span class="label">Listing 2:</span> The example is showing a set of triples representing a TREE relation. 
 The relation can be converted into the following boolean equation 
