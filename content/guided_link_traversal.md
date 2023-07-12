@@ -51,3 +51,75 @@ containing the predicate `tree:value`.
 
 Given the boolean representation of the `tree:Relation` and the SPARQL filter expression that is already a boolean expression,
 a solver can evaluate if the combination of those two expressions is resolvable, like in [our open source implementation](https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation) where we evaluate the solution domain of the equation to find the solvability, hence, pruning certainly non-contributing relations.
+
+
+
+Q1
+
+PREFIX sosa: <http://www.w3.org/ns/sosa/> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX etsi: <https://saref.etsi.org/core/>
+    
+SELECT * WHERE {
+    ?s etsi:hasTimestamp ?t.
+?s etsi:hasValue ?result.
+?s etsi:measurementMadeBy ?sensor.
+?sensor <https://dahcc.idlab.ugent.be/Ontology/Sensors/analyseStateOf> ?stateOf.
+?sensor <https://saref.etsi.org/core/measuresProperty> <https://dahcc.idlab.ugent.be/Homelab/SensorsAndActuators/energy.consumption>
+
+    FILTER(?t="2022-01-03T10:57:54.000000"^^xsd:dateTime)
+}
+
+Q2
+
+PREFIX sosa: <http://www.w3.org/ns/sosa/> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX etsi: <https://saref.etsi.org/core/>
+    
+SELECT * WHERE {
+    ?s etsi:hasTimestamp ?t.
+?s etsi:hasValue ?result.
+?s etsi:measurementMadeBy ?sensor.
+?sensor <https://dahcc.idlab.ugent.be/Ontology/Sensors/analyseStateOf> ?stateOf.
+?sensor <https://saref.etsi.org/core/measuresProperty> <https://dahcc.idlab.ugent.be/Homelab/SensorsAndActuators/energy.consumption>
+
+    FILTER(?t="2022-01-03T19:54:22.469000"^^xsd:dateTime)
+}
+
+
+Q3
+
+PREFIX sosa: <http://www.w3.org/ns/sosa/> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX etsi: <https://saref.etsi.org/core/>
+    
+SELECT * WHERE {
+    ?s etsi:hasTimestamp ?t.
+?s etsi:hasValue ?result.
+?s etsi:measurementMadeBy ?sensor.
+?sensor <https://dahcc.idlab.ugent.be/Ontology/Sensors/analyseStateOf> ?stateOf.
+?sensor <https://saref.etsi.org/core/measuresProperty> <https://dahcc.idlab.ugent.be/Homelab/SensorsAndActuators/energy.consumption>
+
+    FILTER(?t>="2022-01-03T15:00:00.000000"^^xsd:dateTime && ?t<"2022-01-03T15:30:00.000000"^^xsd:dateTime)
+}
+
+Q4
+
+PREFIX sosa: <http://www.w3.org/ns/sosa/> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX etsi: <https://saref.etsi.org/core/>
+    
+SELECT * WHERE {
+    ?s etsi:hasTimestamp ?t.
+?s etsi:hasValue ?result.
+?s etsi:measurementMadeBy ?sensor.
+?sensor <https://dahcc.idlab.ugent.be/Ontology/Sensors/analyseStateOf> ?stateOf.
+?sensor <https://saref.etsi.org/core/measuresProperty> <https://dahcc.idlab.ugent.be/Homelab/SensorsAndActuators/energy.consumption>
+
+    FILTER((?t>="2022-01-03T15:00:00.000000"^^xsd:dateTime && ?t<"2022-01-03T20:00:00.000000"^^xsd:dateTime) && !(?t>="2022-01-03T15:10:00.000000"^^xsd:dateTime && ?t<"2022-01-03T15:40:00.000000"^^xsd:dateTime))
+}
+

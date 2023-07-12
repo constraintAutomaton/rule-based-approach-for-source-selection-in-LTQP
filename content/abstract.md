@@ -1,5 +1,21 @@
 ## Abstract
 <!-- Context      -->
+Linked data can be published online to describe all sort of concepts to form a 
+pseudo infinite (knowledge) graph.
+The data on the web are not organized in a way that at specific subgraph we have a guarenty to find complete information (following a contract) about a set of concepts.
+Hence when making exploring the web of linked data 
+
+
+the full information
+about the data requested in a query
+
+
+ Another important property of linked data is the ability
+to get more context about the data by derefencing the IRI that compose a triple to obtain
+a new data source with more triple describing the target. 
+Also the links between the property of the object are semantic hence 
+
+
 Linked Data can be published on the Web in a variety of APIs such as in subject pages or in a SPARQL endpoint.
 Each API has its own set of trade-offs:
 in the former, the client needs to perform a rather slow link traversal algorithm to find an answer to any query, but the 
