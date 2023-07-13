@@ -315,17 +315,14 @@
   groups    = {Link traversal},
 }
 
-@Misc{taelman2023,
+@InProceedings{taelman2023,
   author    = {Taelman, Ruben and Verborgh, Ruben},
-  title     = {Evaluation of Link Traversal Query Execution over Decentralized Environments with Structural Assumptions},
-  year.bak      = {2023},
-  copyright = {Creative Commons Attribution 4.0 International},
-  doi.bak       = {10.48550/ARXIV.2302.06933},
-  file      = {:articles/Evaluation of Link Traversal Query Execution over Decentralized Environments with Structural Assumptions.pdf:PDF},
+  booktitle = {Proceedings of the 22nd International Semantic Web Conference},
+  title     = {Link Traversal Query Processing over Decentralized Environments with Structural Assumptions},
+  year      = {2023},
+  month     = {november},
   groups    = {Link traversal},
-  keywords  = {Databases (cs.DB), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  publisher = {arXiv},
-  url.bak       = {https://arxiv.org/abs/2302.06933},
+  url       = {https://comunica.github.io/Article-ISWC2023-SolidQuery/},
 }
 
 @TechReport{spec:shacl,
@@ -547,6 +544,73 @@
   year.bak   = {2000},
 }
 
+@InProceedings{aranda2013,
+  author    = {Buil-Aranda, Carlos and Hogan, Aidan and Umbrich, J\"{u}rgen and Vandenbussche, Pierre-Yves},
+  booktitle = {Proceedings of the 12th International Semantic Web Conference - Part II},
+  title     = {SPARQL Web-Querying Infrastructure: Ready for Action?},
+  year      = {2013},
+  address   = {Berlin, Heidelberg},
+  pages     = {277–293},
+  publisher = {Springer-Verlag},
+  series    = {ISWC '13},
+  abstract  = {Hundreds of public SPARQL endpoints have been deployed on the Web, forming a novel decentralised infrastructure for querying billions of structured facts from a variety of sources on a plethora of topics. But is this infrastructure mature enough to support applications? For 427 public SPARQL endpoints registered on the DataHub, we conduct various experiments to test their maturity. Regarding discoverability, we find that only one-third of endpoints make descriptive meta-data available, making it difficult to locate or learn about their content and capabilities. Regarding interoperability, we find patchy support for established SPARQL features like ORDER BY as well as (understandably) for new SPARQL 1.1 features. Regarding efficiency, we show that the performance of endpoints for generic queries can vary by up to 3—4 orders of magnitude. Regarding availability, based on a 27-month long monitoring experiment, we show that only 32.2% of public endpoints can be expected to have (monthly) "two-nines" uptimes of 99—100%.},
+  doi       = {10.1007/978-3-642-41338-4_18},
+  file      = {:articles/SPARQL Web-Querying Infrastructure.pdf:PDF},
+  groups    = {rdf statistic, statistic},
+  isbn      = {9783642413377},
+  numpages  = {17},
+  url       = {https://doi.org/10.1007/978-3-642-41338-4_18},
+}
+
+@InProceedings{Azzam2020,
+  author    = {Azzam, Amr and Fern\'{a}ndez, Javier D. and Acosta, Maribel and Beno, Martin and Polleres, Axel},
+  booktitle = {Proceedings of The Web Conference 2020},
+  title     = {SMART-KG: Hybrid Shipping for SPARQL Querying on the Web},
+  year      = {2020},
+  address   = {New York, NY, USA},
+  pages     = {984–994},
+  publisher = {Association for Computing Machinery},
+  series    = {WWW '20},
+  abstract  = {While Linked Data (LD) provides standards for publishing (RDF) and (SPARQL) querying Knowledge Graphs (KGs) on the Web, serving, accessing and processing such open, decentralized KGs is often practically impossible, as query timeouts on publicly available SPARQL endpoints show. Alternative solutions such as Triple Pattern Fragments (TPF) attempt to tackle the problem of availability by pushing query processing workload to the client side, but suffer from unnecessary transfer of irrelevant data on complex queries with large intermediate results. In this paper we present smart-KG, a novel approach to share the load between servers and clients, while significantly reducing data transfer volume, by combining TPF with shipping compressed KG partitions. Our evaluations show that smart-KG outperforms state-of-the-art client-side solutions and increases server-side availability towards more cost-effective and balanced hosting of open and decentralized KGs.},
+  doi       = {10.1145/3366423.3380177},
+  file      = {:articles/SMART-KG Hybrid Shipping for SPARQL Querying on the Web.pdf:PDF},
+  groups    = {SPARQL enpoint, SPARQL interfaces},
+  isbn      = {9781450370233},
+  location  = {Taipei, Taiwan},
+  numpages  = {11},
+  url       = {https://doi.org/10.1145/3366423.3380177},
+}
+
+@InProceedings{Azzam2021,
+  author    = {Azzam, Amr and Aebeloe, Christian and Montoya, Gabriela and Keles, Ilkcan and Polleres, Axel and Hose, Katja},
+  booktitle = {Proceedings of the Web Conference 2021},
+  title     = {WiseKG: Balanced Access to Web Knowledge Graphs},
+  year      = {2021},
+  address   = {New York, NY, USA},
+  pages     = {1422–1434},
+  publisher = {Association for Computing Machinery},
+  series    = {WWW '21},
+  abstract  = {SPARQL query services that balance processing between clients and servers become more and more essential to handle the increasing load for open and decentralized knowledge graphs on the Web. To this end, Linked Data Fragments (LDF) have introduced a foundational framework that has sparked research exploring a spectrum of potential Web querying interfaces in between server-side query processing via SPARQL endpoints and client-side query processing of data dumps. Current proposals in between typically suffer from imbalanced load on either the client or the server. In this paper, to the best of our knowledge, we present the first work that combines both client-side and server-side query optimization techniques in a truly dynamic fashion: we introduce WiseKG, a system that employs a cost model that dynamically delegates the load between servers and clients by combining client-side processing of shipped partitions with efficient server-side processing of star-shaped sub-queries, based on current server workload and client capabilities. Our experiments show that WiseKG significantly outperforms state-of-the-art solutions in terms of average total query execution time per client, while at the same time decreasing network traffic and increasing server-side availability.},
+  doi       = {10.1145/3442381.3449911},
+  file      = {:articles/WiseKG Balanced Access to Web Knowledge Graphs.pdf:PDF},
+  groups    = {SPARQL enpoint, SPARQL interfaces},
+  isbn      = {9781450383127},
+  location  = {Ljubljana, Slovenia},
+  numpages  = {13},
+  url       = {https://doi.org/10.1145/3442381.3449911},
+}
+
+@InProceedings{dahcc_resource,
+  author    = {{Bram Steenwinckel, Mathias De Brouwer, Marija Stojchevska, Jeroen Van Der Donckt, Jelle Nelis, Joeri Ruyssinck, Joachim van der Herten, Koen Casier, Jan Van Ooteghem, Pieter Crombez, Filip De Turck, Sofie Van Hoecke and Femke Ongenae}},
+  booktitle = {Published in the proceedings of the sixteenth EAI Pervasive Healthcare conference},
+  title     = {{Data Analytics For Health and Connected Care: Ontology, Knowledge Graph and Applications}},
+  year      = {2022},
+  month     = {December},
+  publisher = {Springer},
+  groups    = {statistic},
+  url       = {https://dahcc.idlab.ugent.be},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
 
 @Comment{jabref-meta: grouping:
@@ -558,5 +622,7 @@
 1 StaticGroup:optimisation technique\;0\;1\;0x8a8a8aff\;\;\;;
 1 StaticGroup:push down\;0\;0\;0x8a8a8aff\;\;\;;
 1 StaticGroup:rdf statistic\;0\;1\;0x8a8a8aff\;\;\;;
+1 StaticGroup:SPARQL interfaces\;0\;1\;0x8a8a8aff\;\;\;;
 1 StaticGroup:specification\;0\;1\;0x8a8a8aff\;\;\;;
+1 StaticGroup:statistic\;0\;1\;0x8a8a8aff\;\;\;;
 }
