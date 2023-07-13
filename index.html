@@ -43,39 +43,16 @@
 <div datatype="rdf:HTML" property="schema:description">
       <h2 property="schema:name">Abstract</h2>
       <!-- Context      -->
-      <p>Linked data can be published online to describe all sort of concepts to form a 
-pseudo infinite (knowledge) graph.
-The data on the web are not organized in a way that at specific subgraph we have a guarenty to find complete information (following a contract) about a set of concepts.
-Hence when making exploring the web of linked data</p>
 
-      <p>the full information
-about the data requested in a query</p>
+      <!-- Need         -->
 
-      <p>Another important property of linked data is the ability
-to get more context about the data by derefencing the IRI that compose a triple to obtain
-a new data source with more triple describing the target. 
-Also the links between the property of the object are semantic hence</p>
+      <!-- Task         -->
 
-      <p>Linked Data can be published on the Web in a variety of APIs such as in subject pages or in a SPARQL endpoint.
-Each API has its own set of trade-offs:
-in the former, the client needs to perform a rather slow link traversal algorithm to find an answer to any query, but the 
-API is cheap to host; while in the latter the server is able to provide a rather fast and concise answer to a 
-well-defined query, but the API is more expensive to maintain. 
-<!-- Need         -->
-An in-between solution could work using guided link traversal and hypermedia, in which the server already exposes hints 
-of an ordering of subjects in a search space.
-<!-- Task         -->
-The <a href="https://w3id.org/tree/specification">TREE hypermedia specification</a> allows to define such relations between pages (fragments) containing zero or more members of the collection.
-<!-- Object       -->
-In this paper, we investigate a Guided Link Traversal-based Query Processing (GLTQP) approach to search through such 
-interlinked fragments, and reduce the number of fragments that need to be visited by taking into account the described relations.
-<!-- Findings     -->
-Our findings show that we are able to use the hypermedia descriptions of the TREE specification to prune links to 
-fragments that will certainly not contribute to the SPARQL query based on a reachability criteria that can be
-the basis for a solver resolving a boolean equation combinaing the SPARQL FILTER expression and TREE Relation descriptions.
-<!-- Conclusion   -->
-This solver has been made available as open-source as part of the Comunica project to demonstrate how it can generate faster results on the client for 
-SPARQL queries with FILTER clauses over TREE fragmented Linked Datasets.</p>
+      <!-- Object       -->
+
+      <!-- Findings     -->
+
+      <!-- Conclusion   -->
 
     </div>
 </section>
@@ -92,26 +69,25 @@ When querying SPARQL endpoints, the interface takes the whole query load and del
 which causes high workloads and is partially the reason that <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-642-41338-4_18"><a href="https://doi.org/10.1007/978-3-642-41338-4_18">historically they had a low
 availability</a></span> <span class="references">[<a href="#ref-1">1</a>]</span>.
 Academics have made efforts to introduce linked data publication methods to make the client participate in the query execution,
-with the aim to diminish the workloads of the server and still have fast query execution to the client <span class="references">[<a href="#ref-2">2</a>, <a href="#ref-3">3</a>, <a href="#ref-4">4</a>]</span>.
-The TREE specification is an effort in that direction <span class="references">[<a href="#ref-5">5</a>, <a href="#ref-6">6</a>, <a href="#ref-7">7</a>, <a href="#ref-8">8</a>]</span>,
+with the aim to diminish the workloads of the server and still have fast query execution to the client <span class="references">[<a href="#ref-2">2</a>, <a href="#ref-3">3</a>]</span>.
+The TREE specification is an effort in that direction <span class="references">[<a href="#ref-4">4</a>, <a href="#ref-5">5</a>]</span>,
 that introduces the concept of domain-related fragmentation of large RDF datasets.
 This line of research aims to fragment what would be a data dump in a way that client can easily fetch a subset of it to answer their query fully.
-The data inside a fragment are bounded with constraints that are expressed using hypermedia description <span class="references">[<a href="#ref-9">9</a>]</span>.
+The data inside a fragment are bounded with constraints that are expressed using hypermedia description <span class="references">[<a href="#ref-6">6</a>]</span>.
 More precisely inside a fragment there is a description of the constraint of the data of the other fragments accessible for this location
 in web space.
-Because there is no centralized index in those documents Link Traversal Query Processing (LTQP) <span class="references">[<a href="#ref-10">10</a>]</span>,
+Because there is no centralized index in those documents Link Traversal Query Processing (LTQP) <span class="references">[<a href="#ref-7">7</a>]</span>,
 inspired techniques are used to answer queries. 
 This consist in starting with a small set of URL that provided the first data sources and dereferencing recursively 
-the IRI present inside the data source to obtain new data sources <span class="references">[<a href="#ref-10">10</a>]</span>. 
+the IRI present inside the data source to obtain new data sources <span class="references">[<a href="#ref-7">7</a>]</span>. 
 In the current state of affairs, it is not possible to use SPARQL to query those documents efficiently because there are no method, to
 skip fragments that do not contain data pertaining to the answer to a query.
 It result that custom solutions has been created to make use of this data.
-The aim of this work is not to introduce the TREE specification but to propose a pushdown filter method 
-<span class="references">[<a href="#ref-11">11</a>, <a href="#ref-12">12</a>]</span> with the use of  structural assumption <span class="references">[<a href="#ref-13">13</a>]</span>
+The aim of this work is not to introduce the TREE specification but to propose a pushdown filter method with the use of  structural assumption <span class="references">[<a href="#ref-8">8</a>]</span>
 to diminish the query execution time by using the SPARQL filter expression has link discrimant.</p>
 
         <p>One idiomatic use case of fragmented dataset is the publication of sensor data, hence in this paper
-we consider the example of <a href="#example-sparql">Listing 1</a> using the <a property="schema:citation http://purl.org/spar/cito/cites" href="https://dahcc.idlab.ugent.be">DAHCC</a> <span class="references">[<a href="#ref-14">14</a>]</span> dataset.
+we consider the example of <a href="#example-sparql">Listing 1</a> using the <a property="schema:citation http://purl.org/spar/cito/cites" href="https://dahcc.idlab.ugent.be">DAHCC</a> <span class="references">[<a href="#ref-9">9</a>]</span> dataset.
 We make queries to get the measure of a specific interval (the metavariable <code>{:filter_expression}</code>)
 and information about the sensor using a metadata file that is available online at
 <a href="">https:/​/​github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl</a> 
@@ -170,19 +146,19 @@ where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.
 <div datatype="rdf:HTML" property="schema:description">
         <h2 property="schema:name">Filter pushdown to discriminate link during LTQP</h2>
 
-        <p>LTQP in its most naive form has a pseudo-infinite domain <span class="references">[<a href="#ref-10">10</a>]</span>, as a result
-it is not possible to evaluate the completeness and to have a stopping condition related to the finding of complete results <span class="references">[<a href="#ref-15">15</a>]</span>. 
+        <p>LTQP in its most naive form has a pseudo-infinite domain <span class="references">[<a href="#ref-7">7</a>]</span>, as a result
+it is not possible to evaluate the completeness and to have a stopping condition related to the finding of complete results <span class="references">[<a href="#ref-10">10</a>]</span>. 
 Also, given the vastness of the web, the overwhelming majority of data sources will not contribute to query completeness (in most realistic queries).
-Hartig and Freytag <span class="references">[<a href="#ref-15">15</a>]</span> introduces the concept of reachability criterium, which consists of policies
+Hartig and Freytag <span class="references">[<a href="#ref-10">10</a>]</span> introduces the concept of reachability criterium, which consists of policies
 of IRI to dereference, hence limiting the range of the web that has to be explored to consider to have obtained completeness.
 Corrolary, those criteriums serve as a mechanism to prune links that are not relevant to the answer to the query.
 This is particularly useful in the context of structured environments such as in the use case of Solid and fragmented datasets
-where a priori we have metaknowledge of how to access data related to a query <span class="references">[<a href="#ref-13">13</a>]</span>.
+where a priori we have metaknowledge of how to access data related to a query <span class="references">[<a href="#ref-8">8</a>]</span>.
 With this metaknowledge, the query engine can find triples that will describe the location of the information requested,
-hence “guiding” the query engine towards the right data source <span class="references">[<a href="#ref-16">16</a>]</span>.</p>
+hence “guiding” the query engine towards the right data source <span class="references">[<a href="#ref-11">11</a>]</span>.</p>
 
         <p>Our pushdown filter is based in its use on the concept of reachability criterium.
-In the definition by Hartig and Freytag <span class="references">[<a href="#ref-15">15</a>]</span> a reachability criterium is a function discriminating the dereferencing of 
+In the definition by Hartig and Freytag <span class="references">[<a href="#ref-10">10</a>]</span> a reachability criterium is a function discriminating the dereferencing of 
 an IRI based on the triple available in a current document a query.
 In our approach, we interpret the hypermedia description of the constraint of the fragment as a boolean equation as
 exemplify in <a href="#example-sparql">Listing 1</a>.
@@ -199,17 +175,24 @@ Hence upon discovery of a document, the query engine gathers the relevant triple
 representing the constraint of the next fragment and pushdown the SPARQL filter expression.
 After having those two boolean expressions close together they are evaluated to find the satisfiability and upon satisfaction
 the IRI targeting the next fragment (<code>tree:node</code> in the TREE specification) is added to the link queue following the
-concept of reachability criterium as illustrated in <a href="#running_example">Fig. 1</a>.</p>
+concept of reachability criterium.</p>
 
-        <figure id="running_example">
-<img src="img/running_example.drawio.svg" alt="[Running example of our GLTQP approach]" class="figure-narrow" style="height: 20vh" />
-<figcaption>
-            <p><span class="label">Fig. 1:</span> Running example of our GLTQP approach based on <a href="#example-sparql">Listing 1</a>.</p>
-          </figcaption>
-</figure>
-
-        <p>We made an open source implementation of this criterium available at <a href="">https:/​/​github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation</a> with an associated demo available at
-<a href="">https:/​/​github.com/constraintAutomaton/TREE-Solver-LTQP-demo-engine</a>. In the rest of this section we will present our experimental result.</p>
+        <p>We made an open-source implementation of this criterium available at <a href="">https:/​/​github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation</a> with an associated demo available at
+<a href="">https:/​/​github.com/constraintAutomaton/TREE-Solver-LTQP-demo-engine</a>. In the rest of this section, we will present our experimental result.
+We ran four queries derived from the template of <a href="#example-sparql">Listing 1</a> available at 
+<a href="">https:/​/​github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/content/code</a> 
+with three configurations of the DAHCC participant 31 dataset (of 487 MB) and a timeout of two minutes. 
+The first one is a single endpoint query of the data dump. 
+For the second and the third configuration we convert the data dump into a 
+fragmented dataset following the TREE specification with a one-ary tree topology with 100 and 1000 nodes.
+the second configuration uses  a reachability criterium where we follow each link of the fragmented dataset and the third one with the 
+pushdown filter approach. As shown in {{:todo }} no query were able to be answered by querying the data dump and following every fragment. 
+The reason might be because of the size of the dataset to be processed before executing the joining and solution mapping.
+For the configurations with a pushdown filter method, we see that the queries with 1000 fragments perform better than
+the one with 100 fragments, particularly when the query has one or zero results. In those cases, the query execution time is almost one
+order of magnitude lower with the largest number of fragments. 
+With Q3 we can see that the percentage of reduction is 32%, this lowering of performance might be caused by the increase by a factor of 17
+of HTTP requests. The query Q4 was not able to be answered, with both fragmentations, the cause might be because it covers a far larger range and hence requires more data to be downloaded and more processing time.</p>
 
       </div>
 </section>
@@ -218,16 +201,14 @@ concept of reachability criterium as illustrated in <a href="#running_example">F
 <div datatype="rdf:HTML" property="schema:description">
         <h2 property="schema:name">Conclusion</h2>
 
-        <p>Concluding from our preliminary implementation, a GLTQP approach to prune links to fragmented RDF documents following the TREE specification based on SPARQL filter expressions is possible.
-We show that we can exploit the structural properties of the TREE specification 
-and the hypermedia constraints on links between fragments to reduce the search domain
-that a LTQP query engine has to explore.</p>
+        <p>Concluding from our preliminary implementation, a pushdown filter approach to prune links of fragmented RDF documents based on the SPARQL query language performs better than an approach without it and then querying a data dump of approximately haft a gigabyte in size. 
+The cause of the gain of performance seems to be the reduction of the processing by downloading of fewer data inside the engine, but the increase of the HTTP request seems to reduce the gain in performance. This implies that there might be a tradeoff between
+the size of the fragments and their numbers.</p>
 
         <p>This work opens the possibility for faster traversal-based query execution over fragmented RDF documents, 
 given that the data provider uses hypermedia descriptions to characterize the fragmentation
 in a structured manner. 
-In future work, we are going to benchmark this GLTQP approach and are going to
-empirically prove the efficiency of our method.</p>
+In future work, we are going to make a more extensive evaluation of solutions and compare it with a SPARQL endpoint and TPF interface.</p>
 
       </div>
 </section>
@@ -242,32 +223,22 @@ empirically prove the efficiency of our method.</p>
   <dt id="ref-2">[2]</dt>
   <dd resource="#Verborgh2016TriplePF" typeof="schema:Article">Verborgh, R., Sande, M.V., Hartig, O., Herwegen, J.V., Vocht, L.D., Meester, B.D., Haesendonck, G., Colpaert, P.: Triple Pattern Fragments: A low-cost knowledge graph interface for the Web. J. Web Semant.</dd>
   <dt id="ref-3">[3]</dt>
-  <dd resource="https://dx.doi.org/10.1145/3366423.3380177" typeof="schema:Article">Azzam, A., Fernández, J.D., Acosta, M., Beno, M., Polleres, A.: SMART-KG: Hybrid Shipping for SPARQL Querying on the Web. In: Proceedings of The Web Conference 2020. pp. 984–994. Association for Computing Machinery, New York, NY, USA (2020). doi:10.1145/3366423.3380177</dd>
-  <dt id="ref-4">[4]</dt>
   <dd resource="https://dx.doi.org/10.1145/3442381.3449911" typeof="schema:Article">Azzam, A., Aebeloe, C., Montoya, G., Keles, I., Polleres, A., Hose, K.: WiseKG: Balanced Access to Web Knowledge Graphs. In: Proceedings of the Web Conference 2021. pp. 1422–1434. Association for Computing Machinery, New York, NY, USA (2021). doi:10.1145/3442381.3449911</dd>
-  <dt id="ref-5">[5]</dt>
+  <dt id="ref-4">[4]</dt>
   <dd resource="#ColpaertMaterializedTREE" typeof="schema:Article">Colpaert, P.: Building materializable querying interfaces with the TREE hypermedia specification.</dd>
-  <dt id="ref-6">[6]</dt>
+  <dt id="ref-5">[5]</dt>
   <dd resource="#lancker2021LDS" typeof="schema:Article">Publishing base registries as Linked Data Event Streams. Proceedings of the 21th International Conference on Web Engineering.</dd>
-  <dt id="ref-7">[7]</dt>
-  <dd resource="#Delva2020" typeof="schema:Article">Delva, H., Rojas, J.A., Vandenberghe, P.-J., Colpaert, P., Verborgh, R.: Geospatial Partitioning of Open Transit Data. In: Web Engineering. Springer</dd>
-  <dt id="ref-8">[8]</dt>
-  <dd resource="#Delva2020a" typeof="schema:Article">Delva, H., Smets, A., Colpaert, P., Ballon, P., Verborgh, R.: Interactive Route Personalization Using Regions of Interest. In: Ko, I.-Y., Murillo, J.M., and Vuorimaa, P. (eds.) Current Trends in Web Engineering. Springer International Publishing</dd>
-  <dt id="ref-9">[9]</dt>
+  <dt id="ref-6">[6]</dt>
   <dd resource="#thomasFieldingPhdThesis" typeof="schema:Thesis">Fielding, R.T.: Architectural Styles and the Design of Network-based Software Architectures</dd>
-  <dt id="ref-10">[10]</dt>
+  <dt id="ref-7">[7]</dt>
   <dd resource="#Hartig2016" typeof="schema:Article">Hartig, O., Özsu, M.T.: Walking Without a Map: Ranking-Based Traversal for Querying Linked Data. In: Groth, P., Simperl, E., Gray, A., Sabou, M., Krötzsch, M., Lecue, F., Flöck, F., and Gil, Y. (eds.) The Semantic Web – ISWC 2016. Springer International Publishing</dd>
-  <dt id="ref-11">[11]</dt>
-  <dd resource="#Hellerstein1998OptimizationTF" typeof="schema:Article">Hellerstein, J.M.: Optimization techniques for queries with expensive methods. ACM Trans. Database Syst.</dd>
-  <dt id="ref-12">[12]</dt>
-  <dd resource="#Yang2021FlexPushdownDBHP" typeof="schema:Article">Yang, Y., Youill, M., Woicik, M., Liu, Y., Yu, X., Serafini, M., Aboulnaga, A., Stonebraker, M.: FlexPushdownDB: Hybrid Pushdown and Caching in a Cloud DBMS. Proc. VLDB Endow.</dd>
-  <dt id="ref-13">[13]</dt>
+  <dt id="ref-8">[8]</dt>
   <dd resource="https://comunica.github.io/Article-ISWC2023-SolidQuery/" typeof="schema:Article">Taelman, R., Verborgh, R.: Link Traversal Query Processing over Decentralized Environments with Structural Assumptions. In: Proceedings of the 22nd International Semantic Web Conference (2023).</dd>
-  <dt id="ref-14">[14]</dt>
+  <dt id="ref-9">[9]</dt>
   <dd resource="https://dahcc.idlab.ugent.be" typeof="schema:Article">Bram Steenwinckel, Mathias De Brouwer, Marija Stojchevska, Jeroen Van Der Donckt, Jelle Nelis, Joeri Ruyssinck, Joachim van der Herten, Koen Casier, Jan Van Ooteghem, Pieter Crombez, Filip De Turck, Sofie Van Hoecke and Femke Ongenae: Data Analytics For Health and Connected Care: Ontology, Knowledge Graph and Applications. In: Published in the proceedings of the sixteenth EAI Pervasive Healthcare conference. Springer (2022).</dd>
-  <dt id="ref-15">[15]</dt>
+  <dt id="ref-10">[10]</dt>
   <dd resource="#hartig2012" typeof="schema:Article">Hartig, O., Freytag, J.-C.: Foundations of Traversal Based Query Execution over Linked Data. In: Conference on Hypertext and Social Media. ACM</dd>
-  <dt id="ref-16">[16]</dt>
+  <dt id="ref-11">[11]</dt>
   <dd resource="#verborgh2020" typeof="schema:CreativeWork">Verborgh, R., Taelman, R.: Guided Link-Traversal-Based Query Processing</dd>
 </dl>
 </section>
