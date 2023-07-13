@@ -1,10 +1,16 @@
 PREFIX sosa: <http://www.w3.org/ns/sosa/> 
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX etsi: <https://saref.etsi.org/core/>
+PREFIX dahcc: <https://dahcc.idlab.ugent.be/Ontology/Sensors/>
+PREFIX saref: <https://saref.etsi.org/core/>
 
-SELECT ?s ?temp
-WHERE {
-  ?s sosa:resultTime ?t;
-     sosa:hasSimpleResult ?temp.
-
-  FILTER(?t <= "2023-01-01T00:00:00Z"^^xsd:dateTime)
+SELECT * WHERE {
+  ?s etsi:hasTimestamp ?t.
+  ?s etsi:hasValue ?result.
+  ?s etsi:measurementMadeBy ?sensor.
+  ?sensor dahcc:analyseStateOf ?stateOf.
+  ?sensor saref:measuresProperty {:property}
+  
+  FILTER({:filter_expression})
 }
