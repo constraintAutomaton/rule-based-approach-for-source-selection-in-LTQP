@@ -7,8 +7,8 @@ When querying SPARQL endpoints, the interface takes the whole query load and del
 which causes high workloads and is partially the reason that [historically they had a low
 availability](cite:cites aranda2013).
 Academics have made efforts to introduce linked data publication methods to make the client participate in the query execution,
-with the aim to diminish the workloads of the server and still have fast query execution to the client [](cite:cites Verborgh2016TriplePF, Azzam2020, Azzam2021).
-The TREE specification is an effort in that direction [](cite:cites ColpaertMaterializedTREE, lancker2021LDS, Delva2020, Delva2020a),
+with the aim to diminish the workloads of the server and still have fast query execution to the client [](cite:cites Verborgh2016TriplePF, Azzam2021).
+The TREE specification is an effort in that direction [](cite:cites ColpaertMaterializedTREE, lancker2021LDS),
 that introduces the concept of domain-related fragmentation of large RDF datasets.
 This line of research aims to fragment what would be a data dump in a way that client can easily fetch a subset of it to answer their query fully.
 The data inside a fragment are bounded with constraints that are expressed using hypermedia description [](cite:cites thomasFieldingPhdThesis).
@@ -21,8 +21,7 @@ the IRI present inside the data source to obtain new data sources [](cite:cites 
 In the current state of affairs, it is not possible to use SPARQL to query those documents efficiently because there are no method, to
 skip fragments that do not contain data pertaining to the answer to a query.
 It result that custom solutions has been created to make use of this data.
-The aim of this work is not to introduce the TREE specification but to propose a pushdown filter method 
-[](cite:cites Hellerstein1998OptimizationTF, Yang2021FlexPushdownDBHP) with the use of  structural assumption [](cite:cites taelman2023)
+The aim of this work is not to introduce the TREE specification but to propose a pushdown filter method with the use of  structural assumption [](cite:cites taelman2023)
 to diminish the query execution time by using the SPARQL filter expression has link discrimant.
 
 One idiomatic use case of fragmented dataset is the publication of sensor data, hence in this paper
