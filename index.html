@@ -16,7 +16,9 @@
 </head>
 
 <body prefix="dctypes: http://purl.org/dc/dcmitype/ pimspace: http://www.w3.org/ns/pim/space# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# lsc: http://linkedscience.org/lsc/ns#" typeof="schema:CreativeWork sioc:Post prov:Entity lsc:Research">
-  <!-- Guided Link Traversal Query Processing over RDF documents fragmented with TREE -->
+  <p><span class="comment" data-author="RT">It’s not really source selection though, as that has a specific definition in the context of federated querying. Also, there’s a typo.</span>
+<span class="comment" data-author="RT">Suggestion for another title: “Exploiting SPARQL Filter Expressions for Link Pruning during Link Traversal Query processing”</span>
+<!-- Guided Link Traversal Query Processing over RDF documents fragmented with TREE --></p>
 <header>
   <h1 id="filter-pushdown-as-a-mecanism-for-source-selection-in-sparql-link-traversal-query-processing">Filter pushdown as a mecanism for source selection in SPARQL Link Traversal Query processing</h1>
 
@@ -63,7 +65,7 @@
 <div datatype="rdf:HTML" property="schema:description">
         <h2 property="schema:name">Introduction</h2>
 
-        <p><a href="https://lod-cloud.net/#diagram">In the current years, the web of linked data has grew in size</a>.
+        <p><a href="https://lod-cloud.net/#diagram">In the current years, the web of linked data has grown in size</a>.
 To access those data it is necessary to have an interface, the most common is the SPARQL endpoint.
 When querying SPARQL endpoints, the interface takes the whole query load and delivers the results to the client,
 which causes high workloads and is partially the reason that <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-642-41338-4_18"><a href="https://doi.org/10.1007/978-3-642-41338-4_18">historically they had a low
@@ -71,24 +73,27 @@ availability</a></span> <span class="references">[<a href="#ref-1">1</a>]</span
 Academics have made efforts to introduce linked data publication methods to make the client participate in the query execution,
 with the aim to diminish the workloads of the server and still have fast query execution to the client <span class="references">[<a href="#ref-2">2</a>, <a href="#ref-3">3</a>]</span>.
 The TREE specification is an effort in that direction <span class="references">[<a href="#ref-4">4</a>, <a href="#ref-5">5</a>]</span>,
-that introduces the concept of domain-related fragmentation of large RDF datasets.
-This line of research aims to fragment what would be a data dump in a way that client can easily fetch a subset of it to answer their query fully.
-The data inside a fragment are bounded with constraints that are expressed using hypermedia description <span class="references">[<a href="#ref-6">6</a>]</span>.
-More precisely inside a fragment there is a description of the constraint of the data of the other fragments accessible for this location
-in web space.
-Because there is no centralized index in those documents Link Traversal Query Processing (LTQP) <span class="references">[<a href="#ref-7">7</a>]</span>,
-inspired techniques are used to answer queries. 
-This consist in starting with a small set of URL that provided the first data sources and dereferencing recursively 
-the IRI present inside the data source to obtain new data sources <span class="references">[<a href="#ref-7">7</a>]</span>. 
-In the current state of affairs, it is not possible to use SPARQL to query those documents efficiently because there are no method, to
-skip fragments that do not contain data pertaining to the answer to a query.
-It result that custom solutions has been created to make use of this data.
-The aim of this work is not to introduce the TREE specification but to propose a pushdown filter method with the use of  structural assumption <span class="references">[<a href="#ref-8">8</a>]</span>
-to diminish the query execution time by using the SPARQL filter expression has link discrimant.</p>
+that introduces the concept of domain-related fragmentation of large RDF datasets.<span class="comment" data-author="RT">Could you give a brief example to readers can imagine what this means? Just a single short sentence should be sufficient</span>
+TREE aims to fragment datasets in a way that enables clients to easily fetch a subset of it to answer their query fully.
+The data inside a fragment are bounded with constraints that are expressed using hypermedia descriptions <span class="references">[<a href="#ref-6">6</a>]</span>.
+More precisely, each fragment declaratively describes the constraints of the data it contains, and links to other fragments.
+Since TREE fragments are hyperlinked Linked Data documents,
+clients must traverse over these documents to find data,
+which makes Link Traversal Query Processing (LTQP) <span class="references">[<a href="#ref-7">7</a>]</span> a suitable technique for answering SPARQL queries over it.</p>
 
-        <p>One idiomatic use case of fragmented dataset is the publication of sensor data, hence in this paper
-we consider the example of <a href="#example-sparql">Listing 1</a> using the <a property="schema:citation http://purl.org/spar/cito/cites" href="https://dahcc.idlab.ugent.be">DAHCC</a> <span class="references">[<a href="#ref-9">9</a>]</span> dataset.
-We make queries to get the measure of a specific interval (the metavariable <code>{:filter_expression}</code>)
+        <p>LTQP typically starts with a set of seed URLs that are dereferenced.
+From these dereferenced documents, links to other documents are dereferenced recursively.
+So far, applications on top of TREE datasets <span class="references">[<a href="#ref-4">4</a>, <a href="#ref-5">5</a>]</span>
+have resorted to custom traversal implementations to find data matching custom data needs.
+Our aim in this work is to explore how to execute generic SPARQL queries over TREE datasets through LTQP.
+We do not aim to extend the existing TREE specification,
+but merely to introduce LTQP-specific link pruning techniques that exploit the structural properties of TREE,
+similar to the <a property="schema:citation http://purl.org/spar/cito/cites" href="https://comunica.github.io/Article-ISWC2023-SolidQuery/">exploitation of structural properties when performing LTQP over the Solid environment</a> <span class="references">[<a href="#ref-8">8</a>]</span>.
+Specifically, we will make use of the SPARQL FILTER expression to prune links that match the constraints of TREE fragments.</p>
+
+        <p>As a running example throughout this paper, we consider the publication of sensor data.
+For example, the query in <a href="#example-sparql">Listing 1</a> targets the <a property="schema:citation http://purl.org/spar/cito/cites" href="https://dahcc.idlab.ugent.be">DAHCC</a> <span class="references">[<a href="#ref-9">9</a>]</span> dataset.
+We make queries to get the measure of a specific interval (the metavariable <code>{:filter_expression}</code>) <span class="comment" data-author="RT">Can we just fill in one example value of this filter expression?</span>
 and information about the sensor using a metadata file that is available online at
 <a href="">https:/​/​github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl</a> 
 (we adapt the file by deleting the named graph and we use the metavariable<code>{:property}</code> to accommodate the dataset).</p>
@@ -112,7 +117,7 @@ and information about the sensor using a metadata file that is available online 
 </code><code>  FILTER({:filter_expression})
 </code><code>}</code></pre>
 <figcaption>
-              <p><span class="label">Listing 1:</span> SPARQL query to get sensor measurement and the information about the sensor</p>
+              <p><span class="label">Listing 1:</span> SPARQL query to get sensor measurements and metadata</p>
             </figcaption>
 </figure>
 
@@ -130,154 +135,79 @@ and information about the sensor using a metadata file that is available online 
 </code><code>    tree:path etsi:hasTimestamp ;
 </code></pre>
 <figcaption>
-              <p><span class="label">Listing 2:</span> The example is showing a set of triples representing a TREE relation. 
-The relation can be converted into the following boolean equation 
+              <p><span class="label">Listing 2:</span> <span class="comment" data-author="RT">This listing comment contains too many details. Just explain the constraint, nothing more.</span>
+The example is showing a set of triples representing a TREE relation. <span class="comment" data-author="RT">Relations have not been mentioned in the text yet. Constraints on the other hand have. Make sure to use consistent terminology.</span>
+The relation can be converted into the following boolean equation <span class="comment" data-author="RT">Boolean equations are also new.</span> 
 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>&gt;</mo><mo>=</mo><mtext>2022-01-03T09:47:59.000000</mtext></mrow><annotation encoding="application/x-tex">x &gt;= \text{2022-01-03T09:47:59.000000}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">2022-01-03T09:47:59.000000</span></span></span></span></span> 
 where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> is any variable inside the client SPARQL query that as the predicate <code>etsi:hasTimestamp</code>.</p>
             </figcaption>
 </figure>
 </div>
 
-        <p>The following section will present our approach and early evaluation.</p>
+        <p><span class="comment" data-author="RT">The second listing is never mentioned in the text.</span></p>
+
+        <p><span class="comment" data-author="RT">If I remember correctly, you were planning a demo. As such, explicitly say that this is a demo. You’ll also need a dedicated section explaining what you will show during the demonstration. You can find inspiration in my older papers.</span></p>
+
+        <p><span class="comment" data-author="RT">The sentence below can go.</span>
+The following section will present our approach and early evaluation.</p>
       </div>
 </section>
 
   <section id="guided_link_traversal" inlist="" rel="schema:hasPart" resource="#guided_link_traversal">
 <div datatype="rdf:HTML" property="schema:description">
-        <h2 property="schema:name">Filter pushdown to discriminate link during LTQP</h2>
+        <h2 property="schema:name">Pruning links using filter expressions</h2>
 
-        <p>LTQP in its most naive form has a pseudo-infinite domain <span class="references">[<a href="#ref-7">7</a>]</span>, as a result
-it is not possible to evaluate the completeness and to have a stopping condition related to the finding of complete results <span class="references">[<a href="#ref-10">10</a>]</span>. 
-Also, given the vastness of the web, the overwhelming majority of data sources will not contribute to query completeness (in most realistic queries).
-Hartig and Freytag <span class="references">[<a href="#ref-10">10</a>]</span> introduces the concept of reachability criterium, which consists of policies
-of IRI to dereference, hence limiting the range of the web that has to be explored to consider to have obtained completeness.
-Corrolary, those criteriums serve as a mechanism to prune links that are not relevant to the answer to the query.
-This is particularly useful in the context of structured environments such as in the use case of Solid and fragmented datasets
-where a priori we have metaknowledge of how to access data related to a query <span class="references">[<a href="#ref-8">8</a>]</span>.
-With this metaknowledge, the query engine can find triples that will describe the location of the information requested,
-hence “guiding” the query engine towards the right data source <span class="references">[<a href="#ref-11">11</a>]</span>.</p>
+        <p>Most research around LTQP has been done on query execution over Linked Open Data <span class="references">[<a href="#ref-7">7</a>]</span>.
+Given the pseudo-infinite number of documents on the Web, traversing over all documents is practically infeasible.
+To get a grasp on this completeness issue, different reachability criteria <span class="references">[<a href="#ref-10">10</a>]</span> were introduced
+that allow certain links not to be followed based on the query that is executed.
+Recently, an alternative direction was introduced <span class="references">[<a href="#ref-11">11</a>]</span>
+were instead of just looking at the query to determine which links to follow,
+the data publisher could <em>guide</em> the engine towards query-relevant links.
+This strategy was <a property="schema:citation http://purl.org/spar/cito/cites" href="https://comunica.github.io/Article-ISWC2023-SolidQuery/">applied on the Solid ecosystem</a> <span class="references">[<a href="#ref-8">8</a>]</span>,
+where the structural properties of Solid were exploited to prune links when traversing over Solid vaults.</p>
 
-        <p>Our pushdown filter is based in its use on the concept of reachability criterium.
-In the definition by Hartig and Freytag <span class="references">[<a href="#ref-10">10</a>]</span> a reachability criterium is a function discriminating the dereferencing of 
-an IRI based on the triple available in a current document a query.
-In our approach, we interpret the hypermedia description of the constraint of the fragment as a boolean equation as
-exemplify in <a href="#example-sparql">Listing 1</a>.
-In this example, the left hand of the expression, the variable, is contingent on a SPARQL query expression.
+        <p>Our approach builds upon this concept of guided link traversal,
+and similar to the <a property="schema:citation http://purl.org/spar/cito/cites" href="https://comunica.github.io/Article-ISWC2023-SolidQuery/">Solid approach</a> <span class="references">[<a href="#ref-8">8</a>]</span> exploits the structural properties of TREE datasets to prune links.
+Concretely, we interpret the hypermedia descriptions of constraints in TREE fragments as boolean equations.
+For example, given the query in <a href="#example-sparql">Listing 1</a>,
+the left hand of the expression, the variable, is contingent on a SPARQL query expression.
 It is the variable pertaining to the property that the constraint is targeting.
 The property targeted by the relation is defined by the object of the triple having the predicate <code>tree:path</code>.
 In the example it was <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">?</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">?t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mclose">?</span><span class="mord mathnormal">t</span></span></span></span>, because the example of <a href="#TREE-relation-turtle-example">Listing 2</a>
-has the <code>tree:path</code> property <code>etsi:hasTimestamp</code>. 
-The boolean operator such as; equal, greater than, is described by the <a href="https://treecg.github.io/specification/#Relation">RDF type of the TREE relation</a>, in Turtle serialization it is the object of the triple with the predicate “<code>a</code>”.
+has the <code>tree:path</code> property <code>etsi:hasTimestamp</code>.
+Boolean operators such as; equal, greater than, are described by the <a href="https://treecg.github.io/specification/#Relation">RDF type of the TREE relation</a>.
 Finally, the literal is simply represented by the object of the triple in the relation,
 containing the predicate <code>tree:value</code>.
-The SPARQL filter expression can naively be converted into a boolean expression.
-Hence upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression 
-representing the constraint of the next fragment and pushdown the SPARQL filter expression.
+Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression 
+representing the constraint of the next fragment and effectively pushed down the SPARQL filter expression into the engine’s dereferencing component.
 After having those two boolean expressions close together they are evaluated to find the satisfiability and upon satisfaction
 the IRI targeting the next fragment (<code>tree:node</code> in the TREE specification) is added to the link queue following the
 concept of reachability criterium.</p>
 
-        <figure id="results-queries" class="table table-smaller-font">
+        <p>We have implemented our approach into the LTQP version of <a property="schema:citation http://purl.org/spar/cito/cites" href="https://comunica.github.io/Article-ISWC2018-Resource/">Comunica</a> <span class="references">[<a href="#ref-12">12</a>]</span> at
+<a href="">https:/​/​github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation</a> with an associated demo available at
+<a href="">https:/​/​github.com/constraintAutomaton/TREE-Solver-LTQP-demo-engine</a>.</p>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Configuration</th>
-                <th>Query</th>
-                <th>QT (ms)</th>
-                <th>NH</th>
-                <th>NR</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Data dump</td>
-                <td>Q1/Q2/Q3/Q4</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-              </tr>
-              <tr>
-                <td>One ary 100/1000 fragments</td>
-                <td>Q1/Q2/Q3/Q4</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-              </tr>
-              <tr>
-                <td>One ary 100/1000 fragments Filter pushdown</td>
-                <td>Q4</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-              </tr>
-              <tr>
-                <td>One ary 100 fragments Filter pushdown</td>
-                <td>Q1</td>
-                <td>8,892</td>
-                <td>3</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>One ary 100 fragments Filter pushdown</td>
-                <td>Q2</td>
-                <td>3,541</td>
-                <td>3</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>One ary 100 fragments Filter pushdown</td>
-                <td>Q3</td>
-                <td>59,274</td>
-                <td>8</td>
-                <td>8,166</td>
-              </tr>
-              <tr>
-                <td>One ary 1000 fragments Filter pushdown</td>
-                <td>Q1</td>
-                <td>1,171</td>
-                <td>3</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>One ary 1000 fragments Filter pushdown</td>
-                <td>Q2</td>
-                <td>734</td>
-                <td>3</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>One ary 1000 fragments Filter pushdown</td>
-                <td>Q3</td>
-                <td>39,987</td>
-                <td>51</td>
-                <td>8,166</td>
-              </tr>
-            </tbody>
-          </table>
+        <p><span class="comment" data-author="RT">Let’s move everything below this to a separate section</span></p>
 
-          <figcaption>
-            <p><span class="label">Table 1:</span> Result of the query with our different configurations. <em>Qt</em> is the query execution time,
-<em>NH</em> The number of HTTP request and <em>NR</em> the number of result.</p>
-          </figcaption>
-        </figure>
-
-        <p>We made an open-source implementation of this criterium available at <a href="">https:/​/​github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation</a> with an associated demo available at
-<a href="">https:/​/​github.com/constraintAutomaton/TREE-Solver-LTQP-demo-engine</a>. In the rest of this section, we will present our experimental result.
-We ran four queries derived from the template of <a href="#example-sparql">Listing 1</a> available at 
-<a href="">https:/​/​github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/content/code</a> 
-with three configurations of the DAHCC participant 31 dataset (of 487 MB) and a timeout of two minutes. 
-The first one is a single endpoint query of the data dump. 
+        <p>To evaluate our approach, we executed four queries similar to the one in <a href="#example-sparql">Listing 1</a>.
+All queries are available at <a href="">https:/​/​github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/content/code</a>.
+These queries were executed with three configurations <span class="comment" data-author="RT">what configurations?</span>
+They were executed over the DAHCC participant 31 dataset (of 487 MB) with a timeout of two minutes. 
+The first one <span class="comment" data-author="RT">Are you explaining the configurations here? If so, make that explicit.</span> is a single endpoint query of the data dump. 
 For the second and the third configuration we convert the data dump into a 
 fragmented dataset following the TREE specification with a one-ary tree topology with 100 and 1000 nodes.
-the second configuration uses  a reachability criterium where we follow each link of the fragmented dataset and the third one with the 
-pushdown filter approach. As shown in <a href="#results-queries">Table 1</a> no query were able to be answered by querying the data dump and following every fragment. 
+the second configuration uses a reachability criterium where we follow each link of the fragmented dataset and the third one with the 
+pushdown filter approach. As shown in {{:todo }} no query could be answered by querying the data dump and following every fragment. 
 The reason might be because of the size of the dataset to be processed before executing the joining and solution mapping.
 For the configurations with a pushdown filter method, we see that the queries with 1000 fragments perform better than
 the one with 100 fragments, particularly when the query has one or zero results. In those cases, the query execution time is almost one
 order of magnitude lower with the largest number of fragments. 
 With Q3 we can see that the percentage of reduction is 32%, this lowering of performance might be caused by the increase by a factor of 17
 of HTTP requests. The query Q4 was not able to be answered, with both fragmentations, the cause might be because it covers a far larger range and hence requires more data to be downloaded and more processing time.</p>
+
+        <p><span class="comment" data-author="RT">Honestly, I don’t think we need to talk about the dataset experiment to make our point. I would suggest just comparing the TREE traversal approach <em>with</em> and <em>without</em> filter-based link pruning.</span></p>
 
       </div>
 </section>
@@ -286,14 +216,20 @@ of HTTP requests. The query Q4 was not able to be answered, with both fragmentat
 <div datatype="rdf:HTML" property="schema:description">
         <h2 property="schema:name">Conclusion</h2>
 
-        <p>Concluding from our preliminary implementation, a pushdown filter approach to prune links of fragmented RDF documents based on the SPARQL query language performs better than an approach without it and then querying a data dump of approximately haft a gigabyte in size. 
+        <p>Our preliminary results show that our filter-based link pruning approach for LTQP over fragmented RDF documents
+can be effective for significantly reducing the number of links to traverse.
+This leads to a significantly lower amount of data to be downloaded, and overall query execution time to be lowered
+<span class="comment" data-author="RT">If you remove the experiment with the data dump, then the following can be removed.</span>
+<del class="comment" data-author="RT">
 The cause of the gain of performance seems to be the reduction of the processing by downloading of fewer data inside the engine, but the increase of the HTTP request seems to reduce the gain in performance. This implies that there might be a tradeoff between
-the size of the fragments and their numbers.</p>
+the size of the fragments and their numbers.
+</del></p>
 
         <p>This work opens the possibility for faster traversal-based query execution over fragmented RDF documents, 
 given that the data provider uses hypermedia descriptions to characterize the fragmentation
 in a structured manner. 
-In future work, we are going to make a more extensive evaluation of solutions and compare it with a SPARQL endpoint and TPF interface.</p>
+In future work, we will investigate filter-based link pruning for more expressive filter expressions,
+and evaluate the approach more extensive over more diverse datasets and queries, and compare our approach with alternative query interfaces.</p>
 
       </div>
 </section>
@@ -325,6 +261,8 @@ In future work, we are going to make a more extensive evaluation of solutions an
   <dd resource="#hartig2012" typeof="schema:Article">Hartig, O., Freytag, J.-C.: Foundations of Traversal Based Query Execution over Linked Data. In: Conference on Hypertext and Social Media. ACM</dd>
   <dt id="ref-11">[11]</dt>
   <dd resource="#verborgh2020" typeof="schema:CreativeWork">Verborgh, R., Taelman, R.: Guided Link-Traversal-Based Query Processing</dd>
+  <dt id="ref-12">[12]</dt>
+  <dd resource="https://comunica.github.io/Article-ISWC2018-Resource/" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Proceedings of the 17th International Semantic Web Conference (2018).</dd>
 </dl>
 </section>
 </footer>
