@@ -25,5 +25,6 @@ when evaluating time-related queries over sensor data.
 Given the promising result of initial approach, we improve upon this work in the future
 by supporting more complex filter expressions
 and evaluating with more datasets and comparing our results with other SPARQL interfaces.
-
-
+<p>
+    <b><i>Poster paper</i></b>
+</p>
