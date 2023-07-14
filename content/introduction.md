@@ -20,7 +20,7 @@ which makes Link Traversal Query Processing (LTQP) [](cite:cites Hartig2016) a s
 LTQP typically starts with a set of seed URLs that are dereferenced.
 From these dereferenced documents, links to other documents are dereferenced recursively.
 So far, [applications on top of TREE datasets](cite:cites ColpaertMaterializedTREE, lancker2021LDS)
-have resorted to custom traversal implementations to find data matching custom data needs.
+have resorted to custom traversal implementations to find data matching specific data needs.
 Our aim in this work is to explore how to execute generic SPARQL queries over TREE datasets through LTQP.
 We do not aim to extend the existing TREE specification,
 but merely to introduce LTQP-specific link pruning techniques that exploit the structural properties of TREE,
@@ -31,8 +31,7 @@ As a running example throughout this paper, we consider the publication of senso
 For example, the query in [](#example-sparql) targets the [DAHCC](cite:cites dahcc_resource) dataset.
 We make queries to get the measure of a specific interval (the filter expression will vary in our experiment) 
 and information about the sensor using a metadata file that is available online at
-[https://github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl]() 
-(we adapt the file by deleting the named graph and we use the metavariable`{:property}` to accommodate the dataset). 
+[https://github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl](). 
 
 <div class="sidebysidecontainer" style="align-items: stretch !important; ">
 <figure id="example-sparql" class="listing" style="padding-right: 5px; padding-left: 5px; height='100%'">
@@ -50,8 +49,3 @@ that respect the constraint $$ ?t>= \text{2022-01-03T09:47:59.000000} $$.
 </figcaption>
 </figure>
 </div>
-
-
-<span class="comment" data-author="RT">If I remember correctly, you were planning a demo. As such, explicitly say that this is a demo. You'll also need a dedicated section explaining what you will show during the demonstration. You can find inspiration in my older papers.</span>
-
-<span class="comment" data-author="BET">Given the time available I think the simplest would be to make a poster paper</span>
