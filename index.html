@@ -61,8 +61,8 @@ We found that by using this strategy the query engine is able to drastically
 reduce the query execution time and the number of HTTP requests
 needed to answer time-related queries over sensor data.
 <!-- Conclusion   -->
-Given the positive result of early effort, we will in the future extend our investigation with  more complex filter expressions
-and more datasets and compare our results with other SPARQL interfaces.</p>
+Given the positive result of early effort, we will in the future extend our investigation with more complex filter expressions
+datasets and compare our results with other SPARQL interfaces.</p>
 
     </div>
 </section>
@@ -76,8 +76,8 @@ and more datasets and compare our results with other SPARQL interfaces.</p>
         <p><a href="https://lod-cloud.net/#diagram">In the current years, the web of linked data has grown in size</a>.
 To access those data it is necessary to have an interface, the most common is the SPARQL endpoint.
 When querying SPARQL endpoints, the interface takes the whole query load and delivers the results to the client,
-which causes high workloads and is partially the reason that <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-642-41338-4_18"><a href="https://doi.org/10.1007/978-3-642-41338-4_18">historically they had a low
-availability</a></span> <span class="references">[<a href="#ref-1">1</a>]</span>.
+which causes high workloads and is partially the reason that <a property="schema:citation http://purl.org/spar/cito/cites" href="https://doi.org/10.1007/978-3-642-41338-4_18">historically they had a low
+availability</a> <span class="references">[<a href="#ref-1">1</a>]</span>.
 Academics have made efforts to introduce linked data publication methods to make the client participate in the query execution,
 with the aim to diminish the workloads of the server and still have fast query execution to the client <span class="references">[<a href="#ref-2">2</a>]</span>.
 The TREE specification is an effort in that direction <span class="references">[<a href="#ref-3">3</a>, <a href="#ref-4">4</a>]</span>,
@@ -92,7 +92,7 @@ which makes Link Traversal Query Processing (LTQP) <span class="references">[<a 
 LTQP typically starts with a set of seed URLs that are dereferenced.
 From these dereferenced documents, links to other documents are dereferenced recursively.
 So far, applications on top of TREE datasets <span class="references">[<a href="#ref-3">3</a>, <a href="#ref-4">4</a>]</span>
-have resorted to custom traversal implementations to find data matching custom data needs.
+have resorted to custom traversal implementations to find data matching specific data needs.
 Our aim in this work is to explore how to execute generic SPARQL queries over TREE datasets through LTQP.
 We do not aim to extend the existing TREE specification,
 but merely to introduce LTQP-specific link pruning techniques that exploit the structural properties of TREE,
@@ -103,8 +103,7 @@ Specifically, we will make use of the SPARQL FILTER expression to prune links th
 For example, the query in <a href="#example-sparql">Listing 1</a> targets the DAHCC <span class="references">[<a href="#ref-8">8</a>]</span> dataset.
 We make queries to get the measure of a specific interval (the filter expression will vary in our experiment) 
 and information about the sensor using a metadata file that is available online at
-<a href="">https:/​/​github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl</a> 
-(we adapt the file by deleting the named graph and we use the metavariable<code>{:property}</code> to accommodate the dataset).</p>
+<a href="">https:/​/​github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl</a>.</p>
 
         <div class="sidebysidecontainer" style="align-items: stretch !important; ">
 <figure id="example-sparql" class="listing" style="padding-right: 5px; padding-left: 5px; height='100%'">
@@ -148,10 +147,6 @@ that respect the constraint <span class="katex"><span class="katex-mathml"><math
             </figcaption>
 </figure>
 </div>
-
-        <p><span class="comment" data-author="RT">If I remember correctly, you were planning a demo. As such, explicitly say that this is a demo. You’ll also need a dedicated section explaining what you will show during the demonstration. You can find inspiration in my older papers.</span></p>
-
-        <p><span class="comment" data-author="BET">Given the time available I think the simplest would be to make a poster paper</span></p>
       </div>
 </section>
 
@@ -302,13 +297,13 @@ and evaluate the approach more extensively over more diverse datasets and querie
 <h2 id="references">References</h2>
 <dl class="references">
   <dt id="ref-1">[1]</dt>
-  <dd resource="https://dx.doi.org/10.1007/978-3-642-41338-4_18" typeof="schema:Article">Buil-Aranda, C., Hogan, A., Umbrich, J., Vandenbussche, P.-Y.: SPARQL Web-Querying Infrastructure: Ready for Action? In: Proceedings of the 12th International Semantic Web Conference - Part II. pp. 277–293. Springer-Verlag, Berlin, Heidelberg (2013). doi:10.1007/978-3-642-41338-4_18</dd>
+  <dd resource="https://doi.org/10.1007/978-3-642-41338-4_18" typeof="schema:Article">Buil-Aranda, C., Hogan, A., Umbrich, J., Vandenbussche, P.-Y.: SPARQL Web-Querying Infrastructure: Ready for Action? In: Proceedings 12th ISWC (2013).</dd>
   <dt id="ref-2">[2]</dt>
-  <dd resource="https://dx.doi.org/10.1145/3442381.3449911" typeof="schema:Article">Azzam, A., Aebeloe, C., Montoya, G., Keles, I., Polleres, A., Hose, K.: WiseKG: Balanced Access to Web Knowledge Graphs. In: Proceedings of the Web Conference 2021. pp. 1422–1434. Association for Computing Machinery, New York, NY, USA (2021). doi:10.1145/3442381.3449911</dd>
+  <dd resource="#Azzam2021" typeof="schema:Article">Azzam, A., Aebeloe, C., Montoya, G., Keles, I., Polleres, A., Hose, K.: WiseKG: Balanced Access to Web Knowledge Graphs. In: Proceedings of the Web Conference 2021 (2021).</dd>
   <dt id="ref-3">[3]</dt>
   <dd resource="#ColpaertMaterializedTREE" typeof="schema:Article">Colpaert, P.: Building materializable querying interfaces with the TREE hypermedia specification.</dd>
   <dt id="ref-4">[4]</dt>
-  <dd resource="#lancker2021LDS" typeof="schema:Article">Publishing base registries as Linked Data Event Streams. Proceedings of the 21th International Conference on Web Engineering.</dd>
+  <dd resource="#lancker2021LDS" typeof="schema:Article">Publishing base registries as Linked Data Event Streams. Proceedings 21th ICWE. (2021).</dd>
   <dt id="ref-5">[5]</dt>
   <dd resource="#thomasFieldingPhdThesis" typeof="schema:Thesis">Fielding, R.T.: Architectural Styles and the Design of Network-based Software Architectures</dd>
   <dt id="ref-6">[6]</dt>
@@ -322,7 +317,7 @@ and evaluate the approach more extensively over more diverse datasets and querie
   <dt id="ref-10">[10]</dt>
   <dd resource="#verborgh2020" typeof="schema:CreativeWork">Verborgh, R., Taelman, R.: Guided Link-Traversal-Based Query Processing</dd>
   <dt id="ref-11">[11]</dt>
-  <dd resource="https://comunica.github.io/Article-ISWC2018-Resource/" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Proceedings of the 17th International Semantic Web Conference (2018).</dd>
+  <dd resource="https://comunica.github.io/Article-ISWC2018-Resource/" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Proceedings 17th ISWC (2018).</dd>
 </dl>
 </section>
 </footer>
