@@ -12,5 +12,5 @@ SELECT * WHERE {
   ?sensor dahcc:analyseStateOf ?stateOf.
   ?sensor saref:measuresProperty {:property}
   
-  FILTER({:filter_expression})
+  FILTER(?t="2022-01-03T10:57:54.000000"^^xsd:dateTime)
 }

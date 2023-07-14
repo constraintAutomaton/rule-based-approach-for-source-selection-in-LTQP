@@ -9,14 +9,14 @@ availability](cite:cites aranda2013).
 Academics have made efforts to introduce linked data publication methods to make the client participate in the query execution,
 with the aim to diminish the workloads of the server and still have fast query execution to the client [](cite:cites Verborgh2016TriplePF, Azzam2021).
 The TREE specification is an effort in that direction [](cite:cites ColpaertMaterializedTREE, lancker2021LDS),
-that introduces the concept of domain-related fragmentation of large RDF datasets.<span class="comment" data-author="RT">Could you give a brief example to readers can imagine what this means? Just a single short sentence should be sufficient</span>
+that introduces the concept of domain-related fragmentation of large RDF datasets.
+For example, in the case of periodic measurement of sensor data the fragmentation can be made on the publication date.
 TREE aims to fragment datasets in a way that enables clients to easily fetch a subset of it to answer their query fully.
 The data inside a fragment are bounded with constraints that are expressed using hypermedia descriptions [](cite:cites thomasFieldingPhdThesis).
 More precisely, each fragment declaratively describes the constraints of the data it contains, and links to other fragments.
 Since TREE fragments are hyperlinked Linked Data documents,
 clients must traverse over these documents to find data,
 which makes Link Traversal Query Processing (LTQP) [](cite:cites Hartig2016) a suitable technique for answering SPARQL queries over it.
-
 LTQP typically starts with a set of seed URLs that are dereferenced.
 From these dereferenced documents, links to other documents are dereferenced recursively.
 So far, [applications on top of TREE datasets](cite:cites ColpaertMaterializedTREE, lancker2021LDS)
@@ -29,7 +29,7 @@ Specifically, we will make use of the SPARQL FILTER expression to prune links th
 
 As a running example throughout this paper, we consider the publication of sensor data.
 For example, the query in [](#example-sparql) targets the [DAHCC](cite:cites dahcc_resource) dataset.
-We make queries to get the measure of a specific interval (the metavariable `{:filter_expression}`) <span class="comment" data-author="RT">Can we just fill in one example value of this filter expression?</span>
+We make queries to get the measure of a specific interval (the filter expression will vary in our experiment) 
 and information about the sensor using a metadata file that is available online at
 [https://github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl]() 
 (we adapt the file by deleting the named graph and we use the metavariable`{:property}` to accommodate the dataset). 
@@ -45,19 +45,13 @@ SPARQL query to get sensor measurements and metadata
 <figure id="TREE-relation-turtle-example" class="listing" style="padding-right: 5px; padding-left: 5px">
 ````/code/example_tree_relation.ttl````
 <figcaption markdown="block">
-<span class="comment" data-author="RT">This listing comment contains too many details. Just explain the constraint, nothing more.</span>
-The example is showing a set of triples representing a TREE relation. <span class="comment" data-author="RT">Relations have not been mentioned in the text yet. Constraints on the other hand have. Make sure to use consistent terminology.</span>
-The relation can be converted into the following boolean equation <span class="comment" data-author="RT">Boolean equations are also new.</span> 
-$$ x >= \text{2022-01-03T09:47:59.000000} $$ 
-where $$ x $$ is any variable inside the client SPARQL query that as the predicate `etsi:hasTimestamp`.
+In this RDF snippet can be read in natural language as in the fragment `ex:nextNode` there are data that are have the property `etsi:hasTimestamp`
+that respect the constraint $$ ?t>= \text{2022-01-03T09:47:59.000000} $$.
 </figcaption>
 </figure>
 </div>
 
-<span class="comment" data-author="RT">The second listing is never mentioned in the text.</span>
 
 <span class="comment" data-author="RT">If I remember correctly, you were planning a demo. As such, explicitly say that this is a demo. You'll also need a dedicated section explaining what you will show during the demonstration. You can find inspiration in my older papers.</span>
 
-
-<span class="comment" data-author="RT">The sentence below can go.</span>
-The following section will present our approach and early evaluation.
+<span class="comment" data-author="BET">Given the time available I think the simplest would be to make a poster paper</span>
