@@ -12,7 +12,7 @@
   <meta name="citation_author" content="Ruben Taelman" />
   <meta name="citation_author" content="Pieter Colpaert" />
   
-  <meta name="citation_publication_date" content="2023/07/13" />
+  <meta name="citation_publication_date" content="2023/07/14" />
 </head>
 
 <body prefix="dctypes: http://purl.org/dc/dcmitype/ pimspace: http://www.w3.org/ns/pim/space# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# lsc: http://linkedscience.org/lsc/ns#" typeof="schema:CreativeWork sioc:Post prov:Entity lsc:Research">
@@ -193,6 +193,83 @@ the one with 100 fragments, particularly when the query has one or zero results.
 order of magnitude lower with the largest number of fragments. 
 With Q3 we can see that the percentage of reduction is 32%, this lowering of performance might be caused by the increase by a factor of 17
 of HTTP requests. The query Q4 was not able to be answered, with both fragmentations, the cause might be because it covers a far larger range and hence requires more data to be downloaded and more processing time.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Configuration</th>
+              <th>Query</th>
+              <th>QT (ms)</th>
+              <th>NH</th>
+              <th>NR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data dump</td>
+              <td>Q1/Q2/Q3/Q4</td>
+              <td>X</td>
+              <td>X</td>
+              <td>X</td>
+            </tr>
+            <tr>
+              <td>One ary 100/1000 fragments</td>
+              <td>Q1/Q2/Q3/Q4</td>
+              <td>X</td>
+              <td>X</td>
+              <td>X</td>
+            </tr>
+            <tr>
+              <td>One ary 100/1000 fragments Filter pushdown</td>
+              <td>Q4</td>
+              <td>X</td>
+              <td>X</td>
+              <td>X</td>
+            </tr>
+            <tr>
+              <td>One ary 100 fragments Filter pushdown</td>
+              <td>Q1</td>
+              <td>8,892</td>
+              <td>3</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>One ary 100 fragments Filter pushdown</td>
+              <td>Q2</td>
+              <td>3,541</td>
+              <td>3</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>One ary 100 fragments Filter pushdown</td>
+              <td>Q3</td>
+              <td>59,274</td>
+              <td>8</td>
+              <td>8,166</td>
+            </tr>
+            <tr>
+              <td>One ary 1000 fragments Filter pushdown</td>
+              <td>Q1</td>
+              <td>1,171</td>
+              <td>3</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>One ary 1000 fragments Filter pushdown</td>
+              <td>Q2</td>
+              <td>734</td>
+              <td>3</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>One ary 1000 fragments Filter pushdown</td>
+              <td>Q3</td>
+              <td>39,987</td>
+              <td>51</td>
+              <td>8,166</td>
+            </tr>
+          </tbody>
+        </table>
 
       </div>
 </section>
