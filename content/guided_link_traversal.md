@@ -10,7 +10,7 @@ Corrolary, those criteriums serve as a mechanism to prune links that are not rel
 This is particularly useful in the context of structured environments such as in the use case of Solid and fragmented datasets
 where a priori we have metaknowledge of how to access data related to a query [](cite:cites taelman2023).
 With this metaknowledge, the query engine can find triples that will describe the location of the information requested,
-hence "guiding" the query engine towards the right data source [](cite:cites verborgh2020). 
+hence "guiding" the query engine towards the right data sources [](cite:cites verborgh2020). 
 
 Our pushdown filter is based in its use on the concept of reachability criterium.
 In the definition by Hartig and Freytag [](cite:cites hartig2012) a reachability criterium is a function discriminating the dereferencing of 
