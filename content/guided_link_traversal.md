@@ -32,22 +32,7 @@ After having those two boolean expressions close together they are evaluated to 
 the IRI targeting the next fragment (`tree:node` in the TREE specification) is added to the link queue following the
 concept of reachability criterium.
 
-We made an open-source implementation of this criterium available at [https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation]() with an associated demo available at
-[https://github.com/constraintAutomaton/TREE-Solver-LTQP-demo-engine](). In the rest of this section, we will present our experimental result.
-We ran four queries derived from the template of [](#example-sparql) available at 
-[https://github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/content/code]() 
-with three configurations of the DAHCC participant 31 dataset (of 487 MB) and a timeout of two minutes. 
-The first one is a single endpoint query of the data dump. 
-For the second and the third configuration we convert the data dump into a 
-fragmented dataset following the TREE specification with a one-ary tree topology with 100 and 1000 nodes.
-the second configuration uses  a reachability criterium where we follow each link of the fragmented dataset and the third one with the 
-pushdown filter approach. As shown in {{:todo }} no query were able to be answered by querying the data dump and following every fragment. 
-The reason might be because of the size of the dataset to be processed before executing the joining and solution mapping.
-For the configurations with a pushdown filter method, we see that the queries with 1000 fragments perform better than
-the one with 100 fragments, particularly when the query has one or zero results. In those cases, the query execution time is almost one
-order of magnitude lower with the largest number of fragments. 
-With Q3 we can see that the percentage of reduction is 32%, this lowering of performance might be caused by the increase by a factor of 17
-of HTTP requests. The query Q4 was not able to be answered, with both fragmentations, the cause might be because it covers a far larger range and hence requires more data to be downloaded and more processing time.
+<figure id="results-queries" markdown="1" class="table table-smaller-font">
 
 | Configuration                              | Query       | QT (ms) | NH | NR    |
 |--------------------------------------------|-------------|---------|----|-------|
@@ -60,4 +45,28 @@ of HTTP requests. The query Q4 was not able to be answered, with both fragmentat
 | One ary 1000 fragments Filter pushdown     | Q1          | 1,171   | 3  | 0     |
 | One ary 1000 fragments Filter pushdown     | Q2          | 734     | 3  | 1     |
 | One ary 1000 fragments Filter pushdown     | Q3          | 39,987  | 51 | 8,166 |
+
+<figcaption markdown="block">
+Result of the query with our different configurations. *Qt* is the query execution time,
+*NH* The number of HTTP request and *NR* the number of result.
+</figcaption>
+</figure>
+
+
+We made an open-source implementation of this criterium available at [https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation]() with an associated demo available at
+[https://github.com/constraintAutomaton/TREE-Solver-LTQP-demo-engine](). In the rest of this section, we will present our experimental result.
+We ran four queries derived from the template of [](#example-sparql) available at 
+[https://github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/content/code]() 
+with three configurations of the DAHCC participant 31 dataset (of 487 MB) and a timeout of two minutes. 
+The first one is a single endpoint query of the data dump. 
+For the second and the third configuration we convert the data dump into a 
+fragmented dataset following the TREE specification with a one-ary tree topology with 100 and 1000 nodes.
+the second configuration uses  a reachability criterium where we follow each link of the fragmented dataset and the third one with the 
+pushdown filter approach. As shown in [](#results-queries) no query were able to be answered by querying the data dump and following every fragment. 
+The reason might be because of the size of the dataset to be processed before executing the joining and solution mapping.
+For the configurations with a pushdown filter method, we see that the queries with 1000 fragments perform better than
+the one with 100 fragments, particularly when the query has one or zero results. In those cases, the query execution time is almost one
+order of magnitude lower with the largest number of fragments. 
+With Q3 we can see that the percentage of reduction is 32%, this lowering of performance might be caused by the increase by a factor of 17
+of HTTP requests. The query Q4 was not able to be answered, with both fragmentations, the cause might be because it covers a far larger range and hence requires more data to be downloaded and more processing time.
 
