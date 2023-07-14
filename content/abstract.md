@@ -19,7 +19,7 @@ We found that by using this strategy the query engine is able to drastically
 reduce the query execution time and the number of HTTP requests
 needed to answer time-related queries over sensor data.
 <!-- Conclusion   -->
-Given the positive result of early effort, we will in the future extend our investigation with  more complex filter expressions
-and more datasets and compare our results with other SPARQL interfaces.
+Given the positive result of early effort, we will in the future extend our investigation with more complex filter expressions
+datasets and compare our results with other SPARQL interfaces.
 
 
