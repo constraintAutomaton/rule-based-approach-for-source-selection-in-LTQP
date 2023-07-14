@@ -18,17 +18,15 @@
 <body prefix="dctypes: http://purl.org/dc/dcmitype/ pimspace: http://www.w3.org/ns/pim/space# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# lsc: http://linkedscience.org/lsc/ns#" typeof="schema:CreativeWork sioc:Post prov:Entity lsc:Research">
   <header>
   <h1 id="exploiting-sparql-filter-expressions-for-link-pruning-during-link-traversal-query-processing">Exploiting SPARQL Filter Expressions for Link Pruning during Link Traversal Query processing</h1>
+  <!-- 
+{:#authors}
+- <a rev="lsc:participatesIn" property="foaf:maker schema:creator schema:author schema:publisher" href="https://github.com/constraintAutomaton" typeof="foaf:Person schema:Person" resource="">Bryan-Elliott Tam</a>
+- <a rev="lsc:participatesIn" property="foaf:maker schema:creator schema:author schema:publisher" href="http://www.rubensworks.net/" typeof="foaf:Person schema:Person" resource="http://www.rubensworks.net/#me">Ruben Taelman</a>
+- <a rev="lsc:participatesIn" property="foaf:maker schema:creator schema:author schema:publisher" href="https://pietercolpaert.be/" typeof="foaf:Person schema:Person" resource="https://pietercolpaert.be/#me">Pieter Colpaert</a>
 
-  <ul id="authors">
-    <li><a rev="lsc:participatesIn" property="foaf:maker schema:creator schema:author schema:publisher" href="https://github.com/constraintAutomaton" typeof="foaf:Person schema:Person" resource="">Bryan-Elliott Tam</a></li>
-    <li><a rev="lsc:participatesIn" property="foaf:maker schema:creator schema:author schema:publisher" href="http://www.rubensworks.net/" typeof="foaf:Person schema:Person" resource="http://www.rubensworks.net/#me">Ruben Taelman</a></li>
-    <li><a rev="lsc:participatesIn" property="foaf:maker schema:creator schema:author schema:publisher" href="https://pietercolpaert.be/" typeof="foaf:Person schema:Person" resource="https://pietercolpaert.be/#me">Pieter Colpaert</a></li>
-  </ul>
-
-  <ul id="affiliations">
-    <li id="myaffiliation">IDLab, Department of Electronics and Information Systems, Ghent University – imec</li>
-  </ul>
-
+{:#affiliations}
+- {:#myaffiliation} IDLab, Department of Electronics and Information Systems, Ghent University – imec
+-->
 </header>
 <!-- Hack to make our custom fonts load in print-mode -->
 <!-- https://stackoverflow.com/questions/39364259/chrome-print-preview-doesnt-load-media-only-print-font-face -->
@@ -67,6 +65,9 @@ when evaluating time-related queries over sensor data.
 Given the promising result of initial approach, we improve upon this work in the future
 by supporting more complex filter expressions
 and evaluating with more datasets and comparing our results with other SPARQL interfaces.</p>
+      <p>
+    <b><i>Poster paper</i></b>
+</p>
 
     </div>
 </section>
@@ -80,8 +81,8 @@ and evaluating with more datasets and comparing our results with other SPARQL in
         <p><a href="https://lod-cloud.net/#diagram">In the current years, the web of linked data has grown in size</a>.
 To access those data it is necessary to have an interface, the most common is the SPARQL endpoint.
 When querying SPARQL endpoints, the interface takes the whole query load and delivers the results to the client,
-which causes high workloads and is partially the reason that <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-642-41338-4_18"><a href="https://doi.org/10.1007/978-3-642-41338-4_18">historically they had a low
-availability</a></span> <span class="references">[<a href="#ref-1">1</a>]</span>.
+which causes high workloads and is partially the reason that <a property="schema:citation http://purl.org/spar/cito/cites" href="https://doi.org/10.1007/978-3-642-41338-4_18">historically they had a low
+availability</a> <span class="references">[<a href="#ref-1">1</a>]</span>.
 Academics have made efforts to introduce linked data publication methods to make the client participate in the query execution,
 with the aim to diminish the workloads of the server and still have fast query execution to the client <span class="references">[<a href="#ref-2">2</a>]</span>.
 The TREE specification is an effort in that direction <span class="references">[<a href="#ref-3">3</a>, <a href="#ref-4">4</a>]</span>,
@@ -97,7 +98,7 @@ which makes Link Traversal Query Processing (LTQP) <span class="references">[<a 
         <p>LTQP typically starts with a set of seed URLs that are dereferenced.
 From these dereferenced documents, links to other documents are dereferenced recursively.
 So far, applications on top of TREE datasets <span class="references">[<a href="#ref-3">3</a>, <a href="#ref-4">4</a>]</span>
-have resorted to custom traversal implementations to find data matching custom data needs.
+have resorted to custom traversal implementations to find data matching specific data needs.
 Our aim in this work is to explore how to execute generic SPARQL queries over TREE datasets through LTQP.
 We do not aim to extend the existing TREE specification,
 but merely to introduce LTQP-specific link pruning techniques that exploit the structural properties of TREE,
@@ -108,8 +109,7 @@ Specifically, we will make use of the SPARQL FILTER expression to prune links th
 For example, the query in <a href="#example-sparql">Listing 1</a> targets the DAHCC <span class="references">[<a href="#ref-8">8</a>]</span> dataset.
 We have created queries to get the measures between a specific interval (the filter expression will vary in our experiment) 
 and information about the sensor using a metadata file, which is available at
-<a href="https://github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl">https:/​/​github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl</a> 
-<del class="comment" data-author="RT">(we adapt the file by deleting the named graph and we use the metavariable<code>{:property}</code> to accommodate the dataset).</del></p>
+<a href="https://github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl">https:/​/​github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl</a></p>
 
         <div class="sidebysidecontainer" style="align-items: stretch !important; ">
 <figure id="example-sparql" class="listing" style="padding-right: 5px; padding-left: 5px; height='100%'">
@@ -181,98 +181,123 @@ After having those two boolean expressions close together they are evaluated to 
 the IRI targeting the next fragment is added to the link queue following the concept of reachability criterium.</p>
 
         <p>We have implemented our approach into the LTQP version of <a property="schema:citation http://purl.org/spar/cito/cites" href="https://comunica.github.io/Article-ISWC2018-Resource/">Comunica</a> <span class="references">[<a href="#ref-11">11</a>]</span> at
-<a href="">https:/​/​github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation</a> with an associated demo available at
-<a href="">https:/​/​github.com/constraintAutomaton/TREE-Solver-LTQP-demo-engine</a>.</p>
+<a href="">https:/​/​anonymous.4open.science/pr/3785</a> with an associated demo available at
+<a href="">https:/​/​anonymous.4open.science/r/TREE-Solver-LTQP-demo-engine-21FF/</a>.</p>
 
         <h2 id="experimental-results">Experimental results</h2>
 
         <p>To evaluate our approach, we executed four queries similar to the one in <a href="#example-sparql">Listing 1</a>.
-All queries are available at <a href="https://github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/content/code">https:/​/​github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/content/code</a>.
+All queries are available at <a href="https://anonymous.4open.science/r/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries-8BE8/content/code/">https:/​/​anonymous.4open.science/r/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries-8BE8/content/code/</a>.
 These queries were executed with two configurations that will be described below.
 They were executed over the DAHCC participant 31 dataset (of 487 MB) with a timeout of two minutes.
-We fragmented the dataset following the TREE specification with a one-ary tree topology with 100 and 1000 nodes.
-<span class="comment" data-author="RT">Mention what timeout you set</span></p>
+We fragmented the (same) dataset following the TREE specification with a one-ary tree topology with 100 and 1000 nodes.</p>
 
         <figure id="results-queries" class="table table-smaller-font">
 
           <table>
             <thead>
               <tr>
-                <th>Configuration</th>
+                <th>Fragments</th>
                 <th>Query</th>
                 <th>Time (ms)</th>
                 <th>Req</th>
                 <th>Res</th>
+                <th>Time-pushdown (ms)</th>
+                <th>Req-pushdown</th>
+                <th>Res-pushdown</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>One-ary 100/1000 fragments</td>
-                <td>Q1/Q2/Q3/Q4</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-              </tr>
-              <tr>
-                <td>One-ary 100/1000 fragments Filter pushdown</td>
-                <td>Q4</td>
-                <td>X</td>
-                <td>X</td>
-                <td>X</td>
-              </tr>
-              <tr>
-                <td>One-ary 100 fragments Filter pushdown</td>
+                <td>100</td>
                 <td>Q1</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
                 <td>8,892</td>
                 <td>3</td>
                 <td>0</td>
               </tr>
               <tr>
-                <td>One-ary 100 fragments Filter pushdown</td>
+                <td>100</td>
                 <td>Q2</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
                 <td>3,541</td>
                 <td>3</td>
                 <td>1</td>
               </tr>
               <tr>
-                <td>One-ary 100 fragments Filter pushdown</td>
+                <td>100</td>
                 <td>Q3</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
                 <td>59,274</td>
                 <td>8</td>
                 <td>8,166</td>
               </tr>
               <tr>
-                <td>One-ary 1000 fragments Filter pushdown</td>
+                <td>100</td>
+                <td>Q4</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+              </tr>
+              <tr>
+                <td>1000</td>
                 <td>Q1</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
                 <td>1,171</td>
                 <td>3</td>
                 <td>0</td>
               </tr>
               <tr>
-                <td>One-ary 1000 fragments Filter pushdown</td>
+                <td>1000</td>
                 <td>Q2</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
                 <td>734</td>
                 <td>3</td>
                 <td>1</td>
               </tr>
               <tr>
-                <td>One-ary 1000 fragments Filter pushdown</td>
+                <td>1000</td>
                 <td>Q3</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
                 <td>39,987</td>
                 <td>51</td>
                 <td>8,166</td>
+              </tr>
+              <tr>
+                <td>1000</td>
+                <td>Q4</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
               </tr>
             </tbody>
           </table>
 
           <figcaption>
-            <p><span class="label">Table 1:</span> Result of the query with our different configurations. <em>Time</em> is the query execution time,
-<em>Req</em> The number of HTTP request and <em>Res</em> the number of result.
-<span class="comment" data-author="RT">Say what X means</span></p>
+            <p><span class="label">Table 1:</span> Result of the query with our different configurations.
+X means that the query did not finish before the timeout, <em>Fragment</em> is the number of fragments,
+<em>Time</em> is the query execution time, <em>Req</em> The number of HTTP request and <em>Res</em> the number of result. 
+The pushdown suffix indicates that the use of the pushdown filter configuration.</p>
           </figcaption>
         </figure>
-
-        <p><span class="comment" data-author="RT">The first row in this table is a bit confusing. Could we instead have filter-pushdown (yes/no) as separate column, and just show X for every row without filter pushdown?</span></p>
 
         <p>In the first configuration we use a reachability criterium where the engine follow each link of the fragmented dataset.
 For the second one we use our pushdown filter approach.
@@ -309,13 +334,13 @@ and evaluate the approach more extensively over more diverse datasets and querie
 <h2 id="references">References</h2>
 <dl class="references">
   <dt id="ref-1">[1]</dt>
-  <dd resource="https://dx.doi.org/10.1007/978-3-642-41338-4_18" typeof="schema:Article">Buil-Aranda, C., Hogan, A., Umbrich, J., Vandenbussche, P.-Y.: SPARQL Web-Querying Infrastructure: Ready for Action? In: Proceedings of the 12th International Semantic Web Conference - Part II. pp. 277–293. Springer-Verlag, Berlin, Heidelberg (2013). doi:10.1007/978-3-642-41338-4_18</dd>
+  <dd resource="https://doi.org/10.1007/978-3-642-41338-4_18" typeof="schema:Article">Buil-Aranda, C., Hogan, A., Umbrich, J., Vandenbussche, P.-Y.: SPARQL Web-Querying Infrastructure: Ready for Action? In: Proceedings 12th ISWC (2013).</dd>
   <dt id="ref-2">[2]</dt>
-  <dd resource="https://dx.doi.org/10.1145/3442381.3449911" typeof="schema:Article">Azzam, A., Aebeloe, C., Montoya, G., Keles, I., Polleres, A., Hose, K.: WiseKG: Balanced Access to Web Knowledge Graphs. In: Proceedings of the Web Conference 2021. pp. 1422–1434. Association for Computing Machinery, New York, NY, USA (2021). doi:10.1145/3442381.3449911</dd>
+  <dd resource="#Azzam2021" typeof="schema:Article">Azzam, A., Aebeloe, C., Montoya, G., Keles, I., Polleres, A., Hose, K.: WiseKG: Balanced Access to Web Knowledge Graphs. In: Proceedings of the Web Conference 2021 (2021).</dd>
   <dt id="ref-3">[3]</dt>
   <dd resource="#ColpaertMaterializedTREE" typeof="schema:Article">Colpaert, P.: Building materializable querying interfaces with the TREE hypermedia specification.</dd>
   <dt id="ref-4">[4]</dt>
-  <dd resource="#lancker2021LDS" typeof="schema:Article">Publishing base registries as Linked Data Event Streams. Proceedings of the 21th International Conference on Web Engineering.</dd>
+  <dd resource="#lancker2021LDS" typeof="schema:Article">Publishing base registries as Linked Data Event Streams. Proceedings 21th ICWE. (2021).</dd>
   <dt id="ref-5">[5]</dt>
   <dd resource="#thomasFieldingPhdThesis" typeof="schema:Thesis">Fielding, R.T.: Architectural Styles and the Design of Network-based Software Architectures</dd>
   <dt id="ref-6">[6]</dt>
@@ -323,13 +348,13 @@ and evaluate the approach more extensively over more diverse datasets and querie
   <dt id="ref-7">[7]</dt>
   <dd resource="https://comunica.github.io/Article-ISWC2023-SolidQuery/" typeof="schema:Article">Taelman, R., Verborgh, R.: Link Traversal Query Processing over Decentralized Environments with Structural Assumptions. In: Proceedings of the 22nd International Semantic Web Conference (2023).</dd>
   <dt id="ref-8">[8]</dt>
-  <dd resource="#dahcc_resource" typeof="schema:Article">Bram Steenwinckel, Mathias De Brouwer, Marija Stojchevska, Jeroen Van Der Donckt, Jelle Nelis, Joeri Ruyssinck, Joachim van der Herten, Koen Casier, Jan Van Ooteghem, Pieter Crombez, Filip De Turck, Sofie Van Hoecke and Femke Ongenae: Data Analytics For Health and Connected Care: Ontology, Knowledge Graph and Applications. In: Published in the proceedings of the sixteenth EAI Pervasive Healthcare conference (2022).</dd>
+  <dd resource="#dahcc_resource" typeof="schema:Article">Bram, S., De Brouwer, M., Stojchevska, M. , Van Der Donckt, J. , Nelis, J. , Ruyssinck, J., van der Herten, J. , Casier, K. , Van Ooteghem, J. , Crombez, P. , De Turck, F. , Van Hoecke, S.  and Ongenae, F.: Data Analytics For Health and Connected Care: Ontology, Knowledge Graph and Applications. In: Published in the proceedings of the sixteenth EAI Pervasive Healthcare conference (2022).</dd>
   <dt id="ref-9">[9]</dt>
   <dd resource="#hartig2012" typeof="schema:Article">Hartig, O., Freytag, J.-C.: Foundations of Traversal Based Query Execution over Linked Data. In: Conference on Hypertext and Social Media. ACM</dd>
   <dt id="ref-10">[10]</dt>
   <dd resource="#verborgh2020" typeof="schema:CreativeWork">Verborgh, R., Taelman, R.: Guided Link-Traversal-Based Query Processing</dd>
   <dt id="ref-11">[11]</dt>
-  <dd resource="https://comunica.github.io/Article-ISWC2018-Resource/" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Proceedings of the 17th International Semantic Web Conference (2018).</dd>
+  <dd resource="https://comunica.github.io/Article-ISWC2018-Resource/" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Proceedings 17th ISWC (2018).</dd>
 </dl>
 </section>
 </footer>
