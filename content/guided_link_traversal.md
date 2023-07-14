@@ -48,3 +48,16 @@ the one with 100 fragments, particularly when the query has one or zero results.
 order of magnitude lower with the largest number of fragments. 
 With Q3 we can see that the percentage of reduction is 32%, this lowering of performance might be caused by the increase by a factor of 17
 of HTTP requests. The query Q4 was not able to be answered, with both fragmentations, the cause might be because it covers a far larger range and hence requires more data to be downloaded and more processing time.
+
+| Configuration                              | Query       | QT (ms) | NH | NR    |
+|--------------------------------------------|-------------|---------|----|-------|
+| Data dump                                  | Q1/Q2/Q3/Q4 | X       | X  | X     |
+| One ary 100/1000 fragments                 | Q1/Q2/Q3/Q4 | X       | X  | X     |
+| One ary 100/1000 fragments Filter pushdown | Q4          | X       | X  | X     |
+| One ary 100 fragments Filter pushdown      | Q1          | 8,892   | 3  | 0     |
+| One ary 100 fragments Filter pushdown      | Q2          | 3,541   | 3  | 1     |
+| One ary 100 fragments Filter pushdown      | Q3          | 59,274  | 8  | 8,166 |
+| One ary 1000 fragments Filter pushdown     | Q1          | 1,171   | 3  | 0     |
+| One ary 1000 fragments Filter pushdown     | Q2          | 734     | 3  | 1     |
+| One ary 1000 fragments Filter pushdown     | Q3          | 39,987  | 51 | 8,166 |
+
