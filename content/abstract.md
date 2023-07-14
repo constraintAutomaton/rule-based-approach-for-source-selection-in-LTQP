@@ -1,6 +1,6 @@
 ## Abstract
 <!-- Context      -->
-Linked data can be used to model all sorts of objects, which can be queried to power applications.
+Linked data can be used to model all sorts of objects.
 In some use cases like sensor data publication, the size of the data dump can become quite large.
 The most popular way to query RDF data is a server-side SPARQL endpoint.
 This query strategy at the current time has caused a large problem of unavailability of data.

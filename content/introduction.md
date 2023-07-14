@@ -7,7 +7,7 @@ When querying SPARQL endpoints, the interface takes the whole query load and del
 which causes high workloads and is partially the reason that [historically they had a low
 availability](cite:cites aranda2013).
 Academics have made efforts to introduce linked data publication methods to make the client participate in the query execution,
-with the aim to diminish the workloads of the server and still have fast query execution to the client [](cite:cites Verborgh2016TriplePF, Azzam2021).
+with the aim to diminish the workloads of the server and still have fast query execution to the client [](cite:cites Azzam2021).
 The TREE specification is an effort in that direction [](cite:cites ColpaertMaterializedTREE, lancker2021LDS),
 that introduces the concept of domain-related fragmentation of large RDF datasets.
 For example, in the case of periodic measurement of sensor data the fragmentation can be made on the publication date.
