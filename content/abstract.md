@@ -1,25 +1,29 @@
 ## Abstract
 <!-- Context      -->
-Linked data can be used to model all sorts of objects.
-In some use cases like sensor data publication, the size of the data dump can become quite large.
-The most popular way to query RDF data is the use of server-side SPARQL endpoint.
-This query strategy at the current time has caused a large problem of unavailability of data due to the large computational load send to the server.
+RDF and Linked Data can be used to model and publish various kinds of data through a variety of different interfaces,
+of which the SPARQL endpoint is the most popular.
+However, its high complexity can often lead to availability issues,
+which led to the introduction of alternative interfaces
+that offer a tradeoff between the client and the server by fragmenting the dataset in a particular way.
+In recent years, TREE was introduced that enables publication through domain-related fragmentation strategies,
+where the client has to follow hypermedia links to find and access data.
+However, all solutions making use of TREE so far have resorted to use-case-specific manual traversal of fragments.
 <!-- Need         -->
-Alternative strategies are to create a tradeoff between the client and 
-the server by fragmenting and annotating with hypermedia descriptions the dataset.
-In recent years domain-related fragmentation strategies (by date, by value and so on) 
-have been created where the client has to use Link Traversal Query Processing to access the data.
-At the current time, there are no generic SPARQL ways to query the data. 
+To hide away the complexities for users that want to find data in TREE-fragmented datasets,
+there is a need for an approach to execute generic SPARQL over such datasets.
 <!-- Task         -->
-We propose to use a filter pushdown strategy with the SPARQL query language to prune the links that are not relevant to the query result.
+As such, we propose building upon the Link Traversal Query Processing paradigm to follow links between TREE fragments.
+Furthermore, we optimize it by applying a filter pushdown strategy
+whereby only those links to fragments containing data that match a SPARQL FILTER expression will be followed.
 <!-- Object       -->
 This paper presents our strategy and early experimental results.
 <!-- Findings     -->
-We found that by using this strategy the query engine is able to drastically 
-reduce the query execution time and the number of HTTP requests
-needed to answer time-related queries over sensor data.
+Our preliminary findings show that by using this strategy,
+we are able to drastically reduce the number of HTTP requests and the query execution time
+when evaluating time-related queries over sensor data.
 <!-- Conclusion   -->
-Given the positive result of early effort, we will in the future extend our investigation with more complex filter expressions
-datasets and compare our results with other SPARQL interfaces.
+Given the promising result of initial approach, we improve upon this work in the future
+by supporting more complex filter expressions
+and evaluating with more datasets and comparing our results with other SPARQL interfaces.
 
 
