@@ -1,17 +1,19 @@
 ## Introduction
 {:#introduction}
 
-[In the current years, the web of linked data has grown in size](https://lod-cloud.net/#diagram).
-To access those data it is necessary to have an interface, the most common is the SPARQL endpoint.
-When querying SPARQL endpoints, the interface takes the whole query load and delivers the results to the client,
-which causes high workloads and is partially the reason that [historically they had a low
-availability](cite:cites aranda2013).
-Academics have made efforts to introduce linked data publication methods to make the client participate in the query execution,
-with the aim to diminish the workloads of the server and still have fast query execution to the client [](cite:cites Azzam2021).
-The TREE specification is an effort in that direction [](cite:cites ColpaertMaterializedTREE, lancker2021LDS),
+[The increasing amount of available Linked Data on the Web](https://lod-cloud.net/#diagram),
+prompts the need for efficient query interfaces, with SPARQL endpoints as the most prominent one.
+During a typical SPARQL query execution, the interface takes the whole query load and delivers the results to the client.
+This may cause high workloads and is partially the reason for having [historically low
+availability levels](cite:cites aranda2013).
+Academics have made efforts to introduce alternative Linked Data publication methods
+that enable clients participating in the query execution process.
+The goal is to lower server-side workloads and while keeping fast query execution to the client [](cite:cites Azzam2021).
+The TREE hypermedia specification is an effort in that direction [](cite:cites ColpaertMaterializedTREE, lancker2021LDS),
 that introduces the concept of domain-related fragmentation of large RDF datasets.
-For example, in the case of periodic measurements of sensor data, the fragmentation can be made on the publication date.
-TREE aims to fragment datasets in a way that enables clients to easily fetch a subset of it to answer their query fully.
+For example, in the case of periodic measurements of sensor data,
+the fragmentation can be made based on the publication date of each data entity.
+TREE aims to fragment datasets in a way that enables clients to easily fetch subsets that fully answer a given query.
 The data inside a fragment are bounded with constraints that are expressed using hypermedia descriptions [](cite:cites thomasFieldingPhdThesis).
 More precisely, each fragment declaratively describes the constraints of the data it contains, and links to other fragments.
 Since TREE fragments are hyperlinked Linked Data documents,
@@ -30,7 +32,7 @@ Specifically, we will make use of the SPARQL FILTER expression to prune links th
 
 As a running example throughout this paper, we consider the publication of sensor data.
 For example, the query in [](#example-sparql) targets the [DAHCC](cite:cites dahcc_resource) dataset.
-We have created queries to get the measures between a specific interval (the filter expression will vary in our experiment) 
+We have created queries to get the measures between a specific time interval (the filter expression will vary in our experiment) 
 and information about the sensor using a metadata file, which is available at
 [https://github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl](https://github.com/predict-idlab/DAHCC-Sources/blob/main/instantiated_examples/_Homelab.owl) 
 
