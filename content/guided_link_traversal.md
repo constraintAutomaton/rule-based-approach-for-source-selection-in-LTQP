@@ -15,8 +15,8 @@ Our approach builds upon this concept of guided link traversal,
 and similar to the [Solid approach](cite:cites taelman2023), exploits the structural properties of TREE datasets to prune links.
 Concretely, we interpret the hypermedia descriptions of constraints in TREE fragments as boolean equations
 as shown in [](#TREE-relation-turtle-example).
-Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression
-representing the constraint of the next fragment and effectively pushes down the SPARQL filter expression into the engine's dereferencing component.
+Upon discovery of a document, the query engine gathers the relevant triples to form a boolean expression
+representing the constraint of the next fragment and effectively pushes down the boolean SPARQL filter expression into the engine's dereferencing component.
 After having those two boolean expressions close together they are evaluated to determine if the are satisfied,
 in which case,
 the IRI targeting the next fragment is added to the link queue following the concept of reachability criterium.
