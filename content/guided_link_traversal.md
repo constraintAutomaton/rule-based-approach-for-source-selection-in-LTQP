@@ -6,21 +6,22 @@ Given the pseudo-infinite number of documents on the Web, traversing over all do
 To get a grasp on this completeness issue, different [reachability criteria](cite:cites hartig2012) were introduced
 that allow certain links not to be followed based on the query that is executed.
 Recently, an [alternative direction was introduced](cite:cites verborgh2020)
-were instead of just looking at the query to determine which links to follow,
+where instead of just looking at the query to determine which links to follow,
 the data publisher could _guide_ the engine towards query-relevant links.
 This strategy was [applied on the Solid ecosystem](cite:cites taelman2023),
-where the structural properties of Solid were exploited to prune links when traversing over Solid vaults.
+exploiting structural properties of Solid to prune links when traversing over Solid vaults.
 
 Our approach builds upon this concept of guided link traversal,
-and similar to the [Solid approach](cite:cites taelman2023) exploits the structural properties of TREE datasets to prune links.
+and similar to the [Solid approach](cite:cites taelman2023), exploits the structural properties of TREE datasets to prune links.
 Concretely, we interpret the hypermedia descriptions of constraints in TREE fragments as boolean equations
 as shown in [](#TREE-relation-turtle-example).
-Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression 
-representing the constraint of the next fragment and effectively pushed down the SPARQL filter expression into the engine's dereferencing component.
-After having those two boolean expressions close together they are evaluated to find the satisfiability and upon satisfaction
+Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression
+representing the constraint of the next fragment and effectively pushes down the SPARQL filter expression into the engine's dereferencing component.
+After having those two boolean expressions close together they are evaluated to determine if the are satisfied,
+in which case,
 the IRI targeting the next fragment is added to the link queue following the concept of reachability criterium.
 
-We have implemented our approach into the LTQP version of [Comunica](cite:cites comunica) at
+We have implemented our approach in a fork of the LTQP version of [Comunica](cite:cites comunica) at
 [https://anonymous.4open.science/pr/3785]() with an associated demo available at
 [https://anonymous.4open.science/r/TREE-Solver-LTQP-demo-engine-21FF/]().
 
@@ -53,13 +54,11 @@ The pushdown suffix indicates that the use of the pushdown filter configuration.
 </figcaption>
 </figure>
 
-
-In the first configuration we use a reachability criterium where the engine follow each link of the fragmented dataset.
+In the first configuration we use a reachability criterium where the engine follows each link of the fragmented dataset.
 For the second one we use our pushdown filter approach.
-As shown in [](#results-queries) no query could be answered below the timeout value by following every fragment. 
+As shown in [](#results-queries) no query could be answered below the timeout value by following every fragment.
 The reason is the very large size of the dataset to be traversed before executing the joining and solution mapping.
 For the configurations with our filter pushdown method, we see that the queries with 1000 fragments perform better than
-the one with 100 fragments, particularly when the query has one or zero results. In those cases, the query execution time is almost one
-order of magnitude lower with the largest number of fragments. 
-With Q3 we can see that the percentage of reduction is 32%, this lowering of performance might be caused by the increase by a factor of 17
-of HTTP requests. The query Q4 was not able to be answered, with both fragmentations, because it covers a far larger range and hence requires more data to be downloaded and more processing time.
+the one with 100 fragments, particularly when the query has one or zero results. In those cases, the query execution time is almost one order of magnitude lower with the largest number of fragments.
+With Q3 we can see that the percentage of reduction is 32%, this lowering of performance might be caused by the observed increase by a factor of 17 of HTTP requests. 
+The query Q4 was not able to be answered, with both fragmentations, because it covers a far larger range and hence requires more data to be downloaded and more processing time.

@@ -6,11 +6,11 @@ PREFIX dahcc: <https://dahcc.idlab.ugent.be/Ontology/Sensors/>
 PREFIX saref: <https://saref.etsi.org/core/>
 
 SELECT * WHERE {
-  ?s etsi:hasTimestamp ?t.
-  ?s etsi:hasValue ?result.
-  ?s etsi:measurementMadeBy ?sensor.
-  ?sensor dahcc:analyseStateOf ?stateOf.
-  ?sensor saref:measuresProperty {:property}
+  ?s etsi:hasTimestamp ?t;
+    etsi:hasValue ?result;
+    etsi:measurementMadeBy ?sensor.
+  ?sensor dahcc:analyseStateOf ?stateOf;
+    saref:measuresProperty {:property}.
   
   FILTER(?t="2022-01-03T10:57:54.000000"^^xsd:dateTime)
 }

@@ -1,30 +1,32 @@
 ## Abstract
 <!-- Context      -->
-RDF and Linked Data can be used to model and publish various kinds of data through a variety of different interfaces,
-of which the SPARQL endpoint is the most popular.
-However, its high complexity can often lead to availability issues,
-which led to the introduction of alternative interfaces
-that offer a tradeoff between the client and the server by fragmenting the dataset in a particular way.
-In recent years, TREE was introduced that enables publication through domain-related fragmentation strategies,
-where the client has to follow hypermedia links to find and access data.
-However, all solutions making use of TREE so far have resorted to use-case-specific manual traversal of fragments.
+Despite its well-known availability issues,
+SPARQL endpoints remain to be the most popular approach to publish Linked Data on the Web.
+In recent years, the TREE hypermedia specification was introduced as an alternative approach,
+aiming to strike a better balance on query processing responsibility
+by enabling clients to autonomously follow hypermedia links
+over domain-oriented data fragmentation strategies.
 <!-- Need         -->
-To hide away the complexities for users that want to find data in TREE-fragmented datasets,
-there is a need for an approach to execute generic SPARQL over such datasets.
+However, all existing TREE-based query solutions
+resort to use-case-specific and hard-coded traversal of fragments.
+A need arises to hide away the complexities for developers
+that want to query data in TREE-fragmented datasets through generic SPARQL.
 <!-- Task         -->
-As such, we propose building upon the Link Traversal Query Processing paradigm to follow links between TREE fragments.
-Furthermore, we optimize it by applying a filter pushdown strategy
+We propose building upon the Link Traversal Query Processing paradigm to follow links between TREE fragments.
+We optimize it by applying a filter pushdown strategy
 whereby only those links to fragments containing data that match a SPARQL FILTER expression will be followed.
 <!-- Object       -->
-This paper presents our strategy and early experimental results.
+This poster paper presents our strategy and early experimental results.
 <!-- Findings     -->
 Our preliminary findings show that by using this strategy,
 we are able to drastically reduce the number of HTTP requests and the query execution time
-when evaluating time-related queries over sensor data.
+when evaluating time filtered queries over sensor data.
 <!-- Conclusion   -->
-Given the promising result of initial approach, we improve upon this work in the future
-by supporting more complex filter expressions
-and evaluating with more datasets and comparing our results with other SPARQL interfaces.
+Given the promising result of initial approach,
+In the future, we aim to support more complex filter expressions,
+extend the evaluation to include additional datasets
+and comparer our results with other SPARQL interfaces.
+<!-- Not sure you need this below?   -->
 <p>
     <b><i>Poster paper</i></b>
 </p>
