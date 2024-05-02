@@ -1,32 +1,29 @@
 ## Abstract
 <!-- Context      -->
-Despite its well-known availability issues,
-SPARQL endpoints remain to be the most popular approach to publish Linked Data on the Web.
-In recent years, the TREE hypermedia specification was introduced as an alternative approach,
-aiming to strike a better balance on query processing responsibility
-by enabling clients to autonomously follow hypermedia links
-over domain-oriented data fragmentation strategies.
+Linked data published on the web can naturally be interpreted as one fragmented knowledge graph.
 <!-- Need         -->
-However, all existing TREE-based query solutions
-resort to use-case-specific and hard-coded traversal of fragments.
-A need arises to hide away the complexities for developers
-that want to query data in TREE-fragmented datasets through generic SPARQL.
+The query of subgraph has been well studied in the context of single endpoints
+and of multiple enpoints in federated queries.
+However, in some contexts, it is not possible to know prior to the query execution the location
+of those subgraphs.
+Those subgraphs can also be linked following logical expressions,
+for instance, data published after the first of September is located at this URI.
 <!-- Task         -->
-We propose building upon the Link Traversal Query Processing paradigm to follow links between TREE fragments.
-We optimize it by applying a filter pushdown strategy
-whereby only those links to fragments containing data that match a SPARQL FILTER expression will be followed.
+We propose to use the concept of structural assumption for publication
+and querying of those documents using a lightweight arithmetic solver to discriminate
+subgraphs based on the query sent by the user.
+This pruning mecanism aims at reducing the query execution time
+avoiding costly unnecessary HTTP requests.
 <!-- Object       -->
 This poster paper presents our strategy and early experimental results.
 <!-- Findings     -->
 Our preliminary findings show that by using this strategy,
-we are able to drastically reduce the number of HTTP requests and the query execution time
-when evaluating time filtered queries over sensor data.
+we are able to significantly reduce the number of HTTP requests and the query execution time
+when executing queries aligned with the fragmentation of the result.
 <!-- Conclusion   -->
-Given the promising result of initial approach,
-In the future, we aim to support more complex filter expressions,
-extend the evaluation to include additional datasets
-and compare our results with other SPARQL interfaces.
-<!-- Not sure you need this below?   -->
-<p>
-    <b><i>Poster paper</i></b>
-</p>
+Given the promising result of the initial approach,
+In the future, 
+we aim to extend our solver to support string and geospatial expressions,
+to support more general lightweight reasoning and to support the streaming of 
+results for queries with filter expression aligned with the data fragmentation and the order of traversal.
+
