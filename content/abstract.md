@@ -3,10 +3,10 @@
 Linked data published on the web can be interpreted as one fragmented knowledge graph.
 <!-- Need         -->
 The query of subgraph has been well studied in the context of single endpoints
-and of multiple federated enpoints.
-However, in some contexts, it is not possible to know prior to the query execution the location
+and of federated enpoints.
+In some contexts, it is not possible to know prior to the query execution the location
 of those subgraphs.
-Those subgraphs can be linked following logical expressions,
+However, subgraphs can be linked following logical expressions,
 for instance, data published after the first of September is located at this URI.
 <!-- Task         -->
 We propose to use the concept of structural assumption for publication
