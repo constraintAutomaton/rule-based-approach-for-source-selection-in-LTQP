@@ -1,28 +1,17 @@
 ## Abstract
-<!-- Context      -->
-Linked data published on the web can be interpreted as one fragmented knowledge graph.
-<!-- Need         -->
-The query of subgraph has been well studied in the context of single endpoints
-and of federated enpoints.
-In some contexts, it is not possible to know prior to the query execution the location
-of those subgraphs.
-However, subgraphs can be linked following logical expressions,
-for instance, data published after the first of September is located at this URI.
-<!-- Task         -->
-We propose to use the concept of structural assumption for publication
-and querying of those documents using a lightweight arithmetic solver to discriminate
-subgraphs based on the query sent by the user.
-This pruning mecanism aims at reducing the query execution time
-by avoiding costly unnecessary HTTP requests.
-<!-- Object       -->
-This poster paper presents our strategy and early experimental results.
-<!-- Findings     -->
+<!-- Context -->
+Link Traversal allows a query algorithm to find more answers to queries as it crawls the Web for more data.
+<!-- need -->
+While reachability criteria like cAll, cNone, and cMatch have been explored as a heuristic to restrict the followed links,
+explicit hypermedia controls can provide better guidance.
+<!-- task -->
+However, we still need to be able to logically match the SPARQL query with those hypermedia controls, for which we propose a rule-based reachability function.
+<!-- object -->
+In this demo, we show how the Comunica Web querying engine is modified to, during link traversal, take hints from the TREE hypermedia controls, to more efficiently query over subsets of a sensor dataset published using the TREE hypermedia specification.
+<!-- findings -->
 Our preliminary findings show that by using this strategy,
 we are able to significantly reduce the number of HTTP requests and the query execution time
-when executing queries aligned with the hypermedia description of the link between the subgraphs.
-<!-- Conclusion   -->
-Given the promising result of the initial approach, in future work, 
-we aim to extend our solver to support string and geospatial expressions,
-to support more general lightweight reasoning and to support the streaming of 
-results for queries with filter expression aligned with the data fragmentation and the order of traversal.
-
+when executing queries aligned with the hypermedia controls.
+<!-- conclusion -->
+Given the promising result of this initial approach,
+we are extending our solver beyond a time-based criterium, to support to other features such as substring matching, and geospatial features.
