@@ -1,17 +1,16 @@
-## Abstract
-<!-- Context -->
+% <!-- Context -->
 Link Traversal allows a query algorithm to find more answers to queries as it crawls the Web for more data.
-<!-- need -->
+% <!-- need -->
 While reachability criteria like cAll, cNone, and cMatch have been explored as a heuristic to restrict the followed links,
 explicit hypermedia controls can provide better guidance.
-<!-- task -->
+% <!-- task -->
 However, we still need to be able to logically match the SPARQL query with those hypermedia controls, for which we propose a rule-based reachability function.
 <!-- object -->
 In this demo, we show how the Comunica Web querying engine is modified to, during link traversal, take hints from the TREE hypermedia controls, to more efficiently query over subsets of a sensor dataset published using the TREE hypermedia specification.
-<!-- findings -->
+% <!-- findings -->
 Our preliminary findings show that by using this strategy,
 we are able to significantly reduce the number of HTTP requests and the query execution time
 when executing queries aligned with the hypermedia controls.
-<!-- conclusion -->
+% <!-- conclusion -->
 Given the promising result of this initial approach,
 we are extending our solver beyond a time-based criterium, to support to other features such as substring matching, and geospatial features.
