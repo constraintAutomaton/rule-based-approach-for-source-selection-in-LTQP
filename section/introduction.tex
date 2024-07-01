@@ -1,38 +1,39 @@
 \section{Introduction}
 
-\href{https://lod-cloud.net/#diagram}{The increasing amount of available Linked Data on the Web},
-prompts the need for efficient query interfaces, with SPARQL endpoints as the most prominent one.
+\sepfootnotecontent{sf:treeSpec}{
+    \href{https://treecg.github.io/specification/}{https://treecg.github.io/specification/}
+}
+
+
+\href{https://lod-cloud.net/#diagram}{The increasing amount of available Linked Data on the Web} prompts the need for efficient query interfaces.
+SPARQL endpoints is the most prominent one.
 During a typical SPARQL query execution, the interface takes the whole query load and delivers the results to the client.
-This may cause high workloads and is partially the reason for the historically low
-availability levels~\cite{aranda2013}.
-Academics have made efforts to introduce alternative Linked Data publication methods
-that enable clients participating in the query execution process.
+This may cause high workloads which are partially the reason for the historically low availability of SPARQL endpoints~\cite{aranda2013}.
+Researchers and practitioners have made efforts to introduce alternative Linked Data publication methods that enable client's participation in the query execution process.
 The goal is to lower server-side workloads while keeping fast query execution to the client~\cite{Azzam2021}.
-The TREE hypermedia specification is an effort in that direction~\cite{ColpaertMaterializedTREE, lancker2021LDS},
-that introduces the concept of domain-related fragmentation of large RDF datasets.
-For example, in the case of periodic measurements of sensor data,
-the fragmentation can be made based on the publication date of each data entity.
-TREE aims to fragment datasets in a way that enables clients to easily fetch subsets that fully answer a given query.
+The TREE hypermedia specification is an effort in that direction~\cite{ColpaertMaterializedTREE, lancker2021LDS}, that introduces the concept of domain-related fragmentation of large RDF datasets.
+For example, in the case of periodic measurements of sensor data, the fragmentation can be made based on the publication date of each data entity.
+TREE aims to fragment datasets in a way that enables clients to easily fetch query-relevant subsets.
 The data inside a fragment are bounded with constraints that are expressed using hypermedia descriptions~\cite{thomasFieldingPhdThesis}.
-More precisely, each fragment declaratively describes the constraints of the data it contains, and links to other fragments.
+More precisely, each fragment declaratively describes the constraints of the data of the next fragment.
 Since TREE fragments are hyperlinked Linked Data documents,
 clients must traverse over these documents to find data,
 which makes Link Traversal Query Processing (LTQP)~\cite{Hartig2016} a suitable technique for answering SPARQL queries over it.
 
-LTQP typically starts with a set of seed URLs that are dereferenced.
+LTQP starts by the dereferencing of a set of URLs called seed URLs~\cite{Hartig2016}.
 From these dereferenced documents, links to other documents are dereferenced recursively.
-So far, applications on top of TREE datasets~\cite{ColpaertMaterializedTREE, lancker2021LDS}
-have resorted to custom traversal implementations to find data matching specific data needs.
-Our aim in this work is to explore how to execute generic SPARQL queries over TREE datasets through LTQP.
-We do not aim to extend the existing TREE specification,
-but merely to introduce LTQP-specific link pruning techniques that exploit the structural properties of TREE,
-similar to the exploitation of structural properties when performing LTQP over the Solid environment\cite{taelman2023}.
-Specifically, we will make use of the SPARQL FILTER expression to prune links that match the constraints of TREE fragments.
+LDQL~\cite{hartig2016Ldql} is a theoretical query language with formalism close to SPARQL to define the traversal of LTQP queries.
+However, LDQL is centered around nested regular expressions, thus, it is difficult to define the traversal of links based on domain-specific logical expressions.
+The subweb specifications~\cite{bogaerts_rulemlrr_2021}, propose to let the data provider define the traversal within their area of publication.
+Thus given that the query engine trusts the data publisher it can adapt its traversal to reduce its execution time by reducing the number of HTTP requests.
+Akin to to LDQL, the subweb specifications are not able to express domain-specific logical expressions.
 
+In this paper, we propose to use an arithmetic boolean solver as the backend of a reachability criterion to traverse TREE documents.
+The definitions of the operators are taken from the specification \href{https://treecg.github.io/specification/}{TREE specification} \sepfootnote{sf:treeSpec}.
 As a running example throughout this paper, we consider the publication of sensor data.
-For example, the query the listing \ref{lst:system} targets the DAHCC~\cite{dahcc_resource} dataset.
-We have created queries to get the measures between a specific time interval (the filter expression will vary in our experiment) 
-and information about the sensor using a metadata file, which is available at listing \ref{lst:system}.
+An example query is presented in Figure~\ref{lst:system} with an associated portion of a fragment of the dataset displaying the logical expression linking it with another fragment.
+The dataset was produced from the DAHCC~\cite{dahcc_resource} dataset and adapted to follow the TREE specification.
+We have created queries to get the measures between a specific time interval (the filter expression varies in our experiment).
 
 \begin{figure}[h]
     \begin{minipage}{0.50\textwidth}
@@ -40,7 +41,7 @@ and information about the sensor using a metadata file, which is available at li
         \lstinputlisting[language=,frame=single]{code/example_sparql_query.ttl}
     \end{minipage}
     \hspace{0.05\textwidth}
-    \begin{minipage}{0.40\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \lstinputlisting[language=,frame=single]{code/example_tree_relation.ttl}
     \end{minipage}
