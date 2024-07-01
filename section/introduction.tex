@@ -6,13 +6,13 @@
 
 
 \href{https://lod-cloud.net/#diagram}{The increasing amount of available Linked Data on the Web} prompts the need for efficient query interfaces.
-SPARQL endpoints is the most prominent one.
+SPARQL endpoints are the most prominent ones.
 During a typical SPARQL query execution, the interface takes the whole query load and delivers the results to the client.
 This may cause high workloads which are partially the reason for the historically low availability of SPARQL endpoints~\cite{aranda2013}.
 Researchers and practitioners have made efforts to introduce alternative Linked Data publication methods that enable client's participation in the query execution process.
 The goal is to lower server-side workloads while keeping fast query execution to the client~\cite{Azzam2021}.
 The TREE hypermedia specification is an effort in that direction~\cite{ColpaertMaterializedTREE, lancker2021LDS}, that introduces the concept of domain-related fragmentation of large RDF datasets.
-For example, in the case of periodic measurements of sensor data, the fragmentation can be made based on the publication date of each data entity.
+For example, in the case of periodic measurements of sensor data, a fragmentation can be made based on the publication date of each data entity.
 TREE aims to fragment datasets in a way that enables clients to easily fetch query-relevant subsets.
 The data inside a fragment are bounded with constraints that are expressed using hypermedia descriptions~\cite{thomasFieldingPhdThesis}.
 More precisely, each fragment declaratively describes the constraints of the data of the next fragment.
@@ -21,19 +21,18 @@ clients must traverse over these documents to find data,
 which makes Link Traversal Query Processing (LTQP)~\cite{Hartig2016} a suitable technique for answering SPARQL queries over it.
 
 LTQP starts by the dereferencing of a set of URLs called seed URLs~\cite{Hartig2016}.
-From these dereferenced documents, links to other documents are dereferenced recursively.
-LDQL~\cite{hartig2016Ldql} is a theoretical query language with formalism close to SPARQL to define the traversal of LTQP queries.
+From these dereferenced documents, links to other documents are dereferenced recursively and the data is inserted into an internal data store.
+LDQL~\cite{hartig2016Ldql} is a theoretical query language to define the traversal of LTQP queries.
 However, LDQL is centered around nested regular expressions, thus, it is difficult to define the traversal of links based on domain-specific logical expressions.
-The subweb specifications~\cite{bogaerts_rulemlrr_2021}, propose to let the data provider define the traversal within their area of publication.
-Thus given that the query engine trusts the data publisher it can adapt its traversal to reduce its execution time by reducing the number of HTTP requests.
-Akin to to LDQL, the subweb specifications are not able to express domain-specific logical expressions.
+The subweb specifications~\cite{bogaerts_rulemlrr_2021}, propose to let the data provider define the traversal for information related to them.
+Thus, given that the query engine trusts the data publisher it can adapt its traversal to reduce its execution time by reducing the number of HTTP requests to get the desired information.
+Akin to LDQL, the subweb specifications are not able to express domain-specific logical expressions.
 
 In this paper, we propose to use an arithmetic boolean solver as the backend of a reachability criterion to traverse TREE documents.
-The definitions of the operators are taken from the specification \href{https://treecg.github.io/specification/}{TREE specification} \sepfootnote{sf:treeSpec}.
+The definitions of the operators are taken from the \href{https://treecg.github.io/specification/}{TREE specification}~\sepfootnote{sf:treeSpec}.
 As a running example throughout this paper, we consider the publication of sensor data.
 An example query is presented in Figure~\ref{lst:system} with an associated portion of a fragment of the dataset displaying the logical expression linking it with another fragment.
 The dataset was produced from the DAHCC~\cite{dahcc_resource} dataset and adapted to follow the TREE specification.
-We have created queries to get the measures between a specific time interval (the filter expression varies in our experiment).
 
 \begin{figure}[h]
     \begin{minipage}{0.50\textwidth}

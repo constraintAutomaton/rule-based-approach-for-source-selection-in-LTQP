@@ -1,18 +1,20 @@
 \begin{abstract}
 % <!-- Context -->
-Link Traversal Query Processing enables query engines to crawl the Web while answering conjunctive queries.
-Completeness conditions and source selection are inherent problems of the method due to the size of the web.
-Reachability criteria provide completeness conditions based on the traversal of links in their internal data store.
+Link Traversal queries on the web face challenges in source selections and completeness definition due to the size of the web.
+Reachability criteria provide completeness conditions based on the traversal of links in the internal data store of query engine.
+However, the size of the search domain remains the bottleneck of the approach.
 % <!-- need -->
-Web environments can have structures exploitable by the query engine to select and prune links towards irrelevant data sources.
-Current reachability criteria are defined based on user-defined query, such as $c_{match}$ or predefined predicates.
-Thus, it is difficult to use them to traverse environments with structures declaring logical statements such as data produced after the first of September is stored there.
+Web environments can have structures exploitable by the query engine to perform more precise source selection.
+In current practices, reachability criteria are also used for source selection.
+The criteria relies on using elements of the query and predefined regular expressions.
+Thus, it is difficult to apply these criteria to traverse environments where logical expressions indicate the location of resources.
+For example, data produced after the first of September is stored at \texttt{ex:afterFirstSeptember}.
 % <!-- task -->
-We propose an implementation of reachability criteria as a domain-specific reasoner to capture logical expression in the data for source selection.
+We propose a rule-based reachability criteria for source selection by capturing logical expression expressed in hypermedia descriptions.
 %<!-- object -->
-In this demo, we show how the Comunica Web querying engine is modified to, during link traversal, take hints from the TREE hypermedia controls, to more efficiently query over subsets of a sensor dataset published using the TREE hypermedia specification.
+In this poster paper, we show how the Comunica Web querying engine is modified to, during link traversal, take hints from the TREE hypermedia controls, to more efficiently query over subsets of a sensor dataset published using the TREE hypermedia specification.
 % <!-- findings -->
 Our preliminary findings show that by using this strategy, the query engine can significantly reduce the number of HTTP requests and the query execution time when executing queries aligned with the hypermedia controls.
 % <!-- conclusion -->
-Given the promising result of this initial approach, we are extending our solver beyond a time-based criterium, to support general reasoning over linked data.
+Given the promising result of this initial approach, we are going to extend our solver beyond a time-based criterion, to support general reasoning over linked data.
 \end{abstract}
