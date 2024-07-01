@@ -1,18 +1,18 @@
 \begin{abstract}
 % <!-- Context -->
-Link Traversal allows a query algorithm to find more answers to queries as it crawls the Web for more data.
+Link Traversal Query Processing enables query engines to crawl the Web while answering conjunctive queries.
+Completeness conditions and source selection are inherent problems of the method due to the size of the web.
+Reachability criteria provide completeness conditions based on the traversal of links in their internal data store.
 % <!-- need -->
-While reachability criteria like cAll, cNone, and cMatch have been explored as a heuristic to restrict the followed links,
-explicit hypermedia controls can provide better guidance.
+Web environments can have structures exploitable by the query engine to select and prune links towards irrelevant data sources.
+Current reachability criteria are defined based on user-defined query, such as $c_{match}$ or predefined predicates.
+Thus, it is difficult to use them to traverse environments with structures declaring logical statements such as data produced after the first of September is stored there.
 % <!-- task -->
-However, we still need to be able to logically match the SPARQL query with those hypermedia controls, for which we propose a rule-based reachability function.
-<!-- object -->
+We propose an implementation of reachability criteria as a domain-specific reasoner to capture logical expression in the data for source selection.
+%<!-- object -->
 In this demo, we show how the Comunica Web querying engine is modified to, during link traversal, take hints from the TREE hypermedia controls, to more efficiently query over subsets of a sensor dataset published using the TREE hypermedia specification.
 % <!-- findings -->
-Our preliminary findings show that by using this strategy,
-we are able to significantly reduce the number of HTTP requests and the query execution time
-when executing queries aligned with the hypermedia controls.
+Our preliminary findings show that by using this strategy, the query engine can significantly reduce the number of HTTP requests and the query execution time when executing queries aligned with the hypermedia controls.
 % <!-- conclusion -->
-Given the promising result of this initial approach,
-we are extending our solver beyond a time-based criterium, to support to other features such as substring matching, and geospatial features.
+Given the promising result of this initial approach, we are extending our solver beyond a time-based criterium, to support general reasoning over linked data.
 \end{abstract}
