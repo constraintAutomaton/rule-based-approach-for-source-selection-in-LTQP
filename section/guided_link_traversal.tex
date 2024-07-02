@@ -1,41 +1,38 @@
-\section{Pruning links using filter expressions}
+\section{A rule-based reachability criterion}
 
-\sepfootnotecontent{sf:implementation}{
-\href{https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation}{https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation}.  
+\sepfootnotecontent{sf:opensSource}{
+The implementation, the queries and the benchmark are available at the following links:\newline
+\href{https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation}{https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation}\newline  
+\href{https://github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/code}{https://github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/code}\newline
+\href{https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main}{https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main}
 }
 
-\sepfootnotecontent{sf:queries}{
-\href{https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main/evaluation/query}{https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main/evaluation/query}
-}
-
-Most research around LTQP centered around query execution Linked Open Data.
+Most research around LTQP centered around query execution in Linked Open Data environments.
 Given the pseudo-infinite number of documents on the Web, traversing over all documents is practically infeasible.
-To define completeness, different reachability criteria~\cite{hartig2012} were introduced that allow to discriminate the links followed from the internal data store of the engine.
+To define completeness, different reachability criteria~\cite{hartig2012} were introduced to allow the discrimination of links.
 Recently, an alternative direction was introduced where the query engine uses the structure from the data publisher to guide itself towards relevant data sources~\cite{taelman2023, verborgh2020}.
 
 We define our approach as a rule-based reachability criterion.
 Our approach builds upon the concept of guided link traversal, and structural assumptions~\cite{taelman2023} to exploit the structural properties of TREE datasets to prune irrelevant links.
-Concretely, we interpret the hypermedia descriptions of constraints in TREE fragments as boolean equations as shown in Figure~\ref{lst:system}.
-Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression of the constraint of the next fragment.
-The operators of the expressions are inferred by mapping the triple from the document and the definition of the TREE specification.
-After the parsing of the expression, the filter expression of the SPARQL query is pushdown into the engine's dereferencing component.
+Concretely, we interpret the hypermedia descriptions of constraints in TREE fragments as boolean equations.
+Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression of the constraint on the data of the next fragment.
+After the parsing of the expression, the filter expression of the SPARQL query is pushdown into the engine's source selection component.
 Lastly, the two boolean expressions are evaluated to determine if they can be satisfied, upon satisfaction the IRI targeting the next fragment is added to the link queue otherwise the IRI is pruned.
 
-We have implemented our approach in a fork of the LTQP version of Comunica~\cite{comunica}~\sepfootnote{sf:implementation}.
 
 \subsection{Experimental results}
 
-To evaluate our approach, we executed four queries similar to the one in figure \ref{lst:system}.
-All queries are available online~\sepfootnote{sf:queries}.
+We implemented our approach using the LTQP version of the query engine Comunica~\cite{comunica}.
+To evaluate it, we executed four queries similar to the one in Figure \ref{lst:system}~\sepfootnote{sf:opensSource}.
 They were executed over the DAHCC participant 31 dataset (487 MB) with a timeout of two minutes.
-We fragmented the (same) dataset following the TREE specification with a one-ary tree topology with 100 and 1000 nodes.
+We fragmented the dataset following the TREE specification with a tree topology with 100 and 1000 nodes ($n$).
 
 
 \begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        \textbf{Fragments} & \textbf{Query} & \textbf{Time (ms)}  & \textbf{Time-rule (ms)} & \textbf{Req-rule} & \textbf{Res-rule} \\
+        \textbf{n} & \textbf{Query} & \textbf{Time-predicate (ms)}  & \textbf{Time-rule (ms)} & \textbf{Req-rule} & \textbf{Res-rule} \\
         \hline
         100 & Q1 & x & 8,892& 3 & 0 \\
         100 & Q2 & x & 3,541& 3 & 1 \\
@@ -47,23 +44,22 @@ We fragmented the (same) dataset following the TREE specification with a one-ary
         \hline
     \end{tabular}
     \caption{
-    The predicate-based reachability criterion is not able perform the queries. 
-    With the  rule-based criterion perform better with a larger number of fragments.
+    The predicate-based reachability criterion is not able execute the queries. 
+    The rule-based criterion perform better with a larger number of fragments.
     X means that the query did not finish before the timeout.
-    Q4 is not displayed because they were not able to terminate before the timeout.}
+    Q4 is not depicted because they were not able to terminate before the timeout.}
     \label{tab:result}
 \end{table}
 
-The queries were executed with two configurations.
+The queries were executed using two configurations.
 In the first configuration, we use a predicate-based reachability criterion where the engine follows each link of the fragmented dataset.
 For the second one, we use our rule-based reachability criterion approach.
-As shown in Table \ref{tab:result} no query could be answered below the timeout value by following every fragment.
-The reason is that the bottleneck of LTQP is the large number of HTTP requests~\cite{Hartig2016} and this approach dereferences a large number of non-contributing data sources.
-For the configurations with our rule-based reachability criterion, we see that the queries with 1000 fragments perform better than
-the ones with 100 fragments, particularly when the query has one or zero results.
-In those cases, the query execution time is almost one order of magnitude lower with the largest number of fragments.
-With Q3 we can see that the percentage of reduction is 32\%, this lowering of performance might be caused by the observed increase by a factor of 17 in HTTP requests.
-This raises an interesting observation because we do not observe a reduction of execution time proportional to the reduction of HTTP request.
-We did not affect the query plan, thus the conclusion of~\citeauthor{taelman2023} stating that the query plan can be the bottleneck of the approach might not be the only explanation.
-The size of the internal data source may have a bigger impact on the performance than noted in previous studies.
-The query Q4 was not able to be answered, with both fragmentations, because it covers a far larger range of publication date and hence requires more data to be downloaded and more processing time.
+As shown in Table \ref{tab:result} no queries could be answered within the timeout by following every fragment.
+A possible explanation is the high number of HTTP requests performed~\cite{Hartig2016} leading to non-relevant data sources to answer the queries.
+With our rule-based reachability criterion, we see that the queries performed over the 1000 nodes fragmentation perform better than the ones with 100 nodes, particularly when the query has one or zero results.
+In those cases, the query execution time is almost one order of magnitude lower compared to the one with 100 nodes.
+With Q3 we see that the percentage of reduction is 32\%, this lowering of performance might be caused by the increase by a factor of 17 in HTTP requests.
+This raises an interesting observation because we do not observe a reduction of execution time proportional to the reduction of HTTP requests.
+Previous research has proposed that inefficient query plan might be the bottleneck of some queries in structured environments~\cite{taelman2023,eschauzier_quweda_2023}.
+However, our results seems to show that the size of the internal data source might have a bigger impact on performance than noted in previous studies.
+The query Q4 was not able to be answered, with both fragmentations, because it covers a far larger range of publication date and, hence, requires more data to be downloaded and more processing time.
