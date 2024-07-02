@@ -5,16 +5,16 @@ Reachability criteria provide completeness conditions based on the traversal of 
 However, the size of the search domain remains the bottleneck of the approach.
 % <!-- need -->
 Web environments can have structures exploitable by query engines to perform more precise source selection.
-In current practices, reachability criteria are also used for source selection.
-The current criteria relies on using elements of the query and regular expressions.
+Reachability criteria can also be interpreted as a source selection mechanism.
+Current criteria rely on using information from the query definition and regular expressions to select sources.
 Thus, it is difficult to use them to traverse environments where logical expressions indicate the location of resources.
-For example, data produced after the first of September is stored at \texttt{ex:afterFirstSeptember}.
+For example, expression such as data produced after the first of September is stored at \texttt{ex:afterFirstSeptember}.
 % <!-- task -->
-We propose a rule-based reachability criterion for source selection by capturing logical expression expressed in hypermedia descriptions.
+We propose a rule-based reachability criterion for source selection by capturing logical expression expressed in hypermedia descriptions in linked data documents.
 %<!-- object -->
 In this poster paper, we show how the Comunica Web querying engine is modified to, during link traversal, take hints from the TREE hypermedia controls, to more efficiently query over subsets of a sensor dataset published using the TREE hypermedia specification.
 % <!-- findings -->
 Our preliminary findings show that by using this strategy, the query engine can significantly reduce the number of HTTP requests and the query execution time when executing queries aligned with the hypermedia controls.
 % <!-- conclusion -->
-Given the promising result of this initial approach, we are going to extend our solver beyond a time-based criterion, to support general reasoning over linked data.
+Given the promising result of this initial approach, we are going to extend our implementation beyond a time-based criterion, to support general reasoning over linked data in source selection process during traversal queries.
 \end{abstract}
