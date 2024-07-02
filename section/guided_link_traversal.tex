@@ -62,4 +62,4 @@ With Q3 we see that the percentage of reduction is 32\%, this lowering of perfor
 This raises an interesting observation because we do not observe a reduction of execution time proportional to the reduction of HTTP requests.
 Previous research has proposed that inefficient query plan might be the bottleneck of some queries in structured environments~\cite{taelman2023,eschauzier_quweda_2023}.
 However, our results seems to show that the size of the internal data source might have a bigger impact on performance than noted in previous studies.
-The query Q4 was not able to be answered, with both fragmentations, because it covers a far larger range of publication date and, hence, requires more data to be downloaded and more processing time.
+The query Q4 was not able to be answered, with any setup, because the query requires a larger number of fragments to be processed.
