@@ -1,16 +1,16 @@
 \begin{abstract}
 % <!-- Context -->
 Link Traversal queries on the web face challenges in source selections and completeness definition due to the size of the web.
-Reachability criteria provide completeness conditions based on the traversal of links in the internal data store of query engine.
+Reachability criteria provide completeness conditions based on the traversal of links in the internal data store of query engines.
 However, the size of the search domain remains the bottleneck of the approach.
 % <!-- need -->
-Web environments can have structures exploitable by the query engine to perform more precise source selection.
+Web environments can have structures exploitable by query engines to perform more precise source selection.
 In current practices, reachability criteria are also used for source selection.
-The criteria relies on using elements of the query and predefined regular expressions.
-Thus, it is difficult to apply these criteria to traverse environments where logical expressions indicate the location of resources.
+The current criteria relies on using elements of the query and regular expressions.
+Thus, it is difficult to use them to traverse environments where logical expressions indicate the location of resources.
 For example, data produced after the first of September is stored at \texttt{ex:afterFirstSeptember}.
 % <!-- task -->
-We propose a rule-based reachability criteria for source selection by capturing logical expression expressed in hypermedia descriptions.
+We propose a rule-based reachability criterion for source selection by capturing logical expression expressed in hypermedia descriptions.
 %<!-- object -->
 In this poster paper, we show how the Comunica Web querying engine is modified to, during link traversal, take hints from the TREE hypermedia controls, to more efficiently query over subsets of a sensor dataset published using the TREE hypermedia specification.
 % <!-- findings -->
