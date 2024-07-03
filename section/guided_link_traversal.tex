@@ -8,20 +8,21 @@ The implementation, the queries and the benchmark are available at the following
 }
 
 \sepfootnotecontent{sf:predicateCriterion}{
-The query engine will always follow \texttt{ex:nextNode} from expressions following the schema "\texttt{ex:currentNode tree:node ex:nextNode}" regardless of the constraints.
+The query engine will always follow \texttt{ex:nextNode} from expressions following the schema "\texttt{ex:currentNode tree:relation [tree:node ex:nextNode]}" regardless of the constraints.
 }
 
-Most research on LTQP centered around query execution in Linked Open Data environments.
+Most research on LTQP is centered around query execution in Linked Open Data environments.
 Given the pseudo-infinite number of documents on the Web, traversing over all documents is practically infeasible.
 To define completeness, different reachability criteria~\cite{hartig2012} were introduced to allow the discrimination of links.
 Recently, an alternative direction was designed where the query engine uses the structure from the data publisher to guide itself towards relevant data sources~\cite{taelman2023, verborgh2020}.
 
 We define our approach as a rule-based reachability criterion.
-Our approach builds upon the concept of guided link traversal, and structural assumptions~\cite{taelman2023} to exploit the structural properties of TREE datasets to prune irrelevant links.
+Our approach builds upon the concept of guided link traversal, and structural assumptions~\cite{taelman2023} to exploit the structural properties of, in this case, TREE annotated datasets to prune irrelevant links.
 Concretely, we interpret the hypermedia descriptions of constraints in TREE fragments as boolean equations.
-Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression of the constraint on the data of the next fragment.
-After the parsing of the expression, the filter expression of the SPARQL query is pushdown into the engine's source selection component.
-Lastly, the two boolean expressions are evaluated to determine if they can be satisfied, upon satisfaction the IRI targeting the next fragment is added to the link queue otherwise the IRI is pruned.
+Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression of the constraint on the data of potentially reachable fragments.
+After the parsing of the expression, the filter expression of the SPARQL query is \textit{pushed down} into the engine's source selection component.
+Lastly, the two boolean expressions are evaluated to determine if they can be satisfied. 
+Upon satisfaction the IRI targeting the next fragment is added to the link queue otherwise the IRI is pruned.
 
 
 \subsection{Preliminary results}
@@ -29,7 +30,8 @@ Lastly, the two boolean expressions are evaluated to determine if they can be sa
 We implemented our approach using the LTQP version of the query engine Comunica~\cite{comunica}.
 To evaluate it, we executed four queries similar to the one in Figure \ref{lst:system}~\sepfootnote{sf:opensSource}.
 They were executed over the DAHCC participant 31 dataset (487 MB) with a timeout of two minutes.
-We fragmented the dataset following the TREE specification with a tree topology with 100 and 1000 nodes ($n$).
+We fragmented the dataset following the TREE specification using a tree-based topology with 100 and 1000 nodes ($n$).
+\jr{By tree topology which topology do you mean a B+Tree, a binary tree, etc?}
 
 
 \begin{table}[ht]
@@ -51,7 +53,8 @@ We fragmented the dataset following the TREE specification with a tree topology 
     The predicate-based reachability criterion is not able to execute the queries. 
     The rule-based criterion performs better with a larger number of fragments.
     X means that the query did not finish before the timeout.
-    Q4 is not depicted because they were not able to terminate before the timeout.}
+    Q4 is not depicted because they were not able to terminate before the timeout.
+    \jr{What are the Req-rule and Res-rule columns in this table? I don't understand their meaning and I didn't see a mention to them in the text either.}}
     \label{tab:result}
 \end{table}
 
