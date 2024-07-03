@@ -22,7 +22,7 @@ LTQP starts by dereferencing a set of URLs called seed URLs~\cite{Hartig2016}.
 From these dereferenced documents, links to other documents are dereferenced recursively and their data is inserted into the internal data store of the engine.
 LDQL~\cite{hartig2016Ldql} is a theoretical query language to define the traversal of LTQP queries.
 However, LDQL is centered around nested regular expressions, thus, it is difficult to define the traversal of links based on domain-specific logical expressions.
-The subweb specifications~\cite{bogaerts_rulemlrr_2021}, propose allowing the data provider to define traversal paths with respect to the information related to them.
+The subweb specifications~\cite{bogaerts_rulemlrr_2021}, allow the data provider to define traversal paths with respect to the information related to them.
 Thus, given that the query engine trusts the data publisher it can adapt its traversal to reduce its execution time by reducing the number of HTTP requests to get the desired information.
 Akin to LDQL, it is difficult with the subweb specifications to express domain-specific logical expressions.
 \jr{Can you provide a small example in natural language of what it means to follow links based on domain-specific logical expressions? 
