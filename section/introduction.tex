@@ -24,7 +24,7 @@ LDQL~\cite{hartig2016Ldql} is a theoretical query language to define the travers
 However, LDQL is centered around nested regular expressions, thus, it is difficult to define the traversal of links based on domain-specific logical expressions.
 The subweb specifications~\cite{bogaerts_rulemlrr_2021}, propose to let the data provider define the traversal for information related to them.
 Thus, given that the query engine trusts the data publisher it can adapt its traversal to reduce its execution time by reducing the number of HTTP requests to get the desired information.
-Akin to LDQL, the subweb specifications are not able to express domain-specific logical expressions.
+Akin to LDQL, it is difficult with the subweb specifications to express domain-specific logical expressions.
 
 In this paper, we propose to use an arithmetic boolean solver as the main source selection mechanism for a reachability criterion to traverse TREE documents.
 The operators are defined by \href{https://treecg.github.io/specification/}{TREE specification}~\sepfootnote{sf:treeSpec}.
