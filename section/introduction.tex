@@ -6,7 +6,6 @@
 
 
 \href{https://lod-cloud.net/#diagram}{The increasing amount of available Linked Data on the Web} prompts the need for efficient query interfaces.
-SPARQL endpoints are the most prominent ones.
 During a typical SPARQL query execution, the interface takes the whole query load and delivers the results to the client.
 This may cause high workloads which are partially the reason for the historically low availability of SPARQL endpoints~\cite{aranda2013}.
 Researchers and practitioners have made efforts to introduce alternative Linked Data publication methods that enable client's participation in the query execution process.
@@ -44,7 +43,7 @@ The dataset was produced from the DAHCC~\cite{dahcc_resource} dataset and adapte
         \lstinputlisting[language=,frame=single]{code/example_tree_relation.ttl}
     \end{minipage}
     \caption{On the left, is a SPARQL query to get sensor measurements and metadata of a fragmented dataset.
-    On the right, is the hypermedia description of the fragment following the TREE specification, the next fragment
-    has a constraint on publication time $?t>= \text{2022-01-03T09:47:59.000000}$.}
+    On the right, is the hypermedia description of the location and constraint of the next fragment.
+    The constraint describes a publication time of $?t>= \text{2022-01-03T09:47:59.000000}$.}
         \label{lst:system}
 \end{figure}
