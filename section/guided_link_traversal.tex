@@ -7,6 +7,10 @@ The implementation, the queries and the benchmark are available at the following
 \href{https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main}{https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main}
 }
 
+\sepfootnotecontent{sf:predicateCriterion}{
+It will always follow  \texttt{ex:nextNode} from expressions following the schema "\texttt{ex:currentNode tree:node ex:nextNode}" regardless of the constraints.
+}
+
 Most research around LTQP centered around query execution in Linked Open Data environments.
 Given the pseudo-infinite number of documents on the Web, traversing over all documents is practically infeasible.
 To define completeness, different reachability criteria~\cite{hartig2012} were introduced to allow the discrimination of links.
@@ -54,9 +58,8 @@ We fragmented the dataset following the TREE specification with a tree topology 
 The queries were executed using two configurations.
 In the first configuration, we use a predicate-based reachability criterion where the engine follows each link of the fragmented dataset.
 For the second one, we use our rule-based reachability criterion approach.
-As shown in Table \ref{tab:result} no queries could be answered within the timeout by following every fragment.
-A possible explanation is the high number of HTTP requests performed~\cite{Hartig2016}. 
-A large percentage of those request were leading to non-relevant data sources.
+As shown in Table \ref{tab:result} no queries could be answered within the timeout by following every fragment~\sepfootnote{sf:predicateCriterion}.
+A possible explanation is the high number of HTTP requests performed~\cite{Hartig2016} leading to non-relevant data sources. 
 With our rule-based reachability criterion, we see that the queries performed over the 1000 nodes fragmentation perform better than the ones with 100 nodes, particularly when the query has one or zero results.
 In those cases, the query execution time has a percentage of reduction of 86\% for Q1 and 79\% for Q2 compared to the fragmentation with 100 nodes.
 With Q3 we see that the percentage of reduction is 33\%, this lowering of performance might be caused by the increase by a factor of 6 in HTTP requests.
