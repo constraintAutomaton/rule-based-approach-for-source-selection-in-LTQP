@@ -62,7 +62,7 @@ As shown in Table \ref{tab:result} no queries could be answered within the timeo
 A possible explanation is the high number of HTTP requests performed~\cite{Hartig2016} leading to non-relevant data sources. 
 With our rule-based reachability criterion, we see that the queries performed over the 1000 nodes fragmentation perform better than the ones with 100 nodes, particularly when the query has one or zero results.
 In those cases, the query execution time has a percentage of reduction of 86\% for Q1 and 79\% for Q2 compared to the fragmentation with 100 nodes.
-With Q3 we see that the percentage of reduction is 33\%, this lowering of performance might be caused by the increase by a factor of 6 in HTTP requests.
+With Q3 we see that the percentage of reduction is 33\%, this lowering of performance gain might be caused by the increase by a factor of 6 in HTTP requests.
 This raises an interesting observation because we do not observe a reduction of execution time with a reduction of HTTP requests but the contrary.
 Previous research has proposed that inefficient query plan might be the bottleneck of some queries in structured environments~\cite{taelman2023,eschauzier_quweda_2023}.
 However, our results seems to show that the size of the internal data source might have a bigger impact on performance than noted in previous studies.
