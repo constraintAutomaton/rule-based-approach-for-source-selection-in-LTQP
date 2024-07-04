@@ -1,4 +1,4 @@
-SOURCE = main.tex references.bib section/*.tex
+SOURCE = main.tex references.bib section/*.tex code/*
 
 main.pdf: $(SOURCE)
 	pdflatex --shell-escape main && bibtex main && pdflatex --shell-escape main && pdflatex --shell-escape main
