@@ -55,10 +55,11 @@ We fragmented the dataset following the TREE specification using a tree-based to
     X means that the query did not finish before the timeout.
     Q4 is not depicted because they were not able to terminate before the timeout.
     \jr{What are the Req-rule and Res-rule columns in this table? I don't understand their meaning and I didn't see a mention to them in the text either.}}
+    \rt{Indeed, make sure to explain all columns.}
     \label{tab:result}
 \end{table}
 
-The queries were executed using two configurations.
+The queries were executed using two configurations.\rt{Where can these two configs be seen in the table?}
 In the first configuration, we use a predicate-based reachability criterion where the engine follows each link of the fragmented dataset.
 For the second one, we use our rule-based reachability criterion approach.
 As shown in Table \ref{tab:result} no queries could be answered within the timeout by following every fragment~\sepfootnote{sf:predicateCriterion}.

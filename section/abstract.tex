@@ -1,27 +1,28 @@
 \begin{abstract}
 % <!-- Context -->
-Link Traversal queries on the web face challenges in source selections and completeness definition due to the size of the web.
-Reachability criteria define both completeness and source selection policies, based on the traversal of links encountered by query engines.
-However, the size of the search domain remains the bottleneck of the approach.
+Link Traversal queries on the web face challenges in source selections \rt{Link traversal doesn't really do source selection, that's from the world of federated querying, where source selection is done before query planning. This will also mean that the title needs to be changed} and completeness definition \rt{Do you mean a difficulty in achieving complete results? Because defining the completeness itself is not really a problem.} due to the size of the web.
+Reachability criteria define both completeness and source selection \rt{No, it defines which links need to be followed.} policies, based on the traversal of links encountered by query engines \rt{I'm not sure what you mean with this second part of this sentence, it needs rephrasing.}.
+However, the size of the search domain \rt{Be concrete: the number of links that needs to be dereferenced is the bottleneck} remains the bottleneck of the approach.
 % <!-- need -->
 Web environments often have structures exploitable by query engines to perform more precise source selection.
-Current criteria rely on using information from the query definition and regular expressions to select sources.
+Current criteria rely on using information from the query definition and regular expressions \rt{I'm not aware of regexes being used for this.} to select sources.
 However, it is difficult to use them to traverse environments where logical expressions indicate the location of resources.
 For example, the traversal of interlinked documents respecting expressions such as 
 ``the data produced after the first of September are stored at \texttt{ex:afterFirstSeptember}'' 
-are difficult to express using current reachability criteria.
+are difficult to express using current reachability criteria. \rt{I like the idea of including an example, but this example does not clarify things. Let's make it simpler and more concrete, e.g. "if data is fragmented into documents representing the month in which they are created, ..."}
 % <!-- task -->
 We propose to use a rule-based reachability criterion that captures logical statements expressed in hypermedia descriptions 
 within linked data documents to define the source selection policy of traversal queries.
 %<!-- object -->
-In this poster paper, we show how the Comunica Web querying engine is modified to, during link traversal, 
-take hints from a hypermedia control vocabulary, to more efficiently query over subsets of a sensor dataset published 
+In this poster paper, we show how the Comunica link traversal query engine is modified to 
+take hints from a hypermedia control vocabulary, to more efficiently query \rt{Be more precise: it prunes sources! This makes me realize you haven't mentioned pruning yet up until now} over subsets of a sensor dataset published 
 as linked data documents with semantic hypermedia controls.
 % <!-- findings -->
 Our preliminary findings show that using this strategy, the query engine can significantly reduce the number of HTTP requests 
 and the query execution time without sacrificing the completeness of results 
-when executing queries aligned with the available hypermedia controls.
+when executing queries aligned with the available hypermedia controls.\rt{And what if they are not aligned?}
 % <!-- conclusion -->
+\rt{The following is not really needed for an abstract. Let's focus on perspectives instead on what these findings really mean in practise.}
 Given the promising result of this initial approach, we will extend our implementation beyond a time-based criterion, 
 to support general reasoning over linked data in the source selection process of traversal queries.
 \end{abstract}

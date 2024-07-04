@@ -5,8 +5,8 @@
 }
 
 
-\href{https://lod-cloud.net/#diagram}{The increasing amount of available Linked Data on the Web} prompts the need for efficient query interfaces.
-During a typical SPARQL query execution, the interface takes the whole query load and delivers the results to the client.
+\href{https://lod-cloud.net/#diagram}{The increasing amount of available Linked Data on the Web}\rt{Can you cite lodcloud instead of linking?} prompts the need for efficient query interfaces.
+During a typical SPARQL query execution, the interface takes the whole query load and delivers the results to the client.\rt{That is false, SPARQL querying can be done anywhere. You probably mean SPARQL endpoints.}
 This may cause high workloads which are partially the reason for the historically low availability of SPARQL endpoints~\cite{aranda2013}.
 Researchers and practitioners have made efforts to introduce alternative Linked Data publication methods that enable client's participation in the query execution process~\cite{Verborgh2016TriplePF}.
 The goal is to lower server-side workloads while keeping fast query execution to the client~\cite{Azzam2021}.
@@ -22,9 +22,9 @@ LTQP starts by dereferencing a set of URLs called seed URLs~\cite{Hartig2016}.
 From these dereferenced documents, links to other documents are dereferenced recursively and their data is inserted into the internal data store of the engine.
 LDQL~\cite{hartig2016Ldql} is a theoretical query language to define the traversal of LTQP queries.
 However, LDQL is centered around nested regular expressions, thus, it is difficult to define the traversal of links based on domain-specific logical expressions.
-The subweb specifications~\cite{bogaerts_rulemlrr_2021}, allow the data provider to define traversal paths with respect to the information related to them.
+The subweb specifications language~\cite{bogaerts_rulemlrr_2021} allows the data provider to define traversal paths with respect to the information related to them.
 Thus, given that the query engine trusts the data publisher it can adapt its traversal to reduce its execution time by reducing the number of HTTP requests to get the desired information.
-Akin to LDQL, it is difficult with the subweb specifications to express domain-specific logical expressions.
+Akin to LDQL, it is difficult with the subweb specifications to express domain-specific logical expressions.\rt{Not sure I agree with that. Since SWSL decouples query from what links need to be followed, the SWSL can be defined by the data publisher. So an interesting question becomes; can all of TREE be expressed as SWSL? I don't know the answer myself.}
 \jr{Can you provide a small example in natural language of what it means to follow links based on domain-specific logical expressions? 
 I imagine something like follow only links that contain data produced after X time or data located in Y location}
 
@@ -49,3 +49,5 @@ The dataset was produced from the DAHCC~\cite{dahcc_resource} dataset and adapte
     The constraint describes publication times ($?t$) where $?t>= \text{2022-01-03T09:47:59.000000}$.}
         \label{lst:system}
 \end{figure}
+
+\rt{I don't understand what tree:node ex:nextNode means.}
