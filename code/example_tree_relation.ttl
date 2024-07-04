@@ -1,5 +1,4 @@
 @prefix tree: <https://w3id.org/tree#> .
-@prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ex: <https://example.be/> .
 @prefix etsi: <https://saref.etsi.org/core/>

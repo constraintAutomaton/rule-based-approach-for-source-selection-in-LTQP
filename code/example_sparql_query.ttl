@@ -1,6 +1,4 @@
-PREFIX sosa: <http://www.w3.org/ns/sosa/> 
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX etsi: <https://saref.etsi.org/core/>
 PREFIX dahcc: <https://dahcc.idlab.ugent.be/Ontology/Sensors/>
 PREFIX saref: <https://saref.etsi.org/core/>
@@ -11,6 +9,5 @@ SELECT * WHERE {
     etsi:measurementMadeBy ?sensor.
   ?sensor dahcc:analyseStateOf ?stateOf;
     saref:measuresProperty {:property}.
-  
   FILTER(?t="2022-01-03T10:57:54.000000"^^xsd:dateTime)
 }
