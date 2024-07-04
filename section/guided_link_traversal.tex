@@ -1,9 +1,8 @@
 \section{A rule-based reachability criterion}
 
 \sepfootnotecontent{sf:opensSource}{
-The implementation, the queries and the benchmark are available at the following links:\newline
-\href{https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation}{https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation}\newline  
-\href{https://github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/code}{https://github.com/constraintAutomaton/How-TREE-hypermedia-can-speed-up-Link-Traversal-based-Query-Processing-queries/tree/main/code}\newline
+The implementation, the queries and the evaluation are available at the following links:\newline
+\href{https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation}{https://github.com/constraintAutomaton/comunica-feature-link-traversal/tree/feature/time-filtering-tree-sparqlee-implementation} 
 \href{https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main}{https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main}
 }
 
@@ -17,9 +16,9 @@ To define completeness, different reachability criteria~\cite{hartig2012} were i
 Recently, an alternative direction was designed where the query engine uses the structure from the data publisher to guide itself towards relevant data sources~\cite{taelman2023, verborgh2020}.
 
 We define our approach as a rule-based reachability criterion.
-Our approach builds upon the concept of guided link traversal, and structural assumptions~\cite{taelman2023} to exploit the structural properties of, in this case, TREE annotated datasets to prune irrelevant links.
+Our approach builds upon the concept of structural assumptions~\cite{taelman2023} to exploit the structural properties of TREE annotated datasets to prune irrelevant links.
 Concretely, we interpret the hypermedia descriptions of constraints in TREE fragments as boolean equations.
-Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression of the constraint on the data of potentially reachable fragments.
+Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression of the constraint on the data of reachable fragments.
 After the parsing of the expression, the filter expression of the SPARQL query is \textit{pushed down} into the engine's source selection component.
 Lastly, the two boolean expressions are evaluated to determine if they can be satisfied. 
 Upon satisfaction the IRI targeting the next fragment is added to the link queue otherwise the IRI is pruned.
@@ -28,17 +27,16 @@ Upon satisfaction the IRI targeting the next fragment is added to the link queue
 \subsection{Preliminary results}
 
 We implemented our approach using the LTQP version of the query engine Comunica~\cite{comunica}.
-To evaluate it, we executed four queries similar to the one in Figure \ref{lst:system}~\sepfootnote{sf:opensSource}.
+For evaluation, we executed four queries similar to the one in Figure \ref{lst:system}~\sepfootnote{sf:opensSource}.
 They were executed over the DAHCC participant 31 dataset (487 MB) with a timeout of two minutes.
-We fragmented the dataset following the TREE specification using a tree-based topology with 100 and 1000 nodes ($n$).
-\jr{By tree topology which topology do you mean a B+Tree, a binary tree, etc?}
-
+We fragmented the dataset according to the TREE specification.
+We use a B-tree topology with a depth of 1 using 100 and 1000 nodes ($n$).
 
 \begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        \textbf{n} & \textbf{Query} & \textbf{Time-predicate (ms)}  & \textbf{Time-rule (ms)} & \textbf{Req-rule} & \textbf{Res-rule} \\
+        \textbf{n} & \textbf{Query} & \textbf{Time-predicate (ms)}  & \textbf{Time-rule (ms)} & \textbf{HTTP-request-rule} & \textbf{Res-rule} \\
         \hline
         100 & Q1 & x & 8,892& 3 & 0 \\
         100 & Q2 & x & 3,541& 3 & 1 \\
@@ -50,24 +48,24 @@ We fragmented the dataset following the TREE specification using a tree-based to
         \hline
     \end{tabular}
     \caption{
-    The predicate-based reachability criterion is not able to execute the queries. 
-    The rule-based criterion performs better with a larger number of fragments.
+    The predicate-based (-predicate) reachability criterion is not able to execute the queries. 
+    The rule-based (-rule) criterion performs better with a larger number of fragments.
     X means that the query did not finish before the timeout.
     Q4 is not depicted because they were not able to terminate before the timeout.
-    \jr{What are the Req-rule and Res-rule columns in this table? I don't understand their meaning and I didn't see a mention to them in the text either.}}
+    }
     \label{tab:result}
 \end{table}
 
 The queries were executed using two configurations.
-In the first configuration, we use a predicate-based reachability criterion where the engine follows each link of the fragmented dataset.
+In the first configuration, we use a predicate-based reachability criterion where the engine follows each link of the fragmented dataset~\sepfootnote{sf:predicateCriterion}.
 For the second one, we use our rule-based reachability criterion approach.
-As shown in Table \ref{tab:result} no queries could be answered within the timeout by following every fragment~\sepfootnote{sf:predicateCriterion}.
+As shown in Table \ref{tab:result} no queries could be answered within the timeout by following every fragment.
 A possible explanation is the high number of HTTP requests performed~\cite{Hartig2016} leading to non-relevant data sources. 
-With our rule-based reachability criterion, we see that the queries executed over the 1000 nodes fragmentation perform better than the ones with 100 nodes, particularly when the query has one or zero results.
-In those cases, the query execution time has a percentage of reduction of 86\% for Q1 and 79\% for Q2 compared to the fragmentation with 100 nodes.
+With our rule-based reachability criterion, the queries executed over the 1000 nodes fragmentation perform better than the ones with 100 nodes.
+The query execution time has a percentage of reduction of 86\% with Q1 and 79\% with Q2 compared to the fragmentation with 100 nodes.
 With Q3 we see that the percentage of reduction is 33\%, this lowering of performance gain might be caused by the increase by a factor of 6 in HTTP requests.
-This raises an interesting observation because we do not observe a reduction of execution time with a reduction of HTTP requests but the contrary.
+This raises an interesting observation because we do not observe a reduction of execution time with a reduction of HTTP requests.
 Previous research has proposed that inefficient query plans might be the bottleneck of some queries in structured environments~\cite{taelman2023,eschauzier_quweda_2023}.
 However, our results seem to show that the size of the internal data source might have a bigger impact on performance than noted in previous studies.
 This observation might have significant consequences because large-scale web querying might result in the acquisition of a large number of triples.
-The query Q4 was not able to be answered, with any setup, because the query requires a larger number of fragments to be processed.
+The query Q4 was not able to be answered, with any setup, because the query requires a larger number of fragments than the other to be processed.

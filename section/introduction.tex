@@ -7,14 +7,16 @@
 
 \href{https://lod-cloud.net/#diagram}{The increasing amount of available Linked Data on the Web} prompts the need for efficient query interfaces.
 During a typical SPARQL query execution, the interface takes the whole query load and delivers the results to the client.
-This may cause high workloads which are partially the reason for the historically low availability of SPARQL endpoints~\cite{aranda2013}.
+This paradigm can lead to high workloads, which are partly responsible for the historically low availability of SPARQL endpoints~\cite{aranda2013}.
 Researchers and practitioners have made efforts to introduce alternative Linked Data publication methods that enable client's participation in the query execution process~\cite{Verborgh2016TriplePF}.
 The goal is to lower server-side workloads while keeping fast query execution to the client~\cite{Azzam2021}.
 The TREE hypermedia specification is an effort in that direction~\cite{ColpaertMaterializedTREE, lancker2021LDS}, that introduces the concept of domain-oriented fragmentation of large RDF datasets.
 For example, in the case of periodic measurements of sensor data, a fragmentation can be made based on the publication date of each data entity.
-TREE aims describe datasets fragmentation in ways that enables clients to easily fetch query-relevant subsets.
-The data inside a fragment are bounded with constraints that are expressed using hypermedia descriptions~\cite{thomasFieldingPhdThesis}.
+TREE aims at describing datasets fragmentation in ways that enables clients to easily fetch query-relevant subsets.
+The data inside a fragment are bounded with constraints expressed using hypermedia descriptions~\cite{thomasFieldingPhdThesis}.
 More precisely, each fragment describes the constraints of the data of any reachable fragment.
+In this paper, we refer to those constraints as domain-specific logical expressions.
+They can be expressions such has ``the data produced after the first of September are stored at \texttt{ex:afterFirstSeptember}''.
 Because of the hyperlinked nature of the documents network, clients must traverse them to find the relevant data to answer their queries.
 We propose to use Link Traversal Query Processing (LTQP)~\cite{Hartig2016} as a query mechanism to perform those queries.
 
@@ -23,14 +25,12 @@ From these dereferenced documents, links to other documents are dereferenced rec
 LDQL~\cite{hartig2016Ldql} is a theoretical query language to define the traversal of LTQP queries.
 However, LDQL is centered around nested regular expressions, thus, it is difficult to define the traversal of links based on domain-specific logical expressions.
 The subweb specifications~\cite{bogaerts_rulemlrr_2021}, allow the data provider to define traversal paths with respect to the information related to them.
-Thus, given that the query engine trusts the data publisher it can adapt its traversal to reduce its execution time by reducing the number of HTTP requests to get the desired information.
+Thus, given that the query engine trusts the data publisher it can adapt its traversal to follow the path given by the specification.
 Akin to LDQL, it is difficult with the subweb specifications to express domain-specific logical expressions.
-\jr{Can you provide a small example in natural language of what it means to follow links based on domain-specific logical expressions? 
-I imagine something like follow only links that contain data produced after X time or data located in Y location}
 
 In this paper, we propose to use an arithmetic boolean solver as the main source selection mechanism for a reachability criterion to traverse TREE documents.
-The operators are defined by the \href{https://treecg.github.io/specification/}{TREE specification}~\sepfootnote{sf:treeSpec}.
-As a concrete use case for the paper, we consider the publication of (historical) sensor data.
+The logical operators are defined by the \href{https://treecg.github.io/specification/}{TREE specification}~\sepfootnote{sf:treeSpec}.
+As a concrete use case, we consider the publication of (historical) sensor data.
 An example query is presented in Figure~\ref{lst:system} with the triples representing the link between two fragments.
 The dataset was produced from the DAHCC~\cite{dahcc_resource} dataset and adapted to the TREE specification.
 
@@ -48,4 +48,5 @@ The dataset was produced from the DAHCC~\cite{dahcc_resource} dataset and adapte
     On the right, is the hypermedia description of the location and constraint of the next fragment.
     The constraint describes publication times ($?t$) where $?t>= \text{2022-01-03T09:47:59.000000}$.}
         \label{lst:system}
+    \vspace*{-0.75cm}
 \end{figure}
