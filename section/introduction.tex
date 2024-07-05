@@ -12,19 +12,19 @@ Researchers and practitioners have made efforts to introduce alternative Linked 
 The goal is to lower server-side workloads while keeping fast query execution to the client~\cite{Azzam2021}.
 The TREE hypermedia specification is an effort in that direction~\cite{ColpaertMaterializedTREE, lancker2021LDS}, that introduces the concept of domain-oriented fragmentation of large RDF datasets.
 For example, in the case of periodic measurements of sensor data, a fragmentation can be made on the publication date of each data entity.
-TREE aims at describing datasets fragmentation in ways that enables clients to easily fetch query-relevant subsets.
+TREE aims to describes dataset fragmentation in ways that enable clients to easily fetch query-relevant subsets.
 The data inside a fragment are bounded with constraints expressed using hypermedia descriptions~\cite{thomasFieldingPhdThesis}.
 More precisely, each fragment describes the constraints of the data of any reachable fragment.
 In this paper, we refer to those constraints as domain-specific logical expressions.
-They can be expressions such has ``the data produced by the sensors after the first of September are stored at \texttt{ex:afterFirstSeptember}''.
+They can be expressions such as ``the data produced by the sensors after the first of September are stored at \texttt{ex:afterFirstSeptember}''.
 Because of the hyperlinked nature of the documents network, clients must traverse them to find the relevant data to answer their queries.
 We propose to use Link Traversal Query Processing (LTQP)~\cite{Hartig2016} as a query mechanism to perform those queries.
 
-LTQP starts by dereferencing a set of user provided URLs~\cite{Hartig2016}.
-From these dereferenced documents, links to other documents are dereferenced recursively to be inserted in an internal data store.
+LTQP starts by dereferencing a set of user-provided URLs~\cite{Hartig2016}.
+From these dereferenced documents, links to other documents are dereferenced recursively and inserted in an internal data store.
 LDQL~\cite{hartig2016Ldql} is a theoretical query language to define the traversal of LTQP queries.
 However, LDQL is centered around nested regular expressions, thus, it is difficult to express the traversal of links based on domain-specific logical expressions.
-The subweb specifications language (SWSL)~\cite{bogaerts_rulemlrr_2021}, allows the data provider to define traversal paths with respect to the information related to them.
+The subweb specifications language (SWSL)~\cite{bogaerts_rulemlrr_2021}, allows the data provider to define traversal paths concerning the information related to them.
 Thus, given that the query engine trusts the data publisher it can adapt its traversal to follow the paths given by the specification.
 Akin to LDQL, it is difficult with the SWSL to express traversal using domain-specific logical expressions.
 
