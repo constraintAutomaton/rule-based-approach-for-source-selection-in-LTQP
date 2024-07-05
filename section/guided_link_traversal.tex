@@ -33,14 +33,14 @@ We use a B-tree topology with a depth of 1 using 100 and 1000 nodes ($n$).
 
 \begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|c|}
         \hline
         \textbf{n} & \textbf{Query} & \textbf{Time-predicate (ms)}  & \textbf{Time-rule (ms)} & \textbf{HTTP-request-rule} & \textbf{Res-rule} \\
         \hline
         100 & Q1 & x & 8,892& 3 & 0 \\
         100 & Q2 & x & 3,541& 3 & 1 \\
         100 & Q3 & x & 59,274& 8 & 8,166 \\
-        \hhline{|=|=|=|=|=|=|=|=|}
+        \hhline{|=|=|=|=|=|=|}
         1000 & Q1 & x & 1,171& 3 & 0 \\
         1000 & Q2 & x & 734& 3 & 1 \\
         1000 & Q3 & x & 39,987& 51 & 8,166 \\
