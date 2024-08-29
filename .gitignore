@@ -13,5 +13,7 @@
 *.synctex.gz*
 *.xmpdata
 *.xmpi
+*.bkp
 svg-inkscape/
 !cc-by.pdf
+!image/running_example.drawio.pdf
