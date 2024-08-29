@@ -10,6 +10,10 @@ The implementation, the queries and the evaluation are available at the followin
 The query engine will always follow \texttt{ex:nextNode} from expressions following the schema "\texttt{ex:currentNode tree:relation [tree:node ex:nextNode]}" regardless of the constraints.
 }
 
+\sepfootnotecontent{sf:reachabilityCriterion}{
+    We use a simplified formalization to illustrate the source selection mechanism and to not introduce unnecessary concepts for the aim of this poster paper. 
+}
+
 Most research on LTQP is centered around query execution in Linked Open Data environments.
 Given the pseudo-infinite number of documents on the Web, traversing over all documents is practically infeasible.
 To define completeness, different reachability criteria~\cite{hartig2012} were introduced to allow the discrimination of links.
@@ -20,7 +24,7 @@ Our approach builds upon the concept of structural assumptions~\cite{taelman2023
 Concretely, we interpret the hypermedia descriptions of constraints in TREE fragments as boolean expressions $E$ ($?t>= \text{2022-01-03T09:47:59.000000}$ in Figure~\ref{lst:system}).
 Upon discovery of a document, the query engine gathers the relevant triples to form the boolean expression of the constraint on the data of reachable fragments.
 After the parsing of the expression, the filter expression $F$ of the SPARQL query is \textit{pushed down} into the engine's source selection component.
-The source selection component can be formalized as a reachability criterion 
+The source selection component can be formalized as a reachability criterion~\sepfootnote{sf:reachabilityCriterion} 
 \begin{equation}
 c(i) \rightarrow \{\mathrm{true}, \mathrm{false}\}
 \end{equation}
