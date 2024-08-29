@@ -15,6 +15,7 @@ query engine can significantly reduce the number of HTTP requests and the query 
 sacrificing the completeness of results. Our work shows that the investigation of hypermedia controls in link
 pruning of traversal queries is a worthy effort for optimizing web queries of unindexed decentralized databases.
 
+
 ## Building a PDF
 The authors compiled the PDF version using `pdflatex` (you can use your favorite latex compiler).
 We created a `makefile` to facilitate the building of the PDF version.
@@ -30,6 +31,7 @@ reduce the execution time of queries aligned with hypermedia description constra
 predicate-based reachability opening the possibility for faster and more versatile traversal-based query
 execution over fragmented RDF documents. Our experiment also highlights that the size of the internal
 data store might have more impact on performance than noted in previous studies. In future work, we
-will perform more exhaustive evaluations of other types of domain-oriented fragmentation strategies,
-and investigate how to generalize our approach to support more expressive online reasoning for online
-source selection during traversal queries.
+will perform more exhaustive evaluations of other types of domain-oriented fragmentation strategies
+such as string evaluation and geospatial, and investigate how to generalize our approach to support
+more expressive online reasoning for online source selection during traversal queries.
+
