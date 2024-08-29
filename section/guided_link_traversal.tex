@@ -28,7 +28,7 @@ where when it returns $\mathrm{true}$ the target IRI $i$ \emph{must} be derefere
 Finally, the two boolean expressions are evaluated to determine their satisfiability.
 It can be formalized as determining if 
 \begin{equation}
-    c(i) = \exists x\in\mathbb{R} | (F(x) \land E_i) = \mathrm{true}
+    c(i) = \exists x | (F(x) \land E_i) = \mathrm{true}
 \end{equation}
 is true given $x$ is a variable targeted by $E_i$ and $i$ is the link towards the next fragment (\texttt{ex:nextNode} from \texttt{ex:node tree:node ex:nextNode} in Figure~\ref{lst:system}).
 A variable targetted by $E$ is defined by an RDF object where the predicate as a value \texttt{?target} from the triple
