@@ -14,8 +14,8 @@ The TREE hypermedia specification is an effort in that direction~\cite{ColpaertM
 For example, in the case of periodic measurements of sensor data, a fragmentation can be made on the publication date of each data entity.
 A fragment can be considered an RDF document published in a server.
 TREE aims to describes dataset fragmentation in ways that enable clients to easily fetch query-relevant subsets.
-The data inside a fragment are bounded with constraints expressed using hypermedia descriptions~\cite{thomasFieldingPhdThesis}.
-More precisely, each fragment describes the constraints of the data of every reachable fragment.
+The data within a fragment are bound by constraints expressed through hypermedia descriptions~\cite{thomasFieldingPhdThesis}.
+Each fragment contains relations to other pages, and those relations contain the constraints of the data of every reachable fragment.
 In this paper, we refer to those constraints as domain-specific expressions.
 They can be expressions such as $?t > \text{2022-01-09T00:00:00.000000} \implies \text{ex:afterFirstSeptember}$ 
 given that $?t$ is the date of publication of sensor data and the implication pertains to the location of the data respecting the constraint.
@@ -36,7 +36,7 @@ Given those limitations, we propose to return to the more abstract concept of re
 to define a mechanism of traversal centered around rules.
 
 In this paper, we propose to use a boolean solver as the main link pruning mechanism for a reachability criterion to traverse TREE documents.
-The logical operators are defined by the \href{https://treecg.github.io/specification/}{TREE specification}.~\sepfootnote{sf:treeSpec}
+The logical operators are defined by the \href{https://w3id.org/tree/specification/}{TREE specification}.~\sepfootnote{sf:treeSpec}
 As a concrete use case, we consider the publication of (historical) sensor data.
 An example query is presented in Figure~\ref{lst:system} along with the triples representing the link between two documents expressed using the TREE specification.
 

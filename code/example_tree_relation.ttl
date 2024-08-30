@@ -1,11 +1,11 @@
 @prefix tree: <https://w3id.org/tree#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ex: <https://example.be/> .
-@prefix etsi: <https://saref.etsi.org/core/>
+@prefix saref: <https://saref.etsi.org/core/> .
 
-ex:node tree:relation [
+<> tree:relation [
     a  tree:GreaterThanOrEqualToRelation ;
-    tree:node ex:nextNode ;
-    tree:value "2022-01-03T09:47:59.000000"^^xsd:dateTime ;
-    tree:path etsi:hasTimestamp 
+    tree:node <nextNode> ;
+    tree:value "2022-01-03T09:47:59"^^xsd:dateTime ;
+    tree:path saref:hasTimestamp 
 ] .
