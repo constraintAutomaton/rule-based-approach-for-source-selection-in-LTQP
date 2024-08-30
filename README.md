@@ -24,16 +24,19 @@ One can simply execute `make main.pdf` or `make` to produce the PDF version if `
 
 ## Conclusion
 
-The publication of linked data in SPARQL endpoints is not always a sustainable approach due to
-unavailability and cost problems. Our work is centered around decentralized alternatives for linked data
-publication. Our preliminary results show that our rule-based reachability criterion can significantly
-reduce the execution time of queries aligned with hypermedia description constraints compared to
-predicate-based reachability opening the possibility for faster and more versatile traversal-based query
-execution over fragmented RDF documents. Our experiment also highlights that the size of the internal
-data store might have more impact on performance than noted in previous studies. In future work, we
-will perform more exhaustive evaluations of other types of domain-oriented fragmentation strategies
-such as string evaluation and geospatial, and investigate how to generalize our approach to support
-more expressive online reasoning for online source selection during traversal queries.
+This paper reported on preliminary tests to add guided link traversal support into the Comunica
+querying engine using a rule-based reachability approach. A similar approach could be performed
+with other SPARQL query engines supporting Link Traversal Query Processing. Our preliminary
+results show that our rule-based reachability criterion can significantly reduce the execution time of
+queries aligned with hypermedia description constraints compared to predicate-based reachability
+opening the possibility for faster and more versatile traversal-based query execution over fragmented
+RDF documents. Our experiment also highlights that the size of the internal data store might have
+more impact on performance than noted in previous studies. In future work, we will perform more
+exhaustive evaluations of other types of domain-oriented fragmentation strategies such as string and
+geospatial evaluations, and investigate how to generalize our approach to support more expressive
+online reasoning for online source selection during traversal queries. Furthermore, we also showed
+there might still be room for optimization by researching ways for pruning useless triples from the
+internal triple store during the link traversal process.
 
 ## How to cite
 
