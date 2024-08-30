@@ -20,7 +20,7 @@ pruning of traversal queries is a worthy effort for optimizing web queries of un
 The authors compiled the PDF version using `pdflatex` (you can use your favorite latex compiler).
 We created a `makefile` to facilitate the building of the PDF version.
 One can simply execute `make main.pdf` or `make` to produce the PDF version if `pdflatex` and the other dependencies of the [TeX Live](https://tug.org/texlive/) suite are installed on the machine of the user.
-
+A PDF version is also available in the [github releases sections](https://github.com/constraintAutomaton/rule-based-approach-for-source-selection-in-LTQP/releases/).
 
 ## Conclusion
 
