@@ -34,9 +34,9 @@ It can be formalized as determining if
 \begin{equation}
     c(i) = \exists x | (F(x) \land E_i) = \mathrm{true}
 \end{equation}
-hold true given $x$ is the variable targeted by $E_i$ and $i$ is the link towards the next fragment (\texttt{ex:nextNode} from \texttt{ex:node tree:node ex:nextNode} in Figure~\ref{lst:system}).
+hold true given $x$ is the variable targeted by $E_i$ and $i$ is the link towards the next fragment (\texttt{<nextNode>} from ``\texttt{<> tree:node <nextNode>}'' in Figure~\ref{lst:system}).
 A variable targetted by $E$ is defined by an RDF object where the predicate as a value \texttt{?target} from the triple
-defining the fragmentation path in the form \texttt{?s tree:path ?target} (\texttt{saref:hasTimestamp} in Figure~\ref{lst:system}).
+defining the fragmentation path in the form ``''\texttt{?s tree:path ?target}'' (\texttt{saref:hasTimestamp} in Figure~\ref{lst:system}).
 Upon satisfaction the IRI targeting the next fragment is added to the link queue otherwise the IRI is pruned.
 The process is schematized in Figure~\ref{fig:process}.
 
@@ -92,6 +92,6 @@ The query execution time has a percentage of reduction of 86\% with Q1 and 79\% 
 With Q3 we see that the percentage of reduction is 33\%, this lowering of performance gain might be caused by the increase by a factor of 6 in HTTP requests.
 This raises an interesting observation because we do not observe a reduction in execution time with a reduction in HTTP requests.
 Previous research has proposed that inefficient query plans might be the bottleneck of some queries in structured environments~\cite{taelman2023,eschauzier_quweda_2023}.
-However, our results seem to show that the size of the internal quad store might have a bigger impact on performance than noted in previous studies.
-As large-scale guided link traversal over the web will result in the acquisition of a large number of triples, a future interesting research direction would be to find ways to also remove quads that are certain to not lead to a query result anymore from the internal quad store.
+However, our results seem to show that the size of the internal triple store might have a bigger impact on performance than noted in previous studies.
+As large-scale link traversal over the web will result in the acquisition of a large number of triples, a future interesting research direction would be to find ways to remove triples that are certain to not lead to a query result from the internal triple store.
 The query Q4 was not able to be answered, with any setup, because the query requires a larger number of fragments than the other to be processed.
