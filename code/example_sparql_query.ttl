@@ -1,12 +1,11 @@
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-PREFIX etsi: <https://saref.etsi.org/core/>
-PREFIX dahcc: <https://dahcc.idlab.ugent.be/Ontology/Sensors/>
 PREFIX saref: <https://saref.etsi.org/core/>
+PREFIX dahcc: <https://dahcc.idlab.ugent.be/Ontology/Sensors/>
 
 SELECT * WHERE {
-  ?s etsi:hasTimestamp ?t;
-    etsi:hasValue ?result;
-    etsi:measurementMadeBy ?sensor.
+  ?s saref:hasTimestamp ?t;
+    saref:hasValue ?result;
+    saref:measurementMadeBy ?sensor.
   ?sensor dahcc:analyseStateOf ?stateOf;
     saref:measuresProperty {:property}.
   FILTER(?t="2022-01-03T10:57:54.000000"^^xsd:dateTime)
