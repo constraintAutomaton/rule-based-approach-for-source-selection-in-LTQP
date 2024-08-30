@@ -15,5 +15,6 @@
 *.xmpi
 *.bkp
 svg-inkscape/
+admin/
 !cc-by.pdf
 !image/running_example.drawio.pdf
