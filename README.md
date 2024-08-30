@@ -1,5 +1,8 @@
 # Exploring a rule-based approach for source selection in link traversal queries
 
+Poster paper accepted by the ["The 23rd International Semantic Web Conference (ISWC 2024)"](https://iswc2024.semanticweb.org/). 
+The experiment repository is available via [this hypermedia link](https://github.com/TREEcg/TREE-Guided-Link-Traversal-Query-Processing-Evaluation/tree/main).
+
 ## Abstract
 
 Link Traversal queries face challenges in completeness and long execution time due to the size of the web.
