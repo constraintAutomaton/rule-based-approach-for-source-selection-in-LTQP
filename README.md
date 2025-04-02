@@ -68,3 +68,6 @@ pruning of traversal queries is a worthy effort for optimizing web queries of un
   _type     = {Poster}
 }
 ```
+
+## License
+The code is licensed under the CC-BY-4.0 license. See the [LICENSE](LICENSE) file for details.
